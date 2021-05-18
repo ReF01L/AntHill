@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/issues/issues.css' %}">
+{% endblock %}
+
+{% block title %} - Issues{% endblock %}
+
+{% block content %}
+    <div class="rg">
+        hello yopta
+    <a href="{% url 'issues:index' %}"></a> <!-- change url -->
+    </div>
+{% endblock %}
