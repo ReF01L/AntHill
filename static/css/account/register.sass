@@ -1,0 +1,46 @@
+@import '../colors'
+
+.rg
+  display: flex
+  justify-content: center
+  align-items: center
+  min-height: calc(100vh - 90px)
+
+  &_form
+    width: 35%
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    & p
+      width: 100%
+    &-field
+      width: 100%
+      font-size: 24px
+      color: $light
+      background: transparent
+      border: 3px solid $dark
+      border-radius: 15px
+      outline: none
+      text-align: center
+      height: 60px
+      margin: 30px 0
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
+      &::placeholder
+        color: $light
+        opacity: 0.7
+      &:focus
+        background: $light
+        color: black
+
+    &-btn
+      font-size: 36px
+      color: $light
+      background: transparent
+      border: 3px $dark solid
+      outline: none
+      border-radius: 15px
+      width: 70%
+      box-shadow: 0 4px 4px 0 #00000040
+      padding: 5px 2%
+      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)

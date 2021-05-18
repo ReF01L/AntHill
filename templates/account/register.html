@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/account/register.css' %}">
+{% endblock %}
+
+{% block title %} - Sign up{% endblock %}
+
+{% block content %}
+    <div class="rg">
+        <form action="." method="post" class="rg_form">
+            {{ user_form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Sign up" class="rg_form-btn">
+        </form>
+    </div>
+{% endblock %}
