@@ -21,7 +21,14 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'email')
+        fields = ('username', 'email')
+
+    def __init__(self, *args, **kwargs):
+        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+        for k, v in self.fields.items():
+            v.widget.attrs.update({'class': 'rg_form-field', 'placeholder': v.label})
+            v.label = ''
+            v.help_text = None
 
     def clean_password2(self):
         cd = self.cleaned_data

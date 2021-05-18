@@ -3,21 +3,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}AntHill{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static "img/favicon.ico" %}">
+    <title>AntHill{% block title %}AntHill{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extrahead %}{% endblock %}
 </head>
 <body>
-<header>
-    <span class="logo">AntHill</span>
+<header class="header">
+    <div class="header_logo">
+        <img src="{% static 'img/logo.png' %}" alt="logo" class="header_logo-img"/>
+    </div>
+    <div class="header_auth">
+        <button class="header_auth-btn">Sign In</button>
+    </div>
 </header>
 {% if messages %}
     <ul class="messages">
-    {% for message in messages %}
-        <li class="{{ message.tags }}">
-            {{ message|safe }}
-            <a href="#" class="close">✖</a>
-        </li>
-    {% endfor %}
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message|safe }}
+                <a href="#" class="close">✖</a>
+            </li>
+        {% endfor %}
     </ul>
 {% endif %}
 <div class="content">
