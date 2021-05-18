@@ -142,4 +142,3 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = config['EMAIL']['HOST_PASSWORD']
 EMAIL_HOST_USER = config['EMAIL']['HOST_USER']
-test = None
