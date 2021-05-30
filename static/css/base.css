@@ -34,7 +34,7 @@ body {
 }
 .header_auth-btn {
   color: #57A094;
-  background-color: #fff;
+  background-color: #FFFFFF;
   border-radius: 15px;
   outline: none;
   border: none;
@@ -46,7 +46,7 @@ body {
 .header_auth-btn:hover {
   cursor: pointer;
   background-color: #57A094;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 /*# sourceMappingURL=base.css.map */
