@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/issues/issues.css' %}">
+{% endblock %}
+
+{% block title %} - Issues{% endblock %}
+
+{% block content %}
+    <div style="display: flex">
+        <div class="issues">
+            To be done
+            <div class="issue">
+                <div class="issue_header">
+                    <div class="issue_header-title">
+                        title
+                    </div>
+                    <div class="issue_header-data">
+                        data
+                    </div>
+                </div>
+                <div class="issue_body">
+                    <div class="issue_body-some">
+                        1
+                    </div>
+                </div>
+                <div class="issue_footer">
+                    <div class="issue_footer-some">
+                        2
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="issues">
+            In progress
+            <div class="issue">
+
+            </div>
+        </div>
+        <div class="issues">
+            Finished
+            <div class="issue">
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--<a href="{% url 'issues:index' %}"></a>  change url -->
+
+{% endblock %}

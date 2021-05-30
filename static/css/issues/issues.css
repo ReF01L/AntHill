@@ -1,0 +1,31 @@
+div {
+  display: flex;
+}
+
+.issues {
+  width: 23.5%;
+  margin-left: 15px;
+  margin-top: 15px;
+  background-color: #F1F4FA;
+}
+.issues .issue {
+  padding: 15px;
+  margin: 10px;
+  background-color: #FFFFFF;
+  border: 3px solid #297C6E;
+  border-radius: 15px;
+}
+.issues .issue:hover {
+  cursor: pointer;
+}
+.issues .issue_header {
+  text-align: center;
+}
+.issues .issue_body {
+  text-align: left;
+}
+.issues .issue_footer {
+  text-align: right;
+}
+
+/*# sourceMappingURL=issues.css.map */
