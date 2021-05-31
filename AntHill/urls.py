@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/account/login/'), name='goto_login'),
     path('admin/', admin.site.urls),
     path('account/', include('account.urls', namespace='account')),
+    path('project/', include('project.urls', namespace='project'))
     path('issues/', include('issues.urls', namespace='issues')),
-    path('board/', include('board.urls', namespace='board'))
+    path('board/', include('board.urls', namespace='board')),
 ]
 
 if settings.DEBUG:

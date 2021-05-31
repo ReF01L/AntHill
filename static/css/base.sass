@@ -29,19 +29,43 @@ body
       width: 70px
       height: 70px
 
+
+  &_data
+    margin: auto
+
+    & span
+      color: $white
+      font-size: 24px
+      letter-spacing: 2px
+
   &_auth
     margin: 25px 15px 25px auto
+    display: flex
+    justify-content: center
+    align-items: center
+
+    &_top
+      display: flex
+      justify-content: space-between
+      align-items: center
 
     &-btn
+      display: flex
+      align-items: center
+      justify-content: center
       color: $light
       background-color: $white
       border-radius: 15px
       outline: none
       border: none
       box-shadow: 0 4px 4px 0 #00000040
-      width: 120px
+      min-width: 120px
       height: 40px
       font-size: 18px
+      text-align: center
+      margin: 10px
+      padding: 5px
+
       &:hover
         cursor: pointer
         background-color: $light
