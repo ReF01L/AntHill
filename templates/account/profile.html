@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/account/profile.css' %}">
+{% endblock %}
+{% block title %} - Profile{% endblock %}
+{% block header %}
+    <div class="header_auth">
+        <a class="header_auth-btn" href="{% url 'account:logout' %}">Log out</a>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="hero">
+            <div class="image">
+                <img src="{% static 'img/account/user.png' %}" alt="Profile image">
+            </div>
+            <div class="fields">
+                <div class="field">
+                    <div class="field-key">username</div>
+                    <div class="field-value">{{ user.user.username }}</div>
+                </div>
+                <div class="field">
+                    <div class="field-key">email</div>
+                    <div class="field-value">{{ user.user.email }}</div>
+                </div>
+                <div class="field">
+                    <div class="field-key">name</div>
+                    <div class="field-value">{{ user.user.first_name }}</div>
+                </div>
+                <div class="field">
+                    <div class="field-key">last name</div>
+                    <div class="field-value">{{ user.user.last_name }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

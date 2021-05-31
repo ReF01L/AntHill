@@ -38,5 +38,17 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(label='Username')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ()
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.errors.clear()
+        for k, v in self.fields.items():
+            v.widget.attrs.update({'class': 'login_form-field', 'placeholder': v.label})
+            v.label = ''
+            v.help_text = None

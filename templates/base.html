@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/png" href="{% static "img/favicon.ico" %}">
-    <title>AntHill{% block title %}AntHill{% endblock %}</title>
+    <title>AntHill{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block extrahead %}{% endblock %}
 </head>
@@ -13,20 +13,8 @@
     <div class="header_logo">
         <img src="{% static 'img/logo.png' %}" alt="logo" class="header_logo-img"/>
     </div>
-    <div class="header_auth">
-        <button class="header_auth-btn">Sign In</button>
-    </div>
+    {% block header %}{% endblock %}
 </header>
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li class="{{ message.tags }}">
-                {{ message|safe }}
-                <a href="#" class="close">✖</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
 <div class="content">
     {% block content %}
     {% endblock %}
