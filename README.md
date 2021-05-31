@@ -15,7 +15,6 @@
 
 ## Used technologies
 - Django
-- VueJS
 - SQLite
 
 
