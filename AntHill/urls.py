@@ -22,7 +22,8 @@ from django.views.generic import RedirectView
 urlpatterns = [
     path('', RedirectView.as_view(url='/account/login/'), name='goto_login'),
     path('admin/', admin.site.urls),
-    path('account/', include('account.urls', namespace='account'))
+    path('account/', include('account.urls', namespace='account')),
+    path('project/', include('project.urls', namespace='project'))
 ]
 
 if settings.DEBUG:

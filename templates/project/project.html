@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/project.css' %}">
+{% endblock %}
+{% block title %} - Project{% endblock %}
+{% block header %}
+    <div class="header_auth">
+        <a class="header_auth-btn" href="{% url 'account:logout' %}">Log out</a>
+    </div>
+{% endblock %}
+{% block content %}
+    <h1>ChEcK</h1>
+{% endblock %}
