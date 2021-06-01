@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 
-from .forms import UserRegistrationForm, LoginForm, UserEditForm, ProfileEditForm
+from .forms import UserRegistrationForm, LoginForm, UserEditForm, ProfileEditForm, NewPasswordForm
 from .models import Profile
 
 
@@ -63,3 +63,9 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
+
+
+def success_reset_password(request):
+    return render(request, 'account/success_reset_password.html', {
+        'form': NewPasswordForm()
+    })

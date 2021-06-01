@@ -40,3 +40,15 @@ class UserRegistrationForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+class NewPasswordForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput, label='Enter new password')
+    repeat_password = forms.CharField(widget=forms.PasswordInput, label='Repeat new password')
+
+    def __init__(self, *args, **kwargs):
+        super(NewPasswordForm, self).__init__(*args, **kwargs)
+        for k, v in self.fields.items():
+            v.widget.attrs.update({'class': 'form-field', 'placeholder': v.label})
+            v.label = ''
+            v.help_text = None
