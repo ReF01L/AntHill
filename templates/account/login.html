@@ -5,20 +5,39 @@
 {% endblock %}
 
 {% block title %} - Sign in{% endblock %}
-{% block header %}
-    <div class="header_auth">
-        <a class="header_auth-btn" href="{% url 'account:register' %}">Sign Up</a>
-    </div>
-{% endblock %}
 {% block content %}
-    <div class="login">
-    {% if error %}
-        <h1 class="error">You entered incorrect data</h1>
-    {% endif %}
-        <form action="." method="post" class="login_form">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <input type="submit" value="Sign in" class="login_form-btn">
-        </form>
+    <div class="landing">
+        <div class="hero">
+            <div class="hero_auth">
+                <button class="hero_auth-btn">Auth</button>
+            </div>
+            <div class="hero_body">
+                <div class="hero_body_image">
+                    <img src="{% static 'img/account/anthill.png' %}" alt="logo" class="hero_body_image-img">
+                </div>
+                <div class="hero_body_title">
+                    <span>Welcome to</span>
+                    <span>AntHill.</span>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="body_title">
+                <div class="body_title_img">
+                    <img src="{% static 'img/account/circles.png' %}" alt="circles" class="body_title_img-img">
+                </div>
+                <div class="body_title_desc">
+                    <span>AntHill</span>
+                    <span>- is a TaskManager created by a team of five people who can't code :)</span>
+                </div>
+                <div class="body_title-title">AntHill</div>
+            </div>
+            <div class="body_helper">
+                <div class="body_helper_title">Successful project organization</div>
+                <div class="body_helper-content">
+                    <img src="{% static 'img/account/step_organization.png' %}" alt="Steps" class="body_helper-content-img">
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
