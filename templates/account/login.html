@@ -1,11 +1,43 @@
-{% extends 'base.html' %}
-{% block title %}Sign in{% endblock %}
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/account/login.css' %}">
+{% endblock %}
+
+{% block title %} - Sign in{% endblock %}
 {% block content %}
-    <h1>Login</h1>
-    <p>Please, use the following form to login</p>
-    <form action="." method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <p><input type="submit" value="Login"></p>
-    </form>
+    <div class="landing">
+        <div class="hero">
+            <div class="hero_auth">
+                <button class="hero_auth-btn">Auth</button>
+            </div>
+            <div class="hero_body">
+                <div class="hero_body_image">
+                    <img src="{% static 'img/account/anthill.png' %}" alt="logo" class="hero_body_image-img">
+                </div>
+                <div class="hero_body_title">
+                    <span>Welcome to</span>
+                    <span>AntHill.</span>
+                </div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="body_title">
+                <div class="body_title_img">
+                    <img src="{% static 'img/account/circles.png' %}" alt="circles" class="body_title_img-img">
+                </div>
+                <div class="body_title_desc">
+                    <span>AntHill</span>
+                    <span>- is a TaskManager created by a team of five people who can't code :)</span>
+                </div>
+                <div class="body_title-title">AntHill</div>
+            </div>
+            <div class="body_helper">
+                <div class="body_helper_title">Successful project organization</div>
+                <div class="body_helper-content">
+                    <img src="{% static 'img/account/step_organization.png' %}" alt="Steps" class="body_helper-content-img">
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
