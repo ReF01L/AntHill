@@ -4,5 +4,6 @@ from . import views
 app_name = 'project'
 
 urlpatterns = [
-    path('', views.project, name='project')
+    path('', views.project, name='project'),
+    path('command/<str:project>', views.command, name='command')
 ]
