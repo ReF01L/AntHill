@@ -24,7 +24,8 @@ def home(request, error):
     if request.path == '/account/login/':
         return render(request, 'account/login.html', {
             'form': LoginForm(),
-            'error': error
+            'error': error,
+            'page': int(request.GET.get('page') or 0)
         })
     elif request.path == '/account/register/':
         return render(request, 'account/register.html', {
