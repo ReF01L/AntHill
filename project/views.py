@@ -8,6 +8,10 @@ def project(request):
     return render(request, 'project/project.html')
 
 
+def projects(request):
+    return render(request, 'project/user_projects.html')
+
+
 def command(request, project):
     var = Project.objects.create(name='commandModelName')
     print(var)
