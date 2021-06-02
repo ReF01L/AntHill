@@ -1,72 +1,10 @@
-@import "colors"
+@import 'colors'
+@import 'fonts'
 
 *
   margin: 0
   padding: 0
   box-sizing: border-box
-  font-family: Roboto, sans-serif
+  @include medium
 
 body
-  min-height: 100vh
-
-.header
-  background-color: $dark
-  width: 100vw
-  height: 90px
-  display: flex
-  justify-content: space-between
-  align-items: center
-
-  &_logo
-    margin-left: 15px
-
-    &-img
-      -webkit-transform: rotateZ(-45deg)
-      -moz-transform: rotateZ(-45deg)
-      -ms-transform: rotateZ(-45deg)
-      -o-transform: rotateZ(-45deg)
-      transform: rotateZ(-45deg)
-      width: 70px
-      height: 70px
-
-
-  &_data
-    margin: auto
-
-    & span
-      color: $white
-      font-size: 24px
-      letter-spacing: 2px
-
-  &_auth
-    margin: 25px 15px 25px auto
-    display: flex
-    justify-content: center
-    align-items: center
-
-    &_top
-      display: flex
-      justify-content: space-between
-      align-items: center
-
-    &-btn
-      display: flex
-      align-items: center
-      justify-content: center
-      color: $light
-      background-color: $white
-      border-radius: 15px
-      outline: none
-      border: none
-      box-shadow: 0 4px 4px 0 #00000040
-      min-width: 120px
-      height: 40px
-      font-size: 18px
-      text-align: center
-      margin: 10px
-      padding: 5px
-
-      &:hover
-        cursor: pointer
-        background-color: $light
-        color: $white
