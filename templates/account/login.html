@@ -7,20 +7,46 @@
 {% block title %} - Sign in{% endblock %}
 {% block content %}
     <div class="landing">
-        <div class="hero">
-            <div class="hero_auth">
-                <button class="hero_auth-btn">Auth</button>
-            </div>
-            <div class="hero_body">
-                <div class="hero_body_image">
-                    <img src="{% static 'img/account/anthill.png' %}" alt="logo" class="hero_body_image-img">
+        {% if page == 1 %}
+            <div class="login">
+                <div class="helper">
+                    <div class="helper_text">
+                        <span>Welcome to</span>
+                        <span>AntHill</span>
+                    </div>
+                    <div class="helper_img">
+                        <img src="{% static 'img/account/anthill.png' %}" alt="">
+                    </div>
                 </div>
-                <div class="hero_body_title">
-                    <span>Welcome to</span>
-                    <span>AntHill.</span>
+                <div class="frame">
+                    <form action="." method="post" class="frame_form">
+                        {{ form.as_p }}
+                        {% csrf_token %}
+                        <input type="submit" value="Sign in" class="frame_form-btn">
+                    </form>
+                    <a href="#">Forgot password?</a>
+                    <div class="frame_registration">
+                        <span>Still don't have an account?</span>
+                        <a href="{% url 'account:register' %}">Registration here!</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <div class="hero">
+                <div class="hero_auth">
+                    <button class="hero_auth-btn" onclick="location.href='{% url 'account:user_login' %}?page=1'">Auth</button>
+                </div>
+                <div class="hero_body">
+                    <div class="hero_body_image">
+                        <img src="{% static 'img/account/anthill.png' %}" alt="logo" class="hero_body_image-img">
+                    </div>
+                    <div class="hero_body_title">
+                        <span>Welcome to</span>
+                        <span>AntHill.</span>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <div class="body">
             <div class="body_title">
                 <div class="body_title_img">
