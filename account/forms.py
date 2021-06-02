@@ -49,6 +49,6 @@ class LoginForm(forms.Form):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.errors.clear()
         for k, v in self.fields.items():
-            v.widget.attrs.update({'class': 'login_form-field', 'placeholder': v.label})
+            v.widget.attrs.update({'class': 'frame_form-field', 'placeholder': v.label})
             v.label = ''
             v.help_text = None
