@@ -31,8 +31,8 @@ class LoggedTime(models.Model):
 class Issue(models.Model):
     watchers = models.ManyToManyField(to=Profile)
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE)
-    verifier = models.ForeignKey(to=Profile, on_delete=models.DO_NOTHING)
-    executor = models.ForeignKey(to=Profile, on_delete=models.DO_NOTHING)
+    verifier = models.ForeignKey(to=Profile, on_delete=models.DO_NOTHING, related_name='verifier')
+    executor = models.ForeignKey(to=Profile, on_delete=models.DO_NOTHING, related_name='executor')
     resolution = models.ForeignKey(to=IssueResolution, on_delete=models.CASCADE)
     priority = models.ForeignKey(to=IssuePriority, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)

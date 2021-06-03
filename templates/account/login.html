@@ -39,5 +39,10 @@
                 </div>
             </div>
         </div>
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="login">
+        </form>
     </div>
 {% endblock %}
