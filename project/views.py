@@ -12,6 +12,10 @@ def projects(request):
     return render(request, 'project/user_projects.html')
 
 
+def create_project(request):
+    return render(request, 'project/create_project.html')
+
+
 def command(request, project):
     var = Project.objects.create(name='commandModelName')
     print(var)
