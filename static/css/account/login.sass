@@ -2,10 +2,397 @@
 @import '../fonts'
 
 .landing
+  position: relative
+
+  & .error
+    color: $red
+    text-decoration: underline
+    font-size: 32px
+    @include light
+    text-align: center
+    width: 100%
+
+  & .close
+    color: $white
+    font-size: 36px
+    position: absolute
+    right: 2%
+    top: 2%
+    user-select: none
+
+    &:hover
+      cursor: pointer
+
+  & .login
+    width: 100%
+    height: 100vh
+    background-color: #c4c4c4
+    display: flex
+    justify-content: center
+    align-items: flex-start
+    animation: fade 2s
+
+    & .frame_1
+      width: 50%
+      height: 100%
+      background: $blue
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+
+      &_form
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+
+        &-field
+          outline: none
+          border-radius: 25px
+          border: 2px solid $dark
+          background-color: $gray
+          font-size: 48px
+          padding: 5px
+          margin: 10px auto
+          @include regular
+          color: $dark
+          text-align: center
+
+          &::placeholder
+            font-size: 48px
+            @include regular
+            color: $dark
+            opacity: 0.6
+
+        &-btn
+          color: $dark
+          font-size: 36px
+          @include regular
+          background: $gray
+          border-radius: 25px
+          border: none
+          width: 30%
+          padding: 5px
+          text-align: center
+          margin-top: 5px
+
+          &:hover
+            cursor: pointer
+            text-decoration: underline
+
+      & a
+        color: #c4c4c4
+        font-size: 18px
+        @include regular
+        text-decoration: none
+        margin-top: 5px
+        -webkit-transition: 0.2s
+        -moz-transition: 0.2s
+        -ms-transition: 0.2s
+        -o-transition: 0.2s
+        transition: 0.2s
+
+        &:hover
+          -webkit-transform: scale(1.1)
+          -moz-transform: scale(1.1)
+          -ms-transform: scale(1.1)
+          -o-transform: scale(1.1)
+          transform: scale(1.1)
+
+      &_registration
+        margin-top: 20px
+
+        & span
+          color: $gray
+          font-size: 24px
+          @include regular
+
+        & a
+          color: $green
+          font-size: 24px
+          @include regular
+          text-transform: none
+
+    & .frame_2
+      width: 50%
+      height: 100%
+      background: $green
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+
+      &_form
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+
+        &-field
+          outline: none
+          border-radius: 25px
+          border: 2px solid $dark
+          background-color: $gray
+          font-size: 48px
+          padding: 5px
+          margin: 10px auto
+          @include regular
+          color: $dark
+          text-align: center
+
+          &::placeholder
+            font-size: 48px
+            @include regular
+            color: $dark
+            opacity: 0.6
+
+        &-btn
+          color: $dark
+          font-size: 36px
+          @include regular
+          background: $gray
+          border-radius: 25px
+          width: 50%
+          padding: 5px
+          text-align: center
+          margin-top: 5px
+          border: 2px solid $dark
+          -webkit-transition: 0.2s
+          -moz-transition: 0.2s
+          -ms-transition: 0.2s
+          -o-transition: 0.2s
+          transition: 0.2s
+
+          &:hover
+            cursor: pointer
+            text-decoration: underline
+            -webkit-transform: scale(1.1)
+            -moz-transform: scale(1.1)
+            -ms-transform: scale(1.1)
+            -o-transform: scale(1.1)
+            transform: scale(1.1)
+
+      & a
+        color: #c4c4c4
+        font-size: 18px
+        @include regular
+        text-decoration: none
+        margin-top: 5px
+        -webkit-transition: 0.2s
+        -moz-transition: 0.2s
+        -ms-transition: 0.2s
+        -o-transition: 0.2s
+        transition: 0.2s
+
+        &:hover
+          -webkit-transform: scale(1.1)
+          -moz-transform: scale(1.1)
+          -ms-transform: scale(1.1)
+          -o-transform: scale(1.1)
+          transform: scale(1.1)
+
+      &_registration
+        margin-top: 20px
+
+        & span
+          color: $gray
+          font-size: 24px
+          @include regular
+
+        & a
+          color: $green
+          font-size: 24px
+          @include regular
+          text-transform: none
+
+    & .frame_3
+      width: 50%
+      height: 100%
+      background: $blue
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+
+      &_form
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        & ul
+          display: none
+
+        & p
+          position: relative
+          margin: 25px auto
+
+          & label
+            @include regular
+            font-size: 30px
+            color: $white
+            position: absolute
+            bottom: -35px
+            right: 0
+
+        &-field
+          outline: none
+          border: none
+          border-bottom: 1px solid $white
+          background-color: transparent
+          font-size: 48px
+          padding: 5px
+          @include regular
+          color: $dark
+          text-align: left
+          -webkit-box-shadow: inset 0 0 0 50px $blue
+          -webkit-text-fill-color: $white
+
+          &::placeholder
+            font-size: 48px
+            @include regular
+            color: $dark
+            opacity: 0.6
+
+          &-error
+            outline: none
+            border: none
+            border-bottom: 1px solid $red
+            background-color: transparent
+            font-size: 48px
+            padding: 5px
+            @include regular
+            color: $dark
+            text-align: left
+            -webkit-box-shadow: inset 0 0 0 50px $blue
+            -webkit-text-fill-color: $white
+
+            &::placeholder
+              font-size: 48px
+              @include regular
+              -webkit-text-fill-color: $red
+              opacity: 0.6
+
+        &-btn
+          color: white
+          font-size: 40px
+          @include regular
+          background: transparent
+          border-radius: 25px
+          border: 1px solid $white
+          width: 50%
+          padding: 5px
+          text-align: center
+          margin-top: 50px
+          -webkit-transition: 0.2s
+          -moz-transition: 0.2s 
+          -ms-transition: 0.2s 
+          -o-transition: 0.2s 
+          transition: 0.2s 
+
+          &:hover
+            cursor: pointer
+            -webkit-transform: scale(1.1)
+            -moz-transform: scale(1.1)
+            -ms-transform: scale(1.1)
+            -o-transform: scale(1.1)
+            transform: scale(1.1)
+
+      & a
+        color: #c4c4c4
+        font-size: 18px
+        @include regular
+        text-decoration: none
+        margin-top: 5px
+        -webkit-transition: 0.2s
+        -moz-transition: 0.2s
+        -ms-transition: 0.2s
+        -o-transition: 0.2s
+        transition: 0.2s
+
+        &:hover
+          -webkit-transform: scale(1.1)
+          -moz-transform: scale(1.1)
+          -ms-transform: scale(1.1)
+          -o-transform: scale(1.1)
+          transform: scale(1.1)
+
+      &_registration
+        margin-top: 20px
+
+        & span
+          color: $gray
+          font-size: 24px
+          @include regular
+
+        & a
+          color: $green
+          font-size: 24px
+          @include regular
+          text-transform: none
+          &:hover
+            text-decoration: underline
+
+    & .frame_4
+      width: 50%
+      height: 100%
+      background: $green
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+
+      & span
+        font-size: 40px
+        @include regular
+        color: $white
+        text-align: center
+        width: 70%
+
+        & span
+          color: $dark
+
+    & .helper
+      -webkit-transform: translateY(60%)
+      -moz-transform: translateY(60%)
+      -ms-transform: translateY(60%)
+      -o-transform: translateY(60%)
+      transform: translateY(60%)
+
+      &_text
+        margin-left: 20%
+
+        & span
+          &:nth-child(1)
+            font-size: 96px
+            color: $dark
+            @include light
+
+          &:nth-last-child(1)
+            font-size: 160px
+            color: $white
+            @include medium
+
+      &_img
+        -webkit-transform: translate(10%, -50%)
+        -moz-transform: translate(10%, -50%)
+        -ms-transform: translate(10%, -50%)
+        -o-transform: translate(10%, -50%)
+        transform: translate(10%, -50%)
+
+        & img
+          width: 30%
+          -webkit-transform: rotateZ(-25deg)
+          -moz-transform: rotateZ(-25deg)
+          -ms-transform: rotateZ(-25deg)
+          -o-transform: rotateZ(-25deg)
+          transform: rotateZ(-25deg)
+
   & .hero
     width: 100%
     background-color: #c4c4c4
     height: 100vh
+    box-shadow: 0 8px 2px 0 #00000040
 
     &_auth
       display: flex
@@ -27,6 +414,7 @@
         -ms-transition: 0.3s
         -o-transition: 0.3s
         transition: 0.3s
+
         &:hover
           -webkit-transform: scale(1.2)
           -moz-transform: scale(1.2)
@@ -68,12 +456,14 @@
         -ms-transform: rotateZ(-9deg) translateX(67%)
         -o-transform: rotateZ(-9deg) translateX(67%)
         transform: rotateZ(-9deg) translateX(67%)
+
         &-img
           -webkit-transition: 1.5s linear
           -moz-transition: 1.5s linear
           -ms-transition: 1.5s linear
           -o-transition: 1.5s linear
           transition: 1.5s linear
+
         &:hover .hero_body_image-img
           -webkit-transform: rotateY(360deg) rotateZ(60deg) rotateX(180deg)
           -moz-transform: rotateY(360deg) rotateZ(60deg) rotateX(180deg)
@@ -88,31 +478,50 @@
       align-items: flex-start
       position: relative
       margin: 130px 50px
+
       &_img
         &-img
+
       &_desc
         max-width: 900px
         text-align: center
+
         & span
           color: $dark
+
           &:nth-child(1)
             font-size: 70px
+
           &:nth-last-child(1)
             font-size: 64px
+
       &-title
         @include medium
         font-size: 440px
         color: $gray
         position: absolute
         padding-top: 250px
+
     &_helper
       display: flex
       flex-direction: column
       align-items: center
-      margin-bottom: 300px
+      margin-bottom: 100px
+
       &_title
         @include medium
         font-size: 48px
         color: $dark
         text-decoration: underline
         margin-bottom: 80px
+
+@keyframes fade
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@-webkit-keyframes autofill
+  to
+    color: inherit
+    background: transparent

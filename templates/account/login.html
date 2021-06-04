@@ -4,23 +4,83 @@
     <link rel="stylesheet" href="{% static 'css/account/login.css' %}">
 {% endblock %}
 
-{% block title %} - Sign in{% endblock %}
+{% block title %}
+    {% if page == 1 %}
+        - Sign in
+    {% elif page == 2 or page == 3 %}
+        - Reset password
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="landing">
-        <div class="hero">
-            <div class="hero_auth">
-                <button class="hero_auth-btn">Auth</button>
-            </div>
-            <div class="hero_body">
-                <div class="hero_body_image">
-                    <img src="{% static 'img/account/anthill.png' %}" alt="logo" class="hero_body_image-img">
+        {% if page %}
+            <div class="login">
+                <div class="close" onclick="location.href='{% url 'account:user_login' %}'">X</div>
+                <div class="helper">
+                    <div class="helper_text">
+                        <span>Welcome to</span>
+                        <span>AntHill</span>
+                    </div>
+                    <div class="helper_img">
+                        <img src="{% static 'img/account/anthill.png' %}" alt="">
+                    </div>
                 </div>
-                <div class="hero_body_title">
-                    <span>Welcome to</span>
-                    <span>AntHill.</span>
+                {% if page == 1 %}
+                    <div class="frame_1">
+                        {% if errors.login %}
+                            <h1 class="error">{{ errors.login }}</h1>
+                        {% endif %}
+                        <form action="." method="post" class="frame_1_form">
+                            {{ form.as_p }}
+                            <input type="hidden" name="page" value="1">
+                            {% csrf_token %}
+                            <input type="submit" value="Sign in" class="frame_1_form-btn">
+                        </form>
+                        <a href="{% url 'account:user_login' %}?page=2">Forgot password?</a>
+                        <div class="frame_1_registration">
+                            <span>Still don't have an account?</span>
+                            <a href="{% url 'account:register' %}">Registration here!</a>
+                        </div>
+                    </div>
+                {% elif page == 2 %}
+                    <div class="frame_2">
+                        {% if errors.reset %}
+                            <h1 class="error">{{ errors.reset }}</h1>
+                        {% endif %}
+                        <form action="." method="post" class="frame_2_form">
+                            {{ form.as_p }}
+                            <input type="hidden" name="page" value="{{ page }}">
+                            {% csrf_token %}
+                            <input type="submit" value="Reset password" class="frame_2_form-btn">
+                        </form>
+                    </div>
+                {% elif page == 3 %}
+                    <div class="frame_3">
+                        {% block register %} {% endblock %}
+                    </div>
+                {% elif page == 4 %}
+                    <div class="frame_4">
+                        <span>The message to the entered email address has been <span>successfully sent.</span> Follow the instructions in
+                            the letter. </span>
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="hero">
+                <div class="hero_auth">
+                    <button class="hero_auth-btn" onclick="location.href='{% url 'account:user_login' %}?page=1'">Auth</button>
+                </div>
+                <div class="hero_body">
+                    <div class="hero_body_image">
+                        <img src="{% static 'img/account/anthill.png' %}" alt="logo" class="hero_body_image-img">
+                    </div>
+                    <div class="hero_body_title">
+                        <span>Welcome to</span>
+                        <span>AntHill.</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
         <div class="body">
             <div class="body_title">
                 <div class="body_title_img">
