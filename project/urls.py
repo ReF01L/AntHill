@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.project, name='project'),
     path('command/<str:project>', views.command, name='command'),
     path('projects/', views.projects, name='projects'),
-    path('create_project/', views.create_project, name='create_project')
+    path('create_project/', views.create_project, name='create_project'),
+    path('board/', views.board, name='board')
 ]
