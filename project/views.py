@@ -1,5 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
+from pytz import unicode
 
 from AntHill import settings
 from account.models import Profile
@@ -19,9 +21,9 @@ def command(request, project):
     request.session.save()
     return redirect('account:profile')
 
+
 @require_GET
 def recent_project(request):
     var = Profile.objects.get(user=request.user)
-    users = var.project_set.all()
-    print([x.name for x in users])
-    return redirect('account:profile')
+    project_set = var.project_set.all()
+    return render(request, 'project/projects.html', {'project_names': [x.name for x in project_set]})
