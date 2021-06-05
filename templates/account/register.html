@@ -18,13 +18,31 @@
     </div>
 {% endblock %}
 {% block register %}
-    <form action="." method="post" class="frame_3_form">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="Registration" class="frame_3_form-btn">
-    </form>
-    <div class="frame_3_registration">
-        <span>Already have an account?</span>
-        <a href="{% url 'account:user_login' %}?page=1">Log in here!</a>
-    </div>
+    {% if register_page == 1 %}
+        <div class="frame_3">
+            <form action="." method="post" class="frame_3_form">
+                {{ form.as_p }}
+                <input type="hidden" name="register_page" value="1">
+                {% csrf_token %}
+                <input type="submit" value="Registration" class="frame_3_form-btn">
+            </form>
+            <div class="frame_3_registration">
+                <span>Already have an account?</span>
+                <a href="{% url 'account:user_login' %}?page=1">Log in here!</a>
+            </div>
+        </div>
+    {% elif register_page == 2 %}
+        <div class="frame_5">
+            <div class="frame_5-text">
+                You need to confirm your email address to complete registration. you will be sent an email with a code, which must be
+                entered in the next field
+            </div>
+            <form action="." method="post" class="frame_5_form">
+                {{ form.as_p }}
+                <input type="hidden" name="register_page" value="2">
+                {% csrf_token %}
+                <input type="submit" value="Send" class="frame_5_form-btn">
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
