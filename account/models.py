@@ -8,6 +8,7 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
     phone = models.TextField(null=True, blank=True)
     notification = models.IntegerField(null=True, blank=True)  # TODO: need?
+    code = models.CharField(max_length=4, default='0000')
 
     def __str__(self):
         return f'Profile for user {self.user.username}'
