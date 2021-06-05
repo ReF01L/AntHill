@@ -159,16 +159,24 @@ def register(request):
         form = SendCodeForm(request.POST or None)
         if request.method == 'POST':
             if form.is_valid():
-                if Profile.objects.filter(code=form.cleaned_data['code']).exists():
-                    profile = Profile.objects.get(code=form.cleaned_data['code'])
-                    user = User.objects.get(email=profile.user.email)
-                    user.is_active = True
-                    user.save()
-                    profile.code = 'XXXX'
-                    profile.save()
+                profile = Profile.objects.get(code=form.cleaned_data['code'])
+                user = User.objects.get(email=profile.user.email)
+                user.is_active = True
+                user.save()
+                profile.code = 'XXXX'
+                profile.save()
+                return render(request, 'account/register.html', {
+                    'page': 3,
+                    'register_page': 3
+                })
         return render(request, 'account/register.html', {
             'form': form,
             'page': 3,
             'register_page': 2
+        })
+    if page == 3:
+        return render(request, 'account/register.html', {
+            'page': 3,
+            'register_page': 3
         })
     return render(request, 'account/register.html', {'page': 3, 'register_page': page})

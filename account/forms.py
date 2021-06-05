@@ -140,15 +140,15 @@ class SendCodeForm(forms.Form):
     ))
 
     class Meta:
-        model = User
+        model = Profile
         fields = ()
 
     def clean_code(self):
-        cd = self.cleaned_data
-        if len(cd['code']) != 4:
-            self.fields['cd'].widget.attrs.update({
+        code = self.cleaned_data.get('code')
+        if not Profile.objects.filter(code=code).exists():
+            self.fields['code'].widget.attrs.update({
                 'class': 'frame_5_form-field-error',
                 'placeholder': 'Incorrect code',
             })
-            raise ValueError('')
-        return cd['code']
+            raise forms.ValidationError('')
+        return code

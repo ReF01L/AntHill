@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{% static 'css/account/login.css' %}">
     <script>
         window.onload = () => {
-            document.querySelectorAll('.frame_3_form-field-error').forEach(item => {
+            document.querySelectorAll('.frame_3_form-field-error, .frame_5_form-field-error').forEach(item => {
                 item.value = ''
             })
         }
@@ -43,6 +43,12 @@
                 {% csrf_token %}
                 <input type="submit" value="Send" class="frame_5_form-btn">
             </form>
+        </div>
+    {% elif register_page == 3 %}
+        <div class="frame_6">
+            <div class="frame_6-text">
+                Password changed successfully, please <a href="{% url 'account:user_login' %}?page=1">log into</a> your account
+            </div>
         </div>
     {% endif %}
 {% endblock %}
