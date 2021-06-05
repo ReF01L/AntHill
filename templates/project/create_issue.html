@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/create_issue.css' %}">
+    <script>
+        function dropdown() {
+            document.getElementById("1").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.issue_body_dropdown-btn')) {
+
+                let dropdowns = document.getElementsByClassName("issue_body_dropdown_list");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    let openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block title %} - Creat Issue{% endblock %}
+
+{% block content %}
+    <div class="issue">
+        <div class="issue_header">
+            <div class="issue_header-title">Issue Creation</div>
+        </div>
+        <div class="issue_body">
+            <div class="issue_body_dropdown">
+                <button onclick="dropdown()" class="issue_body_dropdown-btn">Project</button>
+                <div id="1" class="issue_body_dropdown_list">
+                    <div class="issue_body_dropdown_list-elem">AntHill</div>
+                </div>
+            </div>
+            <div class="issue_body_dropdown">
+                <button class="issue_body_dropdown-btn">Type</button>
+                <div class="issue_body_dropdown_list">
+                    <div class="issue_body_dropdown_list-elem">Epic</div>
+                </div>
+            </div>
+            <input class="issue_body-name">
+            <input class="issue_body-description"/>
+            <div class="issue_body_dropdown">
+                <button class="issue_body_dropdown-btn">Executor</button>
+                <div class="issue_body_dropdown_list">
+                    <div class="issue_body_dropdown_list-elem">Dmitry Salushkin</div>
+                </div>
+            </div>
+            <div class="issue_body_dropdown">
+                <button class="issue_body_dropdown-btn">Sprint</button>
+                <div class="issue_body_dropdown_list">
+                    <div class="issue_body_dropdown_list-elem">Sprint1</div>
+                </div>
+            </div>
+            <input class="issue_body-storypoint"/>
+            <div class="issue_body_dropdown">
+                <button class="issue_body_dropdown-btn">Author</button>
+                <div class="issue_body_dropdown_list">
+                    <div class="issue_body_dropdown_list-elem">Dmitry Salushkin</div>
+                </div>
+            </div>
+            <div class="issue_body_dropdown">
+                <button class="issue_body_dropdown-btn">Issue parent</button>
+                <div class="issue_body_dropdown_list">
+                    <div class="issue_body_dropdown_list-elem">Issue1</div>
+                </div>
+            </div>
+        </div>
+        <div class="issue_footer">
+            <button class="issue_footer-btn">Create Issue</button>
+        </div>
+    </div>
+{% endblock %}

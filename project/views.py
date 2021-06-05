@@ -20,6 +20,10 @@ def board(request):
     return render(request, 'project/board.html')
 
 
+def create_issue(request):
+    return render(request, 'project/create_issue.html')
+
+
 def command(request, project):
     var = Project.objects.create(name='commandModelName')
     print(var)
