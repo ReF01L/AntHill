@@ -1,8 +1,11 @@
+import random
+
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.template.loader import render_to_string
@@ -12,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
 from AntHill import settings
-from .forms import UserRegistrationForm, LoginForm, UserEditForm, ProfileEditForm, ForgotPasswordForm, NewPasswordForm
+from .forms import UserRegistrationForm, LoginForm, UserEditForm, ProfileEditForm, ForgotPasswordForm, NewPasswordForm, SendCodeForm
 from .models import Profile
 
 
@@ -118,16 +121,62 @@ def user_login(request):
 
 
 def register(request):
-    form = UserRegistrationForm()
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            Profile.objects.create(user=user)
-            return redirect('account:user_login')
-    return render(request, 'account/register.html', {
-        'form': form,
-        'page': 3
-    })
+    def generate_code() -> str:
+        random.seed()
+        return str(random.randint(1000, 9999))
+
+    page = int(request.POST.get('register_page') or request.GET.get('register_page') or 1)
+    if page == 1:
+        form = UserRegistrationForm(request.POST or None)
+        if request.method == 'POST':
+            if form.is_valid():
+                # Если пользователь с таки email уже существует, но он не активе - удалить
+                if User.objects.filter(email=form.cleaned_data['email']).exists():
+                    user = User.objects.get(email=form.cleaned_data['email'])
+                    user.delete()
+                user = form.save(commit=False)
+                user.set_password(form.cleaned_data['password'])
+                user.is_active = False
+                user.save()
+                code = generate_code()
+                Profile.objects.create(user=user, code=code)
+
+                theme = 'Activate account AntHill'
+                email = EmailMessage(theme, f'CODE: {code}', settings.EMAIL_HOST_USER, [form.cleaned_data['email']])
+                email.send()
+
+                return render(request, 'account/register.html', {
+                    'form': SendCodeForm(),
+                    'page': 3,
+                    'register_page': 2
+                })
+        return render(request, 'account/register.html', {
+            'form': form,
+            'page': 3,
+            'register_page': 1
+        })
+    if page == 2:
+        form = SendCodeForm(request.POST or None)
+        if request.method == 'POST':
+            if form.is_valid():
+                profile = Profile.objects.get(code=form.cleaned_data['code'])
+                user = User.objects.get(email=profile.user.email)
+                user.is_active = True
+                user.save()
+                profile.code = 'XXXX'
+                profile.save()
+                return render(request, 'account/register.html', {
+                    'page': 3,
+                    'register_page': 3
+                })
+        return render(request, 'account/register.html', {
+            'form': form,
+            'page': 3,
+            'register_page': 2
+        })
+    if page == 3:
+        return render(request, 'account/register.html', {
+            'page': 3,
+            'register_page': 3
+        })
+    return render(request, 'account/register.html', {'page': 3, 'register_page': page})

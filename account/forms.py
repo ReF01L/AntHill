@@ -56,22 +56,24 @@ class UserRegistrationForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email and User.objects.filter(email=email).exists():
-            self.fields['email'].widget.attrs.update({
-                'class': 'frame_3_form-field-error',
-                'placeholder': 'Incorrect email',
-            })
-            raise forms.ValidationError('')
+            user = User.objects.get(email=email)
+            if user.is_active:
+                self.fields['email'].widget.attrs.update({
+                    'class': 'frame_3_form-field-error',
+                    'placeholder': 'Incorrect email',
+                })
+                raise forms.ValidationError('')
         return email
 
     def clean_username(self):
-        cd = self.cleaned_data
-        if cd.get('username') and User.objects.filter(username=cd['username']).exists():
+        username = self.cleaned_data.get('username')
+        if username and User.objects.filter(username=username).exists():
             self.fields['username'].widget.attrs.update({
                 'class': 'frame_3_form-field-error',
                 'placeholder': 'Incorrect username',
             })
             raise forms.ValidationError('')
-        return cd['username']
+        return username
 
 
 class LoginForm(forms.Form):
@@ -128,3 +130,25 @@ class NewPasswordForm(forms.Form):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
+
+class SendCodeForm(forms.Form):
+    code = forms.CharField(label='Code', label_suffix='', widget=forms.TextInput(
+        attrs={
+            'class': 'frame_5_form-field',
+        }
+    ))
+
+    class Meta:
+        model = Profile
+        fields = ()
+
+    def clean_code(self):
+        code = self.cleaned_data.get('code')
+        if not Profile.objects.filter(code=code).exists():
+            self.fields['code'].widget.attrs.update({
+                'class': 'frame_5_form-field-error',
+                'placeholder': 'Incorrect code',
+            })
+            raise forms.ValidationError('')
+        return code
