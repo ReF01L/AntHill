@@ -1,8 +1,14 @@
-{% extends "base.html" %}
+{% extends "account/login.html" %}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/account/register.css' %}">
-    <script src="{% static 'js/account/register.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/account/login.css' %}">
+    <script>
+        window.onload = () => {
+            document.querySelectorAll('.frame_3_form-field-error, .frame_5_form-field-error').forEach(item => {
+                item.value = ''
+            })
+        }
+    </script>
 {% endblock %}
 
 {% block title %} - Sign up{% endblock %}
@@ -11,15 +17,38 @@
         <a class="header_auth-btn" href="{% url 'account:user_login' %}">Sign In</a>
     </div>
 {% endblock %}
-{% block content %}
-    <div class="rg">
-        {% if error %}
-            <h1 class="error">This user already exists</h1>
-        {% endif %}
-        <form action="." method="post" class="rg_form">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <input type="submit" value="Sign up" class="rg_form-btn" onclick="try_register()">
-        </form>
-    </div>
+{% block register %}
+    {% if register_page == 1 %}
+        <div class="frame_3">
+            <form action="." method="post" class="frame_3_form">
+                {{ form.as_p }}
+                <input type="hidden" name="register_page" value="1">
+                {% csrf_token %}
+                <input type="submit" value="Registration" class="frame_3_form-btn">
+            </form>
+            <div class="frame_3_registration">
+                <span>Already have an account?</span>
+                <a href="{% url 'account:user_login' %}?page=1">Log in here!</a>
+            </div>
+        </div>
+    {% elif register_page == 2 %}
+        <div class="frame_5">
+            <div class="frame_5-text">
+                You need to confirm your email address to complete registration. you will be sent an email with a code, which must be
+                entered in the next field
+            </div>
+            <form action="." method="post" class="frame_5_form">
+                {{ form.as_p }}
+                <input type="hidden" name="register_page" value="2">
+                {% csrf_token %}
+                <input type="submit" value="Send" class="frame_5_form-btn">
+            </form>
+        </div>
+    {% elif register_page == 3 %}
+        <div class="frame_6">
+            <div class="frame_6-text">
+                Password changed successfully, please <a href="{% url 'account:user_login' %}?page=1">log into</a> your account
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

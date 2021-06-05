@@ -34,6 +34,28 @@
   font-weight: normal;
   font-style: normal;
 }
+.landing {
+  position: relative;
+}
+.landing .error {
+  color: #FF0000;
+  text-decoration: underline;
+  font-size: 32px;
+  font-family: "Raleway Light", sans-serif;
+  text-align: center;
+  width: 100%;
+}
+.landing .close {
+  color: #FFFFFF;
+  font-size: 36px;
+  position: absolute;
+  right: 2%;
+  top: 2%;
+  user-select: none;
+}
+.landing .close:hover {
+  cursor: pointer;
+}
 .landing .login {
   width: 100%;
   height: 100vh;
@@ -41,8 +63,9 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  animation: fade 2s;
 }
-.landing .login .frame {
+.landing .login .frame_1 {
   width: 50%;
   height: 100%;
   background: #066BC6;
@@ -51,13 +74,13 @@
   align-items: center;
   justify-content: center;
 }
-.landing .login .frame_form {
+.landing .login .frame_1_form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.landing .login .frame_form-field {
+.landing .login .frame_1_form-field {
   outline: none;
   border-radius: 25px;
   border: 2px solid #364364;
@@ -69,15 +92,13 @@
   color: #364364;
   text-align: center;
 }
-.landing .login .frame_form-field p {
-  width: 70%;
-}
-.landing .login .frame_form-field::placeholder {
+.landing .login .frame_1_form-field::placeholder {
   font-size: 48px;
   font-family: "Raleway Regular", sans-serif;
   color: #364364;
+  opacity: 0.6;
 }
-.landing .login .frame_form-btn {
+.landing .login .frame_1_form-btn {
   color: #364364;
   font-size: 36px;
   font-family: "Raleway Regular", sans-serif;
@@ -88,31 +109,428 @@
   padding: 5px;
   text-align: center;
   margin-top: 5px;
+  outline: none;
 }
-.landing .login .frame_form-btn:hover {
+.landing .login .frame_1_form-btn:hover {
   cursor: pointer;
   text-decoration: underline;
 }
-.landing .login .frame a {
+.landing .login .frame_1 a {
   color: #c4c4c4;
   font-size: 18px;
   font-family: "Raleway Regular", sans-serif;
   text-decoration: none;
   margin-top: 5px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
 }
-.landing .login .frame_registration {
+.landing .login .frame_1 a:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.landing .login .frame_1_registration {
   margin-top: 20px;
 }
-.landing .login .frame_registration span {
+.landing .login .frame_1_registration span {
   color: #F2F4F9;
   font-size: 24px;
   font-family: "Raleway Regular", sans-serif;
 }
-.landing .login .frame_registration a {
+.landing .login .frame_1_registration a {
   color: #00C084;
   font-size: 24px;
   font-family: "Raleway Regular", sans-serif;
   text-transform: none;
+}
+.landing .login .frame_2 {
+  width: 50%;
+  height: 100%;
+  background: #00C084;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing .login .frame_2_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing .login .frame_2_form-field {
+  outline: none;
+  border-radius: 25px;
+  border: 2px solid #364364;
+  background-color: #F2F4F9;
+  font-size: 48px;
+  padding: 5px;
+  margin: 10px auto;
+  font-family: "Raleway Regular", sans-serif;
+  color: #364364;
+  text-align: center;
+}
+.landing .login .frame_2_form-field::placeholder {
+  font-size: 48px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #364364;
+  opacity: 0.6;
+}
+.landing .login .frame_2_form-btn {
+  color: #364364;
+  font-size: 36px;
+  font-family: "Raleway Regular", sans-serif;
+  background: #F2F4F9;
+  border-radius: 25px;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  margin-top: 5px;
+  border: 2px solid #364364;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+.landing .login .frame_2_form-btn:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.landing .login .frame_2 a {
+  color: #c4c4c4;
+  font-size: 18px;
+  font-family: "Raleway Regular", sans-serif;
+  text-decoration: none;
+  margin-top: 5px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.landing .login .frame_2 a:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.landing .login .frame_2_registration {
+  margin-top: 20px;
+}
+.landing .login .frame_2_registration span {
+  color: #F2F4F9;
+  font-size: 24px;
+  font-family: "Raleway Regular", sans-serif;
+}
+.landing .login .frame_2_registration a {
+  color: #00C084;
+  font-size: 24px;
+  font-family: "Raleway Regular", sans-serif;
+  text-transform: none;
+}
+.landing .login .frame_3 {
+  width: 50%;
+  height: 100%;
+  background: #066BC6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing .login .frame_3_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing .login .frame_3_form ul {
+  display: none;
+}
+.landing .login .frame_3_form p {
+  position: relative;
+  margin: 25px auto;
+}
+.landing .login .frame_3_form p label {
+  font-family: "Raleway Regular", sans-serif;
+  font-size: 30px;
+  color: #FFFFFF;
+  position: absolute;
+  bottom: -35px;
+  right: 0;
+}
+.landing .login .frame_3_form-field {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #FFFFFF;
+  background-color: transparent;
+  font-size: 48px;
+  padding: 5px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #364364;
+  text-align: left;
+  -webkit-box-shadow: inset 0 0 0 50px #066BC6;
+  -webkit-text-fill-color: #FFFFFF;
+}
+.landing .login .frame_3_form-field::placeholder {
+  font-size: 48px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #364364;
+  opacity: 0.6;
+}
+.landing .login .frame_3_form-field-error {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #FF0000;
+  background-color: transparent;
+  font-size: 48px;
+  padding: 5px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #364364;
+  text-align: left;
+  -webkit-box-shadow: inset 0 0 0 50px #066BC6;
+  -webkit-text-fill-color: #FFFFFF;
+}
+.landing .login .frame_3_form-field-error::placeholder {
+  font-size: 48px;
+  font-family: "Raleway Regular", sans-serif;
+  -webkit-text-fill-color: #FF0000;
+  opacity: 0.6;
+}
+.landing .login .frame_3_form-btn {
+  color: white;
+  font-size: 40px;
+  font-family: "Raleway Regular", sans-serif;
+  background: transparent;
+  border-radius: 25px;
+  border: 1px solid #FFFFFF;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  margin-top: 50px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+.landing .login .frame_3_form-btn:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.landing .login .frame_3 a {
+  color: #c4c4c4;
+  font-size: 18px;
+  font-family: "Raleway Regular", sans-serif;
+  text-decoration: none;
+  margin-top: 5px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.landing .login .frame_3 a:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.landing .login .frame_3_registration {
+  margin-top: 20px;
+}
+.landing .login .frame_3_registration span {
+  color: #F2F4F9;
+  font-size: 24px;
+  font-family: "Raleway Regular", sans-serif;
+}
+.landing .login .frame_3_registration a {
+  color: #00C084;
+  font-size: 24px;
+  font-family: "Raleway Regular", sans-serif;
+  text-transform: none;
+}
+.landing .login .frame_3_registration a:hover {
+  text-decoration: underline;
+}
+.landing .login .frame_4 {
+  width: 50%;
+  height: 100%;
+  background: #00C084;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing .login .frame_4 span {
+  font-size: 40px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #FFFFFF;
+  text-align: center;
+  width: 70%;
+}
+.landing .login .frame_4 span span {
+  color: #364364;
+}
+.landing .login .frame_5 {
+  width: 50%;
+  height: 100%;
+  background: #066BC6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.landing .login .frame_5-text {
+  width: 70%;
+  font-size: 48px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #FFFFFF;
+}
+.landing .login .frame_5_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+.landing .login .frame_5_form ul {
+  display: none;
+}
+.landing .login .frame_5_form p {
+  position: relative;
+  width: 100%;
+}
+.landing .login .frame_5_form p::before, .landing .login .frame_5_form p::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  background-color: transparent;
+  position: absolute;
+  bottom: -10px;
+}
+.landing .login .frame_5_form p::before {
+  left: -22px;
+}
+.landing .login .frame_5_form p::after {
+  right: -22px;
+}
+.landing .login .frame_5_form p label {
+  font-family: "Raleway Regular", sans-serif;
+  font-size: 30px;
+  color: #FFFFFF;
+  position: absolute;
+  bottom: -35px;
+  right: 35%;
+}
+.landing .login .frame_5_form-field {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #FFFFFF;
+  background-color: transparent;
+  font-size: 48px;
+  padding: 5px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #364364;
+  text-align: center;
+  -webkit-box-shadow: inset 0 0 0 50px #066BC6;
+  -webkit-text-fill-color: #FFFFFF;
+}
+.landing .login .frame_5_form-field::placeholder {
+  font-size: 48px;
+  font-family: "Raleway Regular", sans-serif;
+  color: #364364;
+  opacity: 0.6;
+}
+.landing .login .frame_5_form-field-error {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #FF0000;
+  background-color: transparent;
+  font-size: 48px;
+  padding: 5px;
+  font-family: "Raleway Regular", sans-serif;
+  color: white;
+  text-align: center;
+  -webkit-box-shadow: inset 0 0 0 50px #066BC6;
+}
+.landing .login .frame_5_form-field-error::placeholder {
+  font-size: 48px;
+  font-family: "Raleway Regular", sans-serif;
+  -webkit-text-fill-color: #FF0000;
+  opacity: 0.6;
+}
+.landing .login .frame_5_form-btn {
+  color: white;
+  font-size: 40px;
+  font-family: "Raleway Regular", sans-serif;
+  background: transparent;
+  border-radius: 25px;
+  border: 1px solid #FFFFFF;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  margin-top: 50px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+.landing .login .frame_5_form-btn:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.landing .login .frame_6 {
+  width: 50%;
+  height: 100%;
+  background: #066BC6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.landing .login .frame_6-text {
+  width: 70%;
+  color: #FFFFFF;
+  font-size: 48px;
+  font-family: "Raleway Regular", sans-serif;
+  text-align: left;
+  margin-left: 50px;
+}
+.landing .login .frame_6-text a {
+  text-decoration: none;
+  color: #00C084;
+}
+.landing .login .frame_6-text a:hover {
+  text-decoration: underline;
 }
 .landing .login .helper {
   -webkit-transform: translateY(60%);
@@ -153,6 +571,7 @@
   width: 100%;
   background-color: #c4c4c4;
   height: 100vh;
+  box-shadow: 0 8px 2px 0 #00000040;
 }
 .landing .hero_auth {
   display: flex;
@@ -174,6 +593,7 @@
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+  outline: none;
 }
 .landing .hero_auth-btn:hover {
   -webkit-transform: scale(1.2);
@@ -261,7 +681,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 300px;
+  margin-bottom: 100px;
 }
 .landing .body_helper_title {
   font-family: "Raleway Medium", sans-serif;
@@ -269,6 +689,21 @@
   color: #364364;
   text-decoration: underline;
   margin-bottom: 80px;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes autofill {
+  to {
+    color: inherit;
+    background: transparent;
+  }
 }
 
 /*# sourceMappingURL=login.css.map */
