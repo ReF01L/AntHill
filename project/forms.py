@@ -4,10 +4,17 @@ from account.models import Profile
 from .models import Project
 
 
-class ProjectForm(forms.ModelForm):
+class JoinProjectForm(forms.ModelForm):
+    # profile = forms.Field
+
+    projects = forms.ModelMultipleChoiceField(
+        queryset=Project.objects.all(),
+        widget=forms.RadioSelect
+    )
+
     class Meta:
         model = Project
-        fields = ('users', 'name', 'description')
+        fields = ('projects',)
 
 
 class CreateProjectForm(forms.ModelForm):

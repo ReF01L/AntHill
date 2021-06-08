@@ -4,7 +4,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 from AntHill import settings
 from account.models import Profile
-from project.forms import CreateProjectForm
+from project.forms import CreateProjectForm, JoinProjectForm
 from project.models import Project
 
 
@@ -54,7 +54,13 @@ def create_project(request):
 
 @login_required(login_url='/account/login/')
 def join_project(request):
-    return redirect('project:projects')
+    form = JoinProjectForm(request.POST or None)
+
+    if form.is_valid():
+        cd = form.cleaned_data
+        cd.get()
+
+    return render(request, 'project/join.html', {'form': form})
 
 
 @login_required(login_url='/account/login/')
