@@ -6,5 +6,9 @@
 
 {% block title %} - Sign in{% endblock %}
 {% block content %}
-    {{ project_names }}
+    {% for project in projects %}
+        <p>{{ project.name }}</p>
+    {% endfor %}
+
+    
 {% endblock %}

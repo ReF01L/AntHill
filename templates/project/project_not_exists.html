@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/projects.css' %}">
+{% endblock %}
+
+{% block title %} - Sign in{% endblock %}
+{% block content %}
+
+    <button onclick="window.location.href='{% url 'project:create' %}'">Конпка создания</button>
+    <button onclick="window.location.href='{% url 'project:join' %}'">Копка присоединиться</button>
+    
+    
+{% endblock %}
