@@ -6,7 +6,7 @@ from account.models import Profile
 
 class IssueResolution(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
 
 
 class IssuePriority(models.Model):

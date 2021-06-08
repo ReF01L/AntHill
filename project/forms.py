@@ -1,7 +1,29 @@
 from django import forms
 
+from account.models import Profile
+from .models import Project
+
 from project.models import Project, Issue
 
+
+class JoinProjectForm(forms.ModelForm):
+    # profile = forms.Field
+
+    projects = forms.ModelMultipleChoiceField(
+        queryset=Project.objects.all(),
+        widget=forms.RadioSelect
+    )
+
+    class Meta:
+        model = Project
+        fields = ('projects',)
+
+
+class CreateProjectForm(forms.ModelForm):
+    users = forms.ModelMultipleChoiceField(
+        queryset=Profile.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
 
 class ChooseProjectForm(forms.ModelForm):
     error_css_class = 'error'
@@ -58,3 +80,5 @@ class ChooseProjectForm(forms.ModelForm):
         issue = self.cleaned_data.get('issue')
         print(issue)
         return self.cleaned_data.get('projects')
+        model = Project
+        fields = ('name', 'description', 'users')
