@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Light";
+  src: url("../fonts/Raleway-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway SemiBold";
+  src: url("../fonts/Raleway-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  background-color: #F2F4F9;
+  color: #364364;
+}
+
+.projects {
+  margin: auto 185px;
+  font-size: 30px;
+}
+.projects .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.projects .header-btn {
+  width: 350px;
+  height: 50px;
+  margin: auto 90px;
+  border-radius: 20px;
+  font-size: 30px;
+}
+.projects .main .recent_title {
+  margin-left: 90px;
+  margin-top: 50px;
+  margin-bottom: 35px;
+}
+.projects .main .recent_projects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.projects .main .recent_projects_project {
+  background-color: #FFFFFF;
+  width: 170px;
+  height: 175px;
+  border: 2px solid black;
+  margin: auto 5px;
+}
+.projects .main .all {
+  margin-top: 75px;
+}
+.projects .main .all_title {
+  margin-bottom: 10px;
+}
+.projects .main .all_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+.projects .main .all_info_title {
+  margin: auto 90px;
+}
+.projects .main .all_body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 45px;
+}
+.projects .main .all_body_project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=user_projects.css.map */

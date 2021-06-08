@@ -1,0 +1,114 @@
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Light";
+  src: url("../fonts/Raleway-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway SemiBold";
+  src: url("../fonts/Raleway-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  background-color: #F2F4F9;
+  color: #364364;
+  font-size: 30px;
+  font-family: "Raleway Thin", sans-serif;
+}
+* .header {
+  margin: auto 185px;
+}
+* .header_title {
+  margin-top: 50px;
+  margin-left: 90px;
+}
+* .header_title-title {
+  font-size: 36px;
+  font-family: "Raleway Medium", sans-serif;
+}
+* .header_btns {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px auto;
+}
+* .header_btns_users-user {
+  border-radius: 90px;
+  padding: 5px;
+}
+* .header_btns-sort {
+  margin: auto 20px;
+}
+* .header_btns-complete {
+  margin: 5px;
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 20px;
+}
+* .main {
+  margin: auto 185px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 100%;
+}
+* .main_board {
+  margin: 10px 5px;
+  width: 20%;
+  height: 600px;
+  border: 1px solid #FFFFFF;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+}
+* .main_board_title {
+  background-color: #FFFFFF;
+}
+* .main_board_title-title {
+  margin: 5px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #364364;
+}
+* .main_board_issues {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+}
+* .main_board_issues-issue {
+  margin: 7%;
+  border: 2px solid #00C084;
+}
+* .main_board_issues-issue_title-title {
+  font-size: 20px;
+  background-color: #FFFFFF;
+  font-family: "Raleway Light", sans-serif;
+}
+* .main_board_issues-issue_data {
+  background-color: #FFFFFF;
+  font-family: "Raleway Light", sans-serif;
+}
+
+/*# sourceMappingURL=board.css.map */

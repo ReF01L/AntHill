@@ -1,0 +1,80 @@
+@import "../colors"
+@import "../fonts"
+
+*
+  background-color: $gray
+  color: $dark
+  font-size: 30px
+  @include thin
+
+  .header
+    margin: auto 185px
+
+    &_title
+      margin-top: 50px
+      margin-left: 90px
+
+      &-title
+        font-size: 36px
+        @include medium
+
+    &_btns
+      display: flex
+      justify-content: flex-end
+      margin: 10px auto
+
+      &_users
+        &-user
+          border-radius: 90px
+          padding: 5px
+
+      &-sort
+        margin: auto 20px
+
+      &-complete
+        margin: 5px
+        padding: 5px
+        font-size: 20px
+        border-radius: 20px
+
+  .main
+    margin: auto 185px
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    height: 100%
+
+    &_board
+      margin: 10px 5px
+      width: 20%
+      height: 600px
+      border: 1px solid $white
+      background-color: $white
+      border-radius: 10px
+
+      &_title
+        background-color: $white
+
+        &-title
+          margin: 5px
+          background-color: $white
+          border-bottom: 1px solid $dark
+
+      &_issues
+        display: flex
+        flex-direction: column
+        background-color: $white
+
+        &-issue
+          margin: 7%
+          border: 2px solid $green
+
+          &_title
+            &-title
+              font-size: 20px
+              background-color: $white
+              @include light
+
+          &_data
+            background-color: $white
+            @include light
