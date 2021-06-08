@@ -1,12 +1,77 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/project/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/project/board.css' %}">
 {% endblock %}
 
-{% block title %} - Sign in{% endblock %}
-{% block content %}
-    board
+{% block title %} - Board{% endblock %}
 
-    
+{% block content %}
+    <div class="header">
+        <div class="header_title">
+            <div class="header_title-title">Name of Project</div>
+        </div>
+        <div class="header_btns">
+            <div class="header_btns_users">
+                <button class="header_btns_users-user">DS</button>
+                <button class="header_btns_users-user">DS</button>
+                <button class="header_btns_users-user">DS</button>
+            </div>
+            <button class="header_btns-sort">Sort</button>
+            <button class="header_btns-complete">Complete Sprint</button>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main_board">
+            <div class="main_board_title">
+                <div class="main_board_title-title">To be done</div>
+            </div>
+            <div class="main_board_issues">
+                <div class="main_board_issues-issue">
+                    <div class="main_board_issues-issue_title">
+                        <div class="main_board_issues-issue_title-title">Ticket</div>
+                    </div>
+                    <div class="main_board_issues-issue_data">Data</div>
+                </div>
+                <div class="main_board_issues-issue">
+                    <div class="main_board_issues-issue_title">
+                        <div class="main_board_issues-issue_title-title">Ticket</div>
+                    </div>
+                    <div class="main_board_issues-issue_data">Data</div>
+                </div>
+                <div class="main_board_issues-issue">
+                    <div class="main_board_issues-issue_title">
+                        <div class="main_board_issues-issue_title-title">Ticket</div>
+                    </div>
+                    <div class="main_board_issues-issue_data">Data</div>
+                </div>
+            </div>
+        </div>
+        <div class="main_board">
+            <div class="main_board_title">
+                <div class="main_board_title-title">In Progress</div>
+            </div>
+            <div class="main_board_issues">
+                <div class="main_board_issues-issue">
+                    <div class="main_board_issues-issue_title">
+                        <div class="main_board_issues-issue_title-title">Ticket</div>
+                    </div>
+                    <div class="main_board_issues-issue_data">Data</div>
+                </div>
+            </div>
+        </div>
+        <div class="main_board">
+            <div class="main_board_title">
+                <div class="main_board_title-title">Finished</div>
+            </div>
+            <div class="main_board_issues">
+                <div class="main_board_issues-issue">
+                    <div class="main_board_issues-issue_title">
+                        <div class="main_board_issues-issue_title-title">Ticket</div>
+                    </div>
+                    <div class="main_board_issues-issue_data">Data</div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -24,7 +24,13 @@
 }
 @font-face {
   font-family: "Raleway Bold";
-  src: url("../fonts/Raleway-SemiBold.ttf");
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
   font-weight: normal;
   font-style: normal;
 }
@@ -33,6 +39,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Raleway Medium", sans-serif;
+  resize: none;
+  border: none;
+  outline: none;
+}
+
+body {
+  background-color: #F2F4F9;
 }
 
 /*# sourceMappingURL=base.css.map */

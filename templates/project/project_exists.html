@@ -1,14 +1,57 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/project/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/project/project.css' %}">
 {% endblock %}
 
-{% block title %} - Sign in{% endblock %}
+{% block title %} - Projects{% endblock %}
 {% block content %}
-    {% for project in projects %}
-        <p>{{ project.name }}</p>
-    {% endfor %}
-
-    
+    <div class="projects">
+        <div class="header">
+            <button class="header-btn">Create Project</button>
+            <button class="header-btn">Join existing Project</button>
+        </div>
+        <div class="main">
+            <div class="recent">
+                <div class="recent_title">
+                    <div class="recent_title-title">Recent projects</div>
+                </div>
+                <div class="recent_projects">
+                    <div class="recent_projects_project"></div>
+                    <div class="recent_projects_project"></div>
+                    <div class="recent_projects_project"></div>
+                    <div class="recent_projects_project"></div>
+                    <div class="recent_projects_project"></div>
+                    <div class="recent_projects_project"></div>
+                </div>
+            </div>
+            <div class="all">
+                <div class="all_title">
+                    <div class="all_title-title">All projects</div>
+                </div>
+                <div class="all_info">
+                    <div class="all_info_title">Project's name</div>
+                    <div class="all_info_title">Project manager</div>
+                </div>
+                <div class="all_body">
+                    <div class="all_body_project">
+                        <div class="all_body_project_project">AntHill</div>
+                        <div class="all_body_project_name">DS</div>
+                        <div class="all_body_project_manager">Dmitry Salushkin</div>
+                    </div>
+                    <div class="all_body_project">
+                        <div class="all_body_project_project">AntHill</div>
+                        <div class="all_body_project_name">DS</div>
+                        <div class="all_body_project_manager">Dmitry Salushkin</div>
+                    </div>
+                    <div class="all_body_project">
+                        <div class="all_body_project_project">AntHill</div>
+                        <div class="all_body_project_name">DS</div>
+                        <div class="all_body_project_manager">Dmitry Salushkin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="project_logo" src="{% static 'img/ant.png' %}" alt="logo">
+    </div>
 {% endblock %}

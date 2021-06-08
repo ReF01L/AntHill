@@ -1,5 +1,6 @@
 # Myself ignores
 *.ini
+*/migrations
 
 # Editors
 .vscode/
