@@ -1,6 +1,5 @@
 # Myself ignores
 *.ini
-*/migrations
 
 # Editors
 .vscode/
@@ -183,3 +182,5 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+/project/migrations/
+/account/migrations/
