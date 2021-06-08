@@ -1,15 +1,15 @@
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 from pytz import unicode
 
 from AntHill import settings
+from project.forms import ChooseProjectForm
 from account.models import Profile
 from project.models import Project
 
 
-def projects(request):
-    return render(request, 'project/projects.html')
+def project(request):
+    return render(request, 'project/project.html')
 
 
 def projects(request):
@@ -25,7 +25,13 @@ def board(request):
 
 
 def create_issue(request):
-    return render(request, 'project/create_issue.html')
+    if request.method == 'POST':
+        form = ChooseProjectForm(request.POST)
+        form.is_valid()
+
+    return render(request, 'project/create_issue.html', {
+        'form': ChooseProjectForm()
+    })
 
 
 def command(request, project):

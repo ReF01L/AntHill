@@ -1,12 +1,9 @@
 @import "../colors"
 @import "../fonts"
 
-select
-  color: $dark
 *
   color: $white
   @include light
-  font-size: 36px
 
   .content
     display: flex
@@ -18,7 +15,6 @@ select
       margin: 1% 185px
       background-color: $green
       border-radius: 20px
-      width: 50%
 
       &_header
         margin: auto 10%
@@ -28,74 +24,31 @@ select
           display: flex
 
       &_body
-        margin: 20px 180px
         display: flex
         flex-direction: column
 
-        &_dropdown
-          display: inline-block
-          position: relative
-          width: 60%
-          border-bottom: 1px solid $white
-          margin: 3% 0
+        &_form
 
-          .show
-            display: block
+          &-name
+            background-color: transparent
+            border-bottom: 1px solid $white
 
-
-          &-btn
-
-            background-color: $green
-            border: none
-            outline: none
-
-          &_list
-            display: none
-            position: absolute
-            background-color: $green
-            padding: 12px 16px
-            overflow: auto
-            z-index: 1
+          &-description
+            background-color: transparent
             border: 1px solid $white
-            -webkit-box-shadow: 0 0 3px 0
-            border-bottom-right-radius: 10px
-            border-bottom-left-radius: 10px
+            border-radius: 20px
+            padding: 15px
 
-            &-elem
-              text-decoration: none
-              display: block
-
-              &:hover
-
-
-        &-name
-          border: none
-          border-bottom: 1px solid $white
-          outline: none
-          -webkit-box-shadow: inset 0 0 0 50px $green
-          -webkit-text-fill-color: $white
-
-        &-description
-          margin-top: 20px
-          border: 1px solid $white
-          border-radius: 15px
-          background-color: $green
-          height: 200px
-
-        &-storypoint
-          border: none
-          border-bottom: 1px solid $white
-          outline: none
-          -webkit-box-shadow: inset 0 0 0 50px $green
-          -webkit-text-fill-color: $white
+          &-field
+            background-color: transparent
 
       &_footer
         display: flex
         justify-content: flex-end
 
         &-btn
+          border: 1px solid $white
           margin: 3% 5%
-          border-color: $white
           border-radius: 15px
           background-color: $green
           padding: 5px 3%

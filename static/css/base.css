@@ -39,6 +39,9 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Raleway Medium", sans-serif;
+  resize: none;
+  border: none;
+  outline: none;
 }
 
 /*# sourceMappingURL=base.css.map */

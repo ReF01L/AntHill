@@ -2,25 +2,6 @@
 {% load static %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/project/create_issue.css' %}">
-    <script>
-        function dropdown() {
-            document.getElementById("1").classList.toggle("show");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function (event) {
-            if (!event.target.matches('.issue_body_dropdown-btn')) {
-
-                let dropdowns = document.getElementsByClassName("issue_body_dropdown_list");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    let openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    </script>
 {% endblock %}
 
 {% block title %} - Creat Issue{% endblock %}
@@ -31,11 +12,12 @@
             <div class="issue_header-title">Issue Creation</div>
         </div>
         <div class="issue_body">
-            <div class="issue_body_dropdown">
-                <button onclick="dropdown()" class="issue_body_dropdown-btn">Project</button>
-                <div id="1" class="issue_body_dropdown_list">
-                    <div class="issue_body_dropdown_list-elem">AntHill</div>
-                </div>
+            {% comment %}<div class="issue_body_dropdown">
+                <select class="issue_body_dropdown-btn">
+                    <option value="project1" selected>Проект1</option>
+                    <option value="project2">Проект2</option>
+                    <option value="project3">Проект3</option>
+                </select>
             </div>
             <div class="issue_body_dropdown">
                 <button class="issue_body_dropdown-btn">Type</button>
@@ -69,7 +51,12 @@
                 <div class="issue_body_dropdown_list">
                     <div class="issue_body_dropdown_list-elem">Issue1</div>
                 </div>
-            </div>
+            </div>{% endcomment %}
+            <form class="issue_body_form" method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input type="submit" value="send">
+            </form>
         </div>
         <div class="issue_footer">
             <button class="issue_footer-btn">Create Issue</button>
