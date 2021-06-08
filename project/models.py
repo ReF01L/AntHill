@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
@@ -23,7 +21,7 @@ class Project(models.Model):
 
 
 class LoggedTime(models.Model):
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(auto_now_add=True)
     hours_count = models.TimeField()
     description = models.TextField()
 
@@ -39,9 +37,9 @@ class Issue(models.Model):
     type = models.CharField(max_length=100)
     summary = models.TextField()
     description = models.TextField(null=True, blank=True)
-    environment = models.TextField(null=True, blank=True)  # status_notes
-    ETA = models.DateTimeField()
+    environment = models.TextField(null=True, blank=True)
+    ETA = models.DateTimeField(auto_now_add=False, auto_now=False)
     percent = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
-    created = models.DateTimeField()  # TODO: add default
-    updated = models.DateTimeField()  # TODO: add default
-    resolution_dated = models.DateTimeField()  # logged time
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    resolution_dated = models.DateTimeField(auto_now_add=False, auto_now=False)

@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/project/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/project/project.css' %}">
 {% endblock %}
 
 {% block title %} - Sign in{% endblock %}
 {% block content %}
-
-    <button onclick="window.location.href='{% url 'project:create' %}'">Конпка создания</button>
-    <button onclick="window.location.href='{% url 'project:join' %}'">Копка присоединиться</button>
-    
-    
+    <div class="no_projects">
+        <button class="no_projects-btn" onclick="window.location.href='{% url 'project:create' %}'">Create new project</button>
+        <button class="no_projects-btn" onclick="window.location.href='{% url 'project:join' %}'">Join to the project</button>
+    </div>
 {% endblock %}
