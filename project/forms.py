@@ -25,17 +25,22 @@ class CreateProjectForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple
     )
 
+    class Meta:
+        model = Project
+        fields = ('name', 'description', 'users')
+
+
 class ChooseProjectForm(forms.ModelForm):
     error_css_class = 'error'
-    PROJECTS = ((x.name, x.name) for x in Project.objects.all())
-    EXECUTORS = ((x.executor.user.username, x.executor.user.username) for x in Issue.objects.all())
+    # PROJECTS = ((x.name, x.name) for x in Project.objects.all())
+    # EXECUTORS = ((x.executor.user.username, x.executor.user.username) for x in Issue.objects.all())
     TASK_TYPE = (('Epic', 'Epic'), ('notEpic', 'notEpic'))
 
     projects = forms.ChoiceField(label='Project', label_suffix='', widget=forms.Select(
         attrs={
             'class': 'issue_body_form-field'
         }
-    ), choices=PROJECTS)
+    ))
     task_type = forms.ChoiceField(label='Task Type', label_suffix='', widget=forms.Select(
         attrs={
             'class': 'issue_body_form-field'
@@ -55,7 +60,7 @@ class ChooseProjectForm(forms.ModelForm):
         attrs={
             'class': 'issue_body_form-field'
         }
-    ), choices=EXECUTORS)
+    ))
     sprint = forms.ChoiceField(label='Sprint', label_suffix='', widget=forms.Select(
         attrs={
             'class': 'issue_body_form-field'
