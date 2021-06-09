@@ -11,10 +11,14 @@ from project.models import Project
 @login_required(login_url='/account/login/')
 def projects(request):
     user = Profile.objects.get(user=request.user)
-    _projects = user.project_set.all()
-    if _projects:
+    all_u = Project.objects.filter(users__in=[user])
+
+    if all_u:
+        recents = all_u[:6]
+        recents += list([x for x in range(6 - len(recents))])
         return render(request, 'project/project_exists.html', {
-            'projects': user.project_set.all()
+            'recents': recents,
+            'all': all_u
         })
     return render(request, 'project/project_not_exists.html')
 
