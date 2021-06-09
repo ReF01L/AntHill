@@ -6,28 +6,10 @@ from .models import Project
 from project.models import Project, Issue
 
 
-class JoinProjectForm(forms.ModelForm):
-    # profile = forms.Field
-
-    projects = forms.ModelMultipleChoiceField(
-        queryset=Project.objects.all(),
-        widget=forms.RadioSelect
-    )
-
-    class Meta:
-        model = Project
-        fields = ('projects',)
-
-
 class CreateProjectForm(forms.ModelForm):
-    users = forms.ModelMultipleChoiceField(
-        queryset=Profile.objects.all(),
-        widget=forms.CheckboxSelectMultiple
-    )
-
     class Meta:
         model = Project
-        fields = ('name', 'description', 'users')
+        fields = ('name', 'description',)
 
 
 class ChooseProjectForm(forms.ModelForm):
