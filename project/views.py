@@ -43,7 +43,6 @@ def recent_project(request):
 @login_required(login_url='/account/login/')
 def create_project(request):
     form = CreateProjectForm(request.POST or None)
-
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data

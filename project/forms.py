@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import CheckboxSelectMultiple
 
 from account.models import Profile
 from .models import Project
@@ -20,14 +21,27 @@ class JoinProjectForm(forms.ModelForm):
 
 
 class CreateProjectForm(forms.ModelForm):
-    users = forms.ModelMultipleChoiceField(
-        queryset=Profile.objects.all(),
-        widget=forms.CheckboxSelectMultiple
-    )
+    description = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
+        attrs={
+            'class': 'create_project_form-field'
+        }
+    ))
+    name = forms.CharField(label='Name of the project', label_suffix='', widget=forms.TextInput(
+        attrs={
+            'class': 'create_project_form-field'
+        }
+    ))
+    link = forms.CharField(label='Link for the join to this project', label_suffix='', widget=forms.TextInput(
+        attrs={
+            'class': 'create_project_form-field',
+            'readonly': True,
+            'value': 'some_link'
+        }
+    ))
 
     class Meta:
         model = Project
-        fields = ('name', 'description', 'users')
+        fields = ('name', 'description')
 
 
 class ChooseProjectForm(forms.ModelForm):
@@ -80,10 +94,3 @@ class ChooseProjectForm(forms.ModelForm):
     class Meta:
         model = Issue
         fields = ()
-
-    def clean_issue(self):
-        issue = self.cleaned_data.get('issue')
-        print(issue)
-        return self.cleaned_data.get('projects')
-        model = Project
-        fields = ('name', 'description', 'users')

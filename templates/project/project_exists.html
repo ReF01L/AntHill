@@ -8,8 +8,8 @@
 {% block content %}
     <div class="projects">
         <div class="header">
-            <button class="header-btn">Create Project</button>
-            <button class="header-btn">Join existing Project</button>
+            <button class="header-btn" onclick="window.location.href='{% url 'project:create' %}'">Create Project</button>
+            <button class="header-btn" onclick="window.location.href='{% url 'project:join' %}'">Join existing Project</button>
         </div>
         <div class="main">
             <div class="recent">

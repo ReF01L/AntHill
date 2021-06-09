@@ -80,7 +80,7 @@ def user_login(request):
                 user = authenticate(username=cd['username'], password=cd['password'])
                 if user is not None and user.is_active:
                     login(request, user)
-                    return redirect('account:profile')
+                    return redirect('project:projects')
             errors['login'] = 'The username or password you entered is incorrect'
         return render(request, 'account/login.html', {
             'form': form,
