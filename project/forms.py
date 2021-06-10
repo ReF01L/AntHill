@@ -36,7 +36,7 @@ class CreateProjectForm(forms.ModelForm):
         attrs={
             'class': 'create_project_form-field',
             'readonly': True,
-            'value': ''.join(choice(ascii_letters) for _ in range(20))
+            'value': 'http://localhost:8000/' + ''.join(choice(ascii_letters) for _ in range(10))
         }
     ))
 
