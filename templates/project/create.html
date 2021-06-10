@@ -7,13 +7,13 @@
 {% block title %} - Sign in{% endblock %}
 {% block content %}
     <div class="create_project">
-    <div class="create_project-title">
-        Create Project
-    </div>
+        <div class="create_project-title">
+            Create Project
+        </div>
         <form action="." method="post" class="create_project_form">
             {% for field in form %}
                 <p>
-                {{ field }}{{ field.label_tag }}
+                    {{ field }}{{ field.label_tag }}
                 </p>
             {% endfor %}
             {% csrf_token %}

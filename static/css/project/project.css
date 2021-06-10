@@ -145,7 +145,7 @@
   -ms-transform: scale(1.2);
   -o-transform: scale(1.2);
   transform: scale(1.2);
-  z-index: 100;
+  z-index: 3;
 }
 .projects .main .all {
   margin-top: 75px;
@@ -218,16 +218,6 @@
   color: #364364;
   font-size: 30px;
   font-family: "Raleway Medium", sans-serif;
-}
-.projects .project_logo {
-  -webkit-transform: translate(57%, -160%);
-  -moz-transform: translate(57%, -160%);
-  -ms-transform: translate(57%, -160%);
-  -o-transform: translate(57%, -160%);
-  transform: translate(57%, -160%);
-  width: 500px;
-  height: 500px;
-  z-index: 1;
 }
 
 /*# sourceMappingURL=project.css.map */

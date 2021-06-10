@@ -61,7 +61,6 @@ def join_project(request):
 
     if form.is_valid():
         cd = form.cleaned_data
-        cd.get()
 
     return render(request, 'project/join.html', {'form': form})
 
