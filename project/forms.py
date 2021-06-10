@@ -1,3 +1,6 @@
+from random import choice
+from string import ascii_letters
+
 from django import forms
 from django.forms import CheckboxSelectMultiple
 
@@ -8,8 +11,6 @@ from project.models import Project, Issue
 
 
 class JoinProjectForm(forms.ModelForm):
-    # profile = forms.Field
-
     projects = forms.ModelMultipleChoiceField(
         queryset=Project.objects.all(),
         widget=forms.RadioSelect
@@ -35,7 +36,7 @@ class CreateProjectForm(forms.ModelForm):
         attrs={
             'class': 'create_project_form-field',
             'readonly': True,
-            'value': 'some_link'
+            'value': ''.join(choice(ascii_letters) for _ in range(20))
         }
     ))
 

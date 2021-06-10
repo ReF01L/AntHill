@@ -18,7 +18,7 @@ class Project(models.Model):
     users = models.ManyToManyField(to=Profile)
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    key = models.CharField(max_length=20)
+    key = models.CharField(max_length=20, null=True, blank=True)
 
 
 class LoggedTime(models.Model):

@@ -50,8 +50,7 @@ def create_project(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = Profile.objects.get(user=request.user)
-            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
-                                          key=''.join(choice(ascii_letters) for i in range(20)))
+            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'), key=cd['link'])
             proj.users.add(user)
             return redirect('project:board')
 
@@ -65,11 +64,10 @@ def join_project(request):
         user = Profile.objects.get(user=request.user)
         try:
             proj = Project.objects.get(key=key)
-        except:
-            proj = None
-        if proj:
             proj.users.add(user)
             return render(request, 'project/join_success.html')
+        except Project.DoesNotExist:
+            pass
 
     return render(request, 'project/join_fail.html')
 
