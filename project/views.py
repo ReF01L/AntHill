@@ -1,10 +1,13 @@
+from random import choice
+from string import ascii_letters
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET, require_POST
 
 from AntHill import settings
 from account.models import Profile
-from project.forms import CreateProjectForm, JoinProjectForm
+from project.forms import CreateProjectForm
 from project.models import Project
 
 
@@ -47,9 +50,9 @@ def create_project(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = Profile.objects.get(user=request.user)
-            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'))
-            for x in cd.get('users'):
-                proj.users.add(x)
+            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
+                                          key=''.join(choice(ascii_letters) for i in range(20)))
+            proj.users.add(user)
             return redirect('project:board')
 
     return render(request, 'project/create.html', {'form': form})
@@ -57,12 +60,18 @@ def create_project(request):
 
 @login_required(login_url='/account/login/')
 def join_project(request):
-    form = JoinProjectForm(request.POST or None)
+    key = request.POST.get('key') or request.GET.get('key') or 0
+    if key != 0:
+        user = Profile.objects.get(user=request.user)
+        try:
+            proj = Project.objects.get(key=key)
+        except:
+            proj = None
+        if proj:
+            proj.users.add(user)
+            return render(request, 'project/join_success.html')
 
-    if form.is_valid():
-        cd = form.cleaned_data
-
-    return render(request, 'project/join.html', {'form': form})
+    return render(request, 'project/join_fail.html')
 
 
 @login_required(login_url='/account/login/')
