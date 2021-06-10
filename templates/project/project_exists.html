@@ -17,8 +17,11 @@
                     <div class="recent_title-title">Recent projects</div>
                 </div>
                 <div class="recent_projects">
-                    {% for project in recents %}
-                        <div class="recent_projects_project"></div>
+                    {% for project in recent %}
+                        <div class="recent_projects_project">
+                             onclick="window.location.href='{% url 'project:board' slug=project.key%}'">
+                            {{ project.name }}
+                        </div>
                     {% endfor %}
                 </div>
             </div>
@@ -32,9 +35,8 @@
                 </div>
                 <div class="all_body">
                     {% for project in all %}
-                        <div class="all_body_project">
+                        <div class="all_body_project" onclick="window.location.href='{% url 'project:board' slug=project.key %}'">
                             <div class="all_body_project_project">{{ project.name }}</div>
-                            <div class="all_body_project_name">{{ projects.short_name }}</div>
                             <div class="all_body_project_manager">{{ project.username }}</div>
                         </div>
                     {% endfor %}
