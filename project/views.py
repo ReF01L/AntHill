@@ -5,8 +5,8 @@ from django.views.decorators.http import require_GET
 
 from account.models import Profile
 from project import constants
-from project.forms import CreateProjectForm
-from project.models import Project
+from project.forms import CreateProjectForm, CreateIssueForm
+from project.models import Project, Issue, Sprint
 
 
 @login_required(login_url='/account/login/')
@@ -44,7 +44,8 @@ def create_project(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = Profile.objects.get(user=request.user)
-            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'), slug=cd['link'].split('/')[-1])
+            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
+                                          slug=cd['link'].split('/')[-1])
             proj.users.add(user)
             return redirect('project:board', 'kPaQDGUdPZ')
 
@@ -79,6 +80,38 @@ def board(request, slug):
     })
 
 
+@login_required(login_url='/account/login/')
+def create_issue(request, slug):
+    project = Project.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = CreateIssueForm(request.POST)
+        if form.valid():
+            cd = form.cleaned_data
+            issue = Issue.objects.create(
+                status=cd.get('status'),
+                type=cd.get('type'),
+                priority=cd.get('priority'),
+                summary=cd.get('summary'),
+                description=cd.get('description'),
+                percent=cd.get('percent'),
+                environment=cd.get('environment'),
+                ETA=cd.get('ETA'),
+                project=project,
+                slug=cd.get(slug)
+            )
+    else:
+        form = CreateIssueForm()
+        form.fields['verifier'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
+
+        form.fields['sprint'].choices = [('', '')]
+        if project.sprint is not None:
+            form.fields['sprint'].choices += [(project.sprint.name, project.sprint.name)]
+        form.fields['executor'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
+    return render(request, 'project/create_issue.html', {
+        'form': form
+    })
+
+
 def issues(request, slug):
     return HttpResponse('Issues')
 
@@ -89,7 +122,3 @@ def roadmap(request, slug):
 
 def log(request, slug):
     return HttpResponse('Log')
-
-
-def create_issue(request, slug):
-    return HttpResponse('Create Issue')

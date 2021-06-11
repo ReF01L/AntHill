@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Issue
+from .models import Project, Issue, Sprint
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -11,7 +11,6 @@ class IssueAdmin(admin.ModelAdmin):
     list_display = ['project',
                     'verifier',
                     'executor',
-                    'resolution',
                     'priority',
                     'status',
                     'type',
@@ -21,18 +20,13 @@ class IssueAdmin(admin.ModelAdmin):
                     'ETA',
                     'percent',
                     'created',
-                    'updated',
-                    'resolution_dated']
-    filter_horizontal = ['watchers']
+                    'updated']
 
 
-class IssuePriorityAdmin(admin.ModelAdmin):
-    list_display = ['name', 'icon']
-
-
-class IssueResolutionAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description']
+class SprintAdmin(admin.ModelAdmin):
+    list_display = ['name', 'start_date', 'due_date']
 
 
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Issue, IssueAdmin)
+admin.site.register(Sprint, SprintAdmin)
