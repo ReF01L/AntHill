@@ -12,26 +12,46 @@
 {% block content %}
     <div class="container">
         <div class="hero">
-            <div class="image">
-                <img src="{% static 'img/account/user.png' %}" alt="Profile image">
-            </div>
             <div class="fields">
+                <div class="field">
+                    {% if user.photo %}
+                        <div class="field-value">{{ user.photo }}</div>
+                    {% else %}
+                        <div class="image">
+                            <img src="{% static 'img/account/user.png' %}" alt="Profile image">
+                        </div>
+                    {% endif %}
+                </div>
                 <div class="field">
                     <div class="field-key">username</div>
                     <div class="field-value">{{ user.user.username }}</div>
+                </div>
+                <div class="field">
+                    <div class="field-key">Last Name</div>
+                    <div class="field-value">{{ user.user.last_name }}</div>
                 </div>
                 <div class="field">
                     <div class="field-key">email</div>
                     <div class="field-value">{{ user.user.email }}</div>
                 </div>
                 <div class="field">
-                    <div class="field-key">name</div>
-                    <div class="field-value">{{ user.user.first_name }}</div>
-                </div>
-                <div class="field">
                     <div class="field-key">last name</div>
                     <div class="field-value">{{ user.user.last_name }}</div>
                 </div>
+            </div>
+            <h1>My projects</h1>
+            <div class="fields">
+                {% for project in projects %}
+                    <a href="#"> {{ project.name }}</a>
+                {% endfor %}
+                <a href="#">Show all my projects</a>
+            </div>
+            <h1>My actual issues</h1>
+            <div class="fields">
+                {% for issue in issues %}
+                    <a href="#"> {{ issue.summary }}</a>
+                {% endfor %}
+                <a href="#">Show all my projects</a>
             </div>
         </div>
     </div>
