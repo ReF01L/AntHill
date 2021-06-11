@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
@@ -64,13 +65,31 @@ def join_project(request):
 
 @login_required(login_url='/account/login/')
 def board(request, slug):
+    project = Project.objects.get(slug=slug)
     tickets = {
-        'waiting': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.WAITING)],
-        'progress': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.PROGRESS)],
-        'complete': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.COMPLETE)]
+        'waiting': [x for x in project.issue_set.filter(status=constants.Statuses.WAITING)],
+        'progress': [x for x in project.issue_set.filter(status=constants.Statuses.PROGRESS)],
+        'complete': [x for x in project.issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
     return render(request, 'project/board.html', {
         'waiting': tickets['waiting'],
         'progress': tickets['progress'],
-        'complete': tickets['complete']
+        'complete': tickets['complete'],
+        'project': project
     })
+
+
+def issues(request, slug):
+    return HttpResponse('Issues')
+
+
+def roadmap(request, slug):
+    return HttpResponse('RoadMap')
+
+
+def log(request, slug):
+    return HttpResponse('Log')
+
+
+def create_issue(request, slug):
+    return HttpResponse('Create Issue')
