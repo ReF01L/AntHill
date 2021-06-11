@@ -32,3 +32,146 @@
       -ms-transform: scale(1.1)
       -o-transform: scale(1.1)
       transform: scale(1.1)
+.projects
+  width: 1070px
+  margin: auto
+  z-index: 20
+  height: 100vh
+
+  & .header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-top: 80px
+
+    &-btn
+      width: 350px
+      height: 50px
+      margin: auto 90px
+      border-radius: 20px
+      font-size: 30px
+      color: $dark
+      border: 1px solid $dark
+      background-color: $gray
+      z-index: 2
+      -webkit-transition: 0.2s
+      -moz-transition: 0.2s
+      -ms-transition: 0.2s
+      -o-transition: 0.2s
+      transition: 0.2s
+      &:hover
+        cursor: pointer
+        -webkit-transform: scale(1.1)
+        -moz-transform: scale(1.1)
+        -ms-transform: scale(1.1)
+        -o-transform: scale(1.1)
+        transform: scale(1.1)
+
+  & .main
+    width: 100%
+    & .recent
+      width: 100%
+      &_title
+        margin-left: 90px
+        margin-top: 50px
+        margin-bottom: 35px
+
+        &-title
+          color: $dark
+          font-size: 30px
+          @include medium
+
+      &_projects
+        display: flex
+        justify-content: space-between
+        align-items: flex-start
+        width: 100%
+
+        &_project
+          background-color: $white
+          width: 170px
+          height: 175px
+          border: 2px solid $dark
+          z-index: 2
+          -webkit-transition: 0.4s
+          -moz-transition: 0.4s
+          -ms-transition: 0.4s
+          -o-transition: 0.4s
+          transition: 0.4s
+          &:hover
+            -webkit-transform: scale(1.2)
+            -moz-transform: scale(1.2)
+            -ms-transform: scale(1.2)
+            -o-transform: scale(1.2)
+            transform: scale(1.2)
+            z-index: 3
+
+    & .all
+      margin-top: 75px
+
+      &_title
+        margin-bottom: 10px
+
+        &-title
+          font-size: 30px
+          @include medium
+          color: $dark
+
+      &_info
+        display: flex
+        justify-content: space-between
+        align-items: center
+        border-bottom: 1px solid $dark
+
+        &_title
+          margin: auto 90px
+          font-size: 30px
+          color: $dark
+          @include medium
+
+      &_body
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: flex-start
+        margin-top: 45px
+        width: 100%
+
+        &_project
+          display: flex
+          justify-content: space-between
+          align-items: center
+          margin-bottom: 20px
+          width: 100%
+          -webkit-transition: 0.2s
+          -moz-transition: 0.2s 
+          -ms-transition: 0.2s 
+          -o-transition: 0.2s 
+          transition: 0.2s 
+          &:hover
+            -webkit-transform: scale(1.1)
+            -moz-transform: scale(1.1)
+            -ms-transform: scale(1.1)
+            -o-transform: scale(1.1)
+            transform: scale(1.1)
+            cursor: pointer
+          &_project
+            width: 620px
+            height: 50px
+            border-radius: 15px
+            border: 1px solid $dark
+            display: flex
+            justify-content: left
+            align-items: center
+            padding-left: 15px
+            margin-right: 35px
+            color: $dark
+            font-size: 30px
+            @include medium
+            background-color: $white
+
+          &_manager
+            color: $dark
+            font-size: 30px
+            @include medium
+            margin-right: 250px

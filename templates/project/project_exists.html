@@ -1,12 +1,47 @@
 {% extends "base.html" %}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/project/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/project/project.css' %}">
 {% endblock %}
 
-{% block title %} - Sign in{% endblock %}
+{% block title %} - Projects{% endblock %}
 {% block content %}
-    {% for project in projects %}
-        <p>{{ project.name }}</p>
-    {% endfor %}
+    <div class="projects">
+        <div class="header">
+            <button class="header-btn" onclick="window.location.href='{% url 'project:create' %}'">Create Project</button>
+            <button class="header-btn" onclick="window.location.href='{% url 'project:join' %}'">Join existing Project</button>
+        </div>
+        <div class="main">
+            <div class="recent">
+                <div class="recent_title">
+                    <div class="recent_title-title">Recent projects</div>
+                </div>
+                <div class="recent_projects">
+                    {% for project in recent %}
+                        <div class="recent_projects_project">
+                             onclick="window.location.href='{% url 'project:board' slug=project.key%}'">
+                            {{ project.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="all">
+                <div class="all_title">
+                    <div class="all_title-title">All projects</div>
+                </div>
+                <div class="all_info">
+                    <div class="all_info_title">Project's name</div>
+                    <div class="all_info_title">Project manager</div>
+                </div>
+                <div class="all_body">
+                    {% for project in all %}
+                        <div class="all_body_project" onclick="window.location.href='{% url 'project:board' slug=project.key %}'">
+                            <div class="all_body_project_project">{{ project.name }}</div>
+                            <div class="all_body_project_manager">{{ project.username }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
