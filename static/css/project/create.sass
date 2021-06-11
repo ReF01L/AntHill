@@ -1,0 +1,111 @@
+@import "../colors"
+@import "../fonts"
+
+body
+  height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+.create_project
+  width: 900px
+  height: 650px
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: center
+  border: 1px solid $green
+  border-radius: 20px
+  margin: auto
+
+  &-title
+    color: $green
+    font-size: 48px
+    margin-bottom: 100px
+    margin-top: 20px
+
+  &_form
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    & p
+      display: flex
+      justify-content: flex-start
+      align-items: flex-end
+      width: 620px
+      position: relative
+      margin-bottom: 50px
+      &:last-child
+        margin-bottom: 350px
+      & label
+        color: $dark
+        @include medium
+        font-size: 30px
+        position: absolute
+        bottom: -100%
+        right: 0
+    &-field
+      background: transparent
+      border-bottom: 1px solid $dark
+      height: 40px
+      width: 100%
+      color: $dark
+      font-size: 30px
+      &[name=link]
+        opacity: 0.6
+        -webkit-transition: 0.4s
+        -moz-transition: 0.4s
+        -ms-transition: 0.4s
+        -o-transition: 0.4s
+        transition: 0.4s
+        &:hover
+          cursor: pointer
+          opacity: 1
+    &_btns
+      display: flex
+      justify-content: space-between
+      align-items: center
+      width: 100%
+      margin-top: 100px
+      & a
+        display: flex
+        justify-content: center
+        align-items: center
+        text-decoration: none
+        width: 260px
+        height: 50px
+        border: 1px solid $green
+        border-radius: 20px
+        font-size: 30px
+        @include medium
+        color: $dark
+        -webkit-transition: 0.4s
+        -moz-transition: 0.4s
+        -ms-transition: 0.4s
+        -o-transition: 0.4s
+        transition: 0.4s
+        &:hover
+          cursor: pointer
+          background-color: $green
+      & input
+        display: flex
+        justify-content: center
+        align-items: center
+        margin-left: 90px
+        text-decoration: none
+        width: 260px
+        height: 50px
+        border: 1px solid $green
+        border-radius: 20px
+        font-size: 30px
+        @include medium
+        color: $dark
+        background-color: transparent
+        -webkit-transition: 0.4s
+        -moz-transition: 0.4s
+        -ms-transition: 0.4s
+        -o-transition: 0.4s
+        transition: 0.4s
+        &:hover
+          cursor: pointer
+          background-color: $green

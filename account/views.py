@@ -15,7 +15,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 
 from AntHill import settings
-from .forms import UserRegistrationForm, LoginForm, UserEditForm, ProfileEditForm, ForgotPasswordForm, NewPasswordForm, SendCodeForm
+from .forms import UserRegistrationForm, LoginForm, UserEditForm, ProfileEditForm, ForgotPasswordForm, NewPasswordForm, \
+    SendCodeForm
 from .forms import UserRegistrationForm, LoginForm, UserEditForm, ProfileEditForm, NewPasswordForm
 from .models import Profile
 
@@ -37,7 +38,11 @@ def new_password(request, uidb64, token):
 @require_GET
 def profile(request):
     user = Profile.objects.get(user=request.user)
-    return render(request, 'account/profile.html', {'user': user})
+    projects = user.project_set.all()
+    issues = user.issue_set.all()
+    return render(request, 'account/profile.html', {'user': user,
+                                                    'projects': projects,
+                                                    'issues': issues})
 
 
 @login_required
@@ -51,6 +56,7 @@ def edit(request):
             messages.success(request, 'Profile updated successfully')
         else:
             messages.error(request, 'Error updating your profile')
+        
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
@@ -80,7 +86,7 @@ def user_login(request):
                 user = authenticate(username=cd['username'], password=cd['password'])
                 if user is not None and user.is_active:
                     login(request, user)
-                    return redirect('account:profile')
+                    return redirect('project:projects')
             errors['login'] = 'The username or password you entered is incorrect'
         return render(request, 'account/login.html', {
             'form': form,

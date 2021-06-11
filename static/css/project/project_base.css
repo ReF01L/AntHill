@@ -34,18 +34,46 @@
   font-weight: normal;
   font-style: normal;
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.menu {
+  position: fixed;
+  background-color: #066BC6;
+  height: 100vh;
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0;
+  z-index: -1;
+  -webkit-transition: 1.2s;
+  -moz-transition: 1.2s;
+  -ms-transition: 1.2s;
+  -o-transition: 1.2s;
+  transition: 1.2s;
+}
+.menu-name {
+  color: #FFFFFF;
   font-family: "Raleway Medium", sans-serif;
-  resize: none;
-  border: none;
-  outline: none;
+  font-size: 64px;
+  margin: 120px auto 10px;
+  text-transform: uppercase;
+}
+.menu-project {
+  color: #FFFFFF;
+  font-family: "Raleway Regular", sans-serif;
+  font-size: 36px;
+  margin: 0 auto 50px auto;
+}
+.menu-item {
+  font-size: 48px;
+  font-family: "Raleway Light", sans-serif;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+.menu-item:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-body {
-  background-color: #F2F4F9;
-}
-
-/*# sourceMappingURL=base.css.map */
+/*# sourceMappingURL=project_base.css.map */
