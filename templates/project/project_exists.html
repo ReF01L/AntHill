@@ -19,7 +19,7 @@
                 <div class="recent_projects">
                     {% for project in recent %}
                         <div class="recent_projects_project">
-                             onclick="window.location.href='{% url 'project:board' slug=project.key%}'">
+{#                             onclick="window.location.href='{% url 'project:board' slug=project.key%}'">#}
                             {{ project.name }}
                         </div>
                     {% endfor %}

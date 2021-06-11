@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
 from account.models import Profile
+from project import constants
 from project.forms import CreateProjectForm
 from project.models import Project
 
@@ -18,7 +19,7 @@ def projects(request):
         _all = [{
             'name': project.name,
             'username': project.users.all()[0].user.username,
-            'key': project.key
+            'key': project.slug
         } for project in all_u]
         return render(request, 'project/project_exists.html', {
             'recent': recent,
@@ -41,7 +42,7 @@ def create_project(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = Profile.objects.get(user=request.user)
-            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'), key=cd['link'].split('/')[-1])
+            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'), slug=cd['link'].split('/')[-1])
             proj.users.add(user)
             return redirect('project:board', 'kPaQDGUdPZ')
 
@@ -53,7 +54,7 @@ def join_project(request):
     key = request.POST.get('key') or request.GET.get('key') or 0
     if key != 0:
         user = Profile.objects.get(user=request.user)
-        proj = Project.objects.filter(key=key)
+        proj = Project.objects.filter(slug=key)
         proj.users.add(user)
         return render(request, 'project/join_success.html')
 
@@ -63,6 +64,8 @@ def join_project(request):
 @login_required(login_url='/account/login/')
 def board(request, slug):
     tickets = {
-        'to_be_done': [x for x in Project.objects.filter(key=slug)]
+        'waiting': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.WAITING)],
+        'progress': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.PROGRESS)],
+        'complete': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
     return render(request, 'project/board.html')
