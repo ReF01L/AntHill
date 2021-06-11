@@ -4,8 +4,8 @@ from django.views.decorators.http import require_GET
 
 from account.models import Profile
 from project import constants
-from project.forms import CreateProjectForm
-from project.models import Project
+from project.forms import CreateProjectForm, CreateIssueForm
+from project.models import Project, Issue, Sprint
 
 
 @login_required(login_url='/account/login/')
@@ -43,7 +43,8 @@ def create_project(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = Profile.objects.get(user=request.user)
-            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'), slug=cd['link'].split('/')[-1])
+            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
+                                          slug=cd['link'].split('/')[-1])
             proj.users.add(user)
             return redirect('project:board', 'kPaQDGUdPZ')
 
@@ -65,12 +66,47 @@ def join_project(request):
 @login_required(login_url='/account/login/')
 def board(request, slug):
     tickets = {
-        'waiting': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.WAITING)],
-        'progress': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.PROGRESS)],
-        'complete': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.COMPLETE)]
+        'waiting': [x for x in
+                    Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.WAITING)],
+        'progress': [x for x in
+                     Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.PROGRESS)],
+        'complete': [x for x in
+                     Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
     return render(request, 'project/board.html', {
         'waiting': tickets['waiting'],
         'progress': tickets['progress'],
         'complete': tickets['complete']
+    })
+
+
+@login_required(login_url='/account/login/')
+def create_issue(request, slug):
+    project = Project.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = CreateIssueForm(request.POST)
+        if form.valid():
+            cd = form.cleaned_data
+            issue = Issue.objects.create(
+                status=cd.get('status'),
+                type=cd.get('type'),
+                priority=cd.get('priority'),
+                summary=cd.get('summary'),
+                description=cd.get('description'),
+                percent=cd.get('percent'),
+                environment=cd.get('environment'),
+                ETA=cd.get('ETA'),
+                project=project,
+                slug=cd.get(slug)
+            )
+    else:
+        form = CreateIssueForm()
+        form.fields['verifier'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
+
+        form.fields['sprint'].choices = [('', '')]
+        if project.sprint is not None:
+            form.fields['sprint'].choices += [(project.sprint.name, project.sprint.name)]
+        form.fields['executor'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
+    return render(request, 'project/create_issue.html', {
+        'form': form
     })
