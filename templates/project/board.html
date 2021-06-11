@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/board.css' %}">
+{% endblock %}
+
+{% block title %} - Board{% endblock %}
+
+{% block content %}
+    <div class="board">
+        <div class="board_content">
+            <div class="board-title">Name of project</div>
+            <div class="board_body">
+                <div class="board_body_col">
+                    <div class="board_body_col-title">To be done</div>
+                    <div class="board_body_col_cards">
+                        <div class="board_body_col_cards_card">
+                            <div class="board_body_col_cards_card-name">Ticket name</div>
+                            <div class="board_body_col_cards_card-date">DeadLine date</div>
+                            <div class="board_body_col_cards_card-link">Link to ticket</div>
+                            <div class="board_body_col_cards_card-percents">Percents</div>
+                            <div class="board_body_col_cards_card_creator">
+                                <span>DS</span>
+                            </div>
+                        </div>
+                        <div class="board_body_col_cards_card">
+                            <div class="board_body_col_cards_card-name">Ticket name</div>
+                            <div class="board_body_col_cards_card-date">DeadLine date</div>
+                            <div class="board_body_col_cards_card-link">Link to ticket</div>
+                            <div class="board_body_col_cards_card-percents">Percents</div>
+                            <div class="board_body_col_cards_card_creator">
+                                <span>DS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="board_body_col">
+                    <div class="board_body_col-title">In Progress</div>
+                    <div class="board_body_col_cards">
+                        <div class="board_body_col_cards_card">
+                            <div class="board_body_col_cards_card-name">Ticket name</div>
+                            <div class="board_body_col_cards_card-date">DeadLine date</div>
+                            <div class="board_body_col_cards_card-link">Link to ticket</div>
+                            <div class="board_body_col_cards_card-percents">Percents</div>
+                            <div class="board_body_col_cards_card_creator">
+                                <span>DS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="board_body_col">
+                    <div class="board_body_col-title">Finished</div>
+                    <div class="board_body_col_cards">
+                        <div class="board_body_col_cards_card">
+                            <div class="board_body_col_cards_card-name">Ticket name</div>
+                            <div class="board_body_col_cards_card-date">DeadLine date</div>
+                            <div class="board_body_col_cards_card-link">Link to ticket</div>
+                            <div class="board_body_col_cards_card-percents">Percents</div>
+                            <div class="board_body_col_cards_card_creator">
+                                <span>DS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="board_body_filter">
+                    <span>Sorted</span>
+                </div>
+                <div class="board_body_info">
+                    <div class="board_body_info_users">
+                        <div class="board_body_info_users-user">DS</div>
+                        <div class="board_body_info_users-user">DS</div>
+                        <div class="board_body_info_users-user">DS</div>
+                        <div class="board_body_info_users-user">DS</div>
+                    </div>
+                    <button class="board_body_info-btn">Complete Sprint</button>
+                    <div class="board_body_info-date">1 MAY 2021</div>
+                    <img src="{% static 'img/ant.png' %}" alt="" class="board_body_info-img">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

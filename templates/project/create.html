@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/create.css' %}">
+    <script>
+        window.onload = () => {
+            let link = document.getElementsByName('link')[0]
+            link.onclick = () => {
+                document.execCommand('copy')
+            }
+            link.addEventListener('copy', event => {
+                event.preventDefault()
+                if (event.clipboardData) {
+                    event.clipboardData.setData('text/plain', link.value)
+                    console.log(event.clipboardData.getData('text'))
+                }
+            })
+        }
+    </script>
+{% endblock %}
+
+{% block title %} - Sign in{% endblock %}
+{% block content %}
+    <div class="create_project">
+        <div class="create_project-title">
+            Create Project
+        </div>
+        <form action="." method="post" class="create_project_form">
+            {% for field in form %}
+                <p>
+                    {{ field }}{{ field.label_tag }}
+                </p>
+            {% endfor %}
+            {% csrf_token %}
+            <div class="create_project_form_btns">
+                <a href="{% url 'project:projects' %}">Cancel</a>
+                <input type="submit" value="Next">
+            </div>
+        </form>
+    </div>
+{% endblock %}

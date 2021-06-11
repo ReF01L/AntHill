@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Light";
+  src: url("../fonts/Raleway-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway SemiBold";
+  src: url("../fonts/Raleway-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  color: #FFFFFF;
+  font-family: "Raleway Light", sans-serif;
+}
+* .content {
+  display: flex;
+  justify-content: center;
+}
+* .content .issue {
+  display: flex;
+  flex-direction: column;
+  margin: 1% 185px;
+  background-color: #00C084;
+  border-radius: 20px;
+}
+* .content .issue_header {
+  margin: auto 10%;
+  padding-top: 5%;
+}
+* .content .issue_header-title {
+  display: flex;
+}
+* .content .issue_body {
+  display: flex;
+  flex-direction: column;
+}
+* .content .issue_body_form-name {
+  background-color: transparent;
+  border-bottom: 1px solid #FFFFFF;
+}
+* .content .issue_body_form-description {
+  background-color: transparent;
+  border: 1px solid #FFFFFF;
+  border-radius: 20px;
+  padding: 15px;
+}
+* .content .issue_body_form-field {
+  background-color: transparent;
+}
+* .content .issue_footer {
+  display: flex;
+  justify-content: flex-end;
+}
+* .content .issue_footer-btn {
+  border: 1px solid #FFFFFF;
+  margin: 3% 5%;
+  border-radius: 15px;
+  background-color: #00C084;
+  padding: 5px 3%;
+}
+
+/*# sourceMappingURL=create_issue.css.map */
