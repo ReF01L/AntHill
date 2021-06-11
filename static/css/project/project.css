@@ -180,10 +180,23 @@
 }
 .projects .main .all_body_project {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.projects .main .all_body_project:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+  cursor: pointer;
 }
 .projects .main .all_body_project_project {
   width: 620px;
@@ -200,24 +213,11 @@
   font-family: "Raleway Medium", sans-serif;
   background-color: #FFFFFF;
 }
-.projects .main .all_body_project_name {
-  border: 1px solid #364364;
-  color: #364364;
-  font-size: 30px;
-  font-family: "Raleway Medium", sans-serif;
-  border-radius: 50%;
-  height: 51px;
-  width: 51px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #FFFFFF;
-  margin-right: 35px;
-}
 .projects .main .all_body_project_manager {
   color: #364364;
   font-size: 30px;
   font-family: "Raleway Medium", sans-serif;
+  margin-right: 250px;
 }
 
 /*# sourceMappingURL=project.css.map */

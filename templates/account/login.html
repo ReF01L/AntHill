@@ -66,7 +66,11 @@
         {% else %}
             <div class="hero">
                 <div class="hero_auth">
-                    <button class="hero_auth-btn" onclick="location.href='{% url 'account:user_login' %}?page=1'">Auth</button>
+                    {% if not user.is_authenticated %}
+                        <button class="hero_auth-btn" onclick="location.href='{% url 'account:user_login' %}?page=1'">Auth</button>
+                    {% else %}
+                        <button class="hero_auth-btn" onclick="location.href='{% url 'project:_projects' %}'">Open project</button>
+                    {% endif %}
                 </div>
                 <div class="hero_body">
                     <div class="hero_body_image">

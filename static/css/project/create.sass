@@ -51,6 +51,16 @@ body
       width: 100%
       color: $dark
       font-size: 30px
+      &[name=link]
+        opacity: 0.6
+        -webkit-transition: 0.4s
+        -moz-transition: 0.4s
+        -ms-transition: 0.4s
+        -o-transition: 0.4s
+        transition: 0.4s
+        &:hover
+          cursor: pointer
+          opacity: 1
     &_btns
       display: flex
       justify-content: space-between

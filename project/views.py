@@ -1,11 +1,7 @@
-from random import choice
-from string import ascii_letters
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET
 
-from AntHill import settings
 from account.models import Profile
 from project.forms import CreateProjectForm
 from project.models import Project
@@ -17,23 +13,18 @@ def projects(request):
     all_u = Project.objects.filter(users__in=[user])
 
     if all_u:
-        recents = all_u[:6]
-        recents += list([x for x in range(6 - len(recents))])
+        recent = all_u[:6]
+        recent += list([x for x in range(6 - len(recent))])
+        _all = [{
+            'name': project.name,
+            'username': project.users.all()[0].user.username,
+            'key': project.key
+        } for project in all_u]
         return render(request, 'project/project_exists.html', {
-            'recents': recents,
-            'all': all_u
+            'recent': recent,
+            'all': _all
         })
     return render(request, 'project/project_not_exists.html')
-
-
-def command(request, project):
-    var = Project.objects.create(name='commandModelName')
-    print(var)
-    print(project)
-    # var.delete()
-    request.session[settings.KEY] = 'css'
-    request.session.save()
-    return redirect('account:profile')
 
 
 @require_GET
@@ -50,10 +41,9 @@ def create_project(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = Profile.objects.get(user=request.user)
-            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
-                                          key=''.join(choice(ascii_letters) for i in range(20)))
+            proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'), key=cd['link'].split('/')[-1])
             proj.users.add(user)
-            return redirect('project:board')
+            return redirect('project:board', 'kPaQDGUdPZ')
 
     return render(request, 'project/create.html', {'form': form})
 
@@ -63,17 +53,16 @@ def join_project(request):
     key = request.POST.get('key') or request.GET.get('key') or 0
     if key != 0:
         user = Profile.objects.get(user=request.user)
-        try:
-            proj = Project.objects.get(key=key)
-        except:
-            proj = None
-        if proj:
-            proj.users.add(user)
-            return render(request, 'project/join_success.html')
+        proj = Project.objects.filter(key=key)
+        proj.users.add(user)
+        return render(request, 'project/join_success.html')
 
     return render(request, 'project/join_fail.html')
 
 
 @login_required(login_url='/account/login/')
-def board(request):
+def board(request, slug):
+    tickets = {
+        'to_be_done': [x for x in Project.objects.filter(key=slug)]
+    }
     return render(request, 'project/board.html')

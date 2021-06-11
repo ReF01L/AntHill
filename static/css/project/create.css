@@ -91,6 +91,18 @@ body {
   color: #364364;
   font-size: 30px;
 }
+.create_project_form-field[name=link] {
+  opacity: 0.6;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+.create_project_form-field[name=link]:hover {
+  cursor: pointer;
+  opacity: 1;
+}
 .create_project_form_btns {
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project, Issue, IssuePriority, IssueResolution
+from .models import Project, Issue
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -36,5 +36,3 @@ class IssueResolutionAdmin(admin.ModelAdmin):
 
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Issue, IssueAdmin)
-admin.site.register(IssuePriority, IssuePriorityAdmin)
-admin.site.register(IssueResolution, IssueResolutionAdmin)
