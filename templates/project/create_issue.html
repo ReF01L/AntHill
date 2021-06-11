@@ -12,46 +12,6 @@
             <div class="issue_header-title">Issue Creation</div>
         </div>
         <div class="issue_body">
-            {% comment %}<div class="issue_body_dropdown">
-                <select class="issue_body_dropdown-btn">
-                    <option value="project1" selected>Проект1</option>
-                    <option value="project2">Проект2</option>
-                    <option value="project3">Проект3</option>
-                </select>
-            </div>
-            <div class="issue_body_dropdown">
-                <button class="issue_body_dropdown-btn">Type</button>
-                <div class="issue_body_dropdown_list">
-                    <div class="issue_body_dropdown_list-elem">Epic</div>
-                </div>
-            </div>
-            <input class="issue_body-name">
-            <input class="issue_body-description"/>
-            <div class="issue_body_dropdown">
-                <button class="issue_body_dropdown-btn">Executor</button>
-                <div class="issue_body_dropdown_list">
-                    <div class="issue_body_dropdown_list-elem">Dmitry Salushkin</div>
-                </div>
-            </div>
-            <div class="issue_body_dropdown">
-                <button class="issue_body_dropdown-btn">Sprint</button>
-                <div class="issue_body_dropdown_list">
-                    <div class="issue_body_dropdown_list-elem">Sprint1</div>
-                </div>
-            </div>
-            <input class="issue_body-storypoint"/>
-            <div class="issue_body_dropdown">
-                <button class="issue_body_dropdown-btn">Author</button>
-                <div class="issue_body_dropdown_list">
-                    <div class="issue_body_dropdown_list-elem">Dmitry Salushkin</div>
-                </div>
-            </div>
-            <div class="issue_body_dropdown">
-                <button class="issue_body_dropdown-btn">Issue parent</button>
-                <div class="issue_body_dropdown_list">
-                    <div class="issue_body_dropdown_list-elem">Issue1</div>
-                </div>
-            </div>{% endcomment %}
             <form class="issue_body_form" method="post">
                 {{ form.as_p }}
                 {% csrf_token %}

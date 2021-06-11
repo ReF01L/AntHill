@@ -50,8 +50,8 @@ class ChooseProjectForm(forms.ModelForm):
     error_css_class = 'error'
     # PROJECTS = ((x.name, x.name) for x in Project.objects.all())
     # EXECUTORS = ((x.executor.user.username, x.executor.user.username) for x in Issue.objects.all())
-    TASK_TYPE = (('Epic', 'Epic'), ('notEpic', 'notEpic'))
-    AUTHOR = ((x.verifier.user.username, x.verifier.user.username) for x in Issue.objects.all())
+    # TASK_TYPE = (('Epic', 'Epic'), ('notEpic', 'notEpic'))
+    # AUTHOR = ((x.verifier.user.username, x.verifier.user.username) for x in Issue.objects.all())
     # PARENT_ISSUE = ((x.objects.name, x.objects.name) for x in Issue.objects.all())
 
     projects = forms.ChoiceField(label='Project', label_suffix='', widget=forms.Select(
@@ -93,7 +93,7 @@ class ChooseProjectForm(forms.ModelForm):
         attrs={
             'class': 'issue_body_form-field'
         }
-    ), choices=AUTHOR)
+    ))
     parent_issue = forms.ChoiceField(label='Parent issue', label_suffix='', widget=forms.Select(
         attrs={
             'class': 'issue_body_form-field'
@@ -126,9 +126,29 @@ class CreateIssueForm(forms.ModelForm):
         'value': ''.join(choice(ascii_letters) for _ in range(10))
     }))
 
+
+class Meta:
+    model = Issue
+    fields = ('sprint', 'verifier',
+              'executor', 'status', 'type',
+              'priority', 'summary', 'description',
+              'environment', 'ETA', 'percent', 'slug',)
+
+
+class CreateLogForm(forms.ModelForm):
+    issue = forms.ChoiceField(label='Issue', label_suffix='', widget=forms.Select())
+    time_spend = forms.CharField(label='Time Spend', label_suffix='', max_length=100, widget=forms.Textarea(
+        attrs={
+            'cols': 80,
+            'rows': 1,
+        }
+    ))
+    desc = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
+        attrs={
+            'cols': 80,
+        }
+    ))
+
     class Meta:
         model = Issue
-        fields = ('sprint', 'verifier',
-                  'executor', 'status', 'type',
-                  'priority', 'summary', 'description',
-                  'environment', 'ETA', 'percent', 'slug',)
+        fields = ()

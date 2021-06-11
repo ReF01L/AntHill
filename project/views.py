@@ -5,7 +5,7 @@ from django.views.decorators.http import require_GET
 
 from account.models import Profile
 from project import constants
-from project.forms import CreateProjectForm, CreateIssueForm
+from project.forms import CreateProjectForm, CreateIssueForm, CreateLogForm
 from project.models import Project, Issue, Sprint
 
 
@@ -121,4 +121,10 @@ def roadmap(request, slug):
 
 
 def log(request, slug):
-    return HttpResponse('Log')
+    form = CreateLogForm()
+    form.fields['issue'].choices = [(x.summary, x.summary) for x in Issue.objects.all()]
+
+    return render(request, 'project/log.html', {
+        'project': Project.objects.get(slug=slug),
+        'form': form,
+    })

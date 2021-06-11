@@ -1,0 +1,62 @@
+@import "../colors"
+@import "../fonts"
+
+.log
+  width: 1070px
+  display: flex
+  justify-content: center
+  align-items: center
+  margin: auto
+  height: 100vh
+
+  &_body
+    border: 5px solid $green
+    border-radius: 15px
+    padding: 15px
+
+    &_form
+
+      & p
+        display: flex
+        justify-content: flex-end
+        align-items: flex-end
+        width: 500px
+        position: relative
+        margin-bottom: 50px
+
+        & select
+          border: 1px solid $dark
+          border-radius: 15px
+          padding: 10px 15px
+          width: 500px
+
+        & input
+          border: 1px solid $dark
+          border-radius: 15px
+          padding: 10px
+
+        & textarea
+          border: 1px solid $dark
+          border-radius: 15px
+          padding: 10px
+
+        & label
+          color: $dark
+          @include medium
+          font-size: 30px
+          position: absolute
+          bottom: -35px
+          right: 20px
+
+      &_btns
+        display: flex
+        justify-content: space-evenly
+
+        &-btn
+          background-color: $white
+          border: 1px solid $dark
+          border-radius: 15px
+          padding: 5px 20px
+          color: $dark
+          @include medium
+          font-size: 30px
