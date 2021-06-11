@@ -14,52 +14,49 @@
                 <div class="board_body_col">
                     <div class="board_body_col-title">To be done</div>
                     <div class="board_body_col_cards">
-                        <div class="board_body_col_cards_card">
-                            <div class="board_body_col_cards_card-name">Ticket name</div>
-                            <div class="board_body_col_cards_card-date">DeadLine date</div>
-                            <div class="board_body_col_cards_card-link">Link to ticket</div>
-                            <div class="board_body_col_cards_card-percents">Percents</div>
-                            <div class="board_body_col_cards_card_creator">
-                                <span>DS</span>
+                        {% for ticket in waiting %}
+                            <div class="board_body_col_cards_card">
+                                <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
+                                <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
+                                <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
+                                <div class="board_body_col_cards_card-percents">{{ ticket.percent }}</div>
+                                <div class="board_body_col_cards_card_creator">
+                                    <span>DS</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="board_body_col_cards_card">
-                            <div class="board_body_col_cards_card-name">Ticket name</div>
-                            <div class="board_body_col_cards_card-date">DeadLine date</div>
-                            <div class="board_body_col_cards_card-link">Link to ticket</div>
-                            <div class="board_body_col_cards_card-percents">Percents</div>
-                            <div class="board_body_col_cards_card_creator">
-                                <span>DS</span>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="board_body_col">
                     <div class="board_body_col-title">In Progress</div>
                     <div class="board_body_col_cards">
-                        <div class="board_body_col_cards_card">
-                            <div class="board_body_col_cards_card-name">Ticket name</div>
-                            <div class="board_body_col_cards_card-date">DeadLine date</div>
-                            <div class="board_body_col_cards_card-link">Link to ticket</div>
-                            <div class="board_body_col_cards_card-percents">Percents</div>
-                            <div class="board_body_col_cards_card_creator">
-                                <span>DS</span>
+                        {% for ticket in progress %}
+                            <div class="board_body_col_cards_card">
+                                <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
+                                <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
+                                <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
+                                <div class="board_body_col_cards_card-percents">{{ ticket.percent }}</div>
+                                <div class="board_body_col_cards_card_creator">
+                                    <span>DS</span>
+                                </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="board_body_col">
                     <div class="board_body_col-title">Finished</div>
                     <div class="board_body_col_cards">
-                        <div class="board_body_col_cards_card">
-                            <div class="board_body_col_cards_card-name">Ticket name</div>
-                            <div class="board_body_col_cards_card-date">DeadLine date</div>
-                            <div class="board_body_col_cards_card-link">Link to ticket</div>
-                            <div class="board_body_col_cards_card-percents">Percents</div>
-                            <div class="board_body_col_cards_card_creator">
-                                <span>DS</span>
+                        {% for ticket in complete %}
+                            <div class="board_body_col_cards_card">
+                                <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
+                                <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
+                                <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
+                                <div class="board_body_col_cards_card-percents">{{ ticket.percent }}</div>
+                                <div class="board_body_col_cards_card_creator">
+                                    <span>DS</span>
+                                </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="board_body_filter">

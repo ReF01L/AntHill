@@ -15,7 +15,7 @@ def projects(request):
 
     if all_u:
         recent = all_u[:6]
-        recent += list([x for x in range(6 - len(recent))])
+        empty = range(6 - len(recent))
         _all = [{
             'name': project.name,
             'username': project.users.all()[0].user.username,
@@ -23,7 +23,8 @@ def projects(request):
         } for project in all_u]
         return render(request, 'project/project_exists.html', {
             'recent': recent,
-            'all': _all
+            'all': _all,
+            'empty': empty
         })
     return render(request, 'project/project_not_exists.html')
 
@@ -68,4 +69,8 @@ def board(request, slug):
         'progress': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.PROGRESS)],
         'complete': [x for x in Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
-    return render(request, 'project/board.html')
+    return render(request, 'project/board.html', {
+        'waiting': tickets['waiting'],
+        'progress': tickets['progress'],
+        'complete': tickets['complete']
+    })
