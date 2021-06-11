@@ -9,7 +9,7 @@ class Project(models.Model):
     users = models.ManyToManyField(to=Profile)
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
-    slug = models.SlugField(max_length=20, null=True, blank=True, default='')
+    slug = models.SlugField(max_length=20)
 
 
 class LoggedTime(models.Model):
@@ -35,6 +35,7 @@ class Issue(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     resolution_dated = models.DateTimeField(auto_now_add=False, auto_now=False)
+    slug = models.SlugField(max_length=20)
 
     def __str__(self):
         return self.summary

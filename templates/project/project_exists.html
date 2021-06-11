@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_tag %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/project/project.css' %}">
 {% endblock %}
@@ -18,10 +19,13 @@
                 </div>
                 <div class="recent_projects">
                     {% for project in recent %}
-                        <div class="recent_projects_project">
-{#                             onclick="window.location.href='{% url 'project:board' slug=project.key%}'">#}
+                        <div class="recent_projects_project"
+                             onclick="window.location.href='{% url 'project:board' slug=project.slug %}'">
                             {{ project.name }}
                         </div>
+                    {% endfor %}
+                    {% for _ in empty %}
+                        <div class="recent_projects_project"></div>
                     {% endfor %}
                 </div>
             </div>
