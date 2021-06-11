@@ -1,3 +1,112 @@
-
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Light";
+  src: url("../fonts/Raleway-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway SemiBold";
+  src: url("../fonts/Raleway-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+.issues {
+  display: flex;
+  width: 1070px;
+  min-height: 100vh;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: auto;
+  background-color: #F2F4F9;
+}
+.issues-title {
+  font-size: 36px;
+  color: #364364;
+  font-family: "Raleway Medium", sans-serif;
+  border-bottom: 1px solid #364364;
+  margin-top: 100px;
+}
+.issues_filters {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.issues_filters button {
+  font-size: 30px;
+  font-family: "Raleway Medium", sans-serif;
+  color: #364364;
+  background-color: transparent;
+  margin-left: 10px;
+}
+.issues_body {
+  width: 100%;
+}
+.issues_body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.issues_body table tr {
+  margin: 15px auto;
+}
+.issues_body table tr th {
+  width: 270px;
+  border-left: 1px solid #364364;
+  border-right: 1px solid #364364;
+  border-bottom: 1px solid #364364;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 25px;
+  font-family: "Raleway Medium", sans-serif;
+  color: #364364;
+}
+.issues_body table tr th:last-child {
+  border-right: none;
+}
+.issues_body table tr th:first-child {
+  border-left: none;
+}
+.issues_body table tr td {
+  border-left: 1px solid #364364;
+  border-right: 1px solid #364364;
+  padding-left: 10px;
+  font-size: 20px;
+  font-family: "Raleway Medium", sans-serif;
+  color: #364364;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.issues_body table tr td:last-child {
+  border-right: none;
+}
+.issues_body table tr td:first-child {
+  border-left: none;
+}
 
 /*# sourceMappingURL=all_issues.css.map */

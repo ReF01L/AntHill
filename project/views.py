@@ -80,7 +80,9 @@ def board(request, slug):
 
 
 def issues(request, slug):
-    return HttpResponse('Issues')
+    return render(request, 'project/all_issues.html', {
+        'project': Project.objects.get(slug=slug)
+    })
 
 
 def roadmap(request, slug):
