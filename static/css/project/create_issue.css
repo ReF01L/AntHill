@@ -37,6 +37,7 @@
 * {
   color: #FFFFFF;
   font-family: "Raleway Light", sans-serif;
+  font-size: 30px;
 }
 * .content {
   display: flex;
@@ -45,7 +46,7 @@
 * .content .issue {
   display: flex;
   flex-direction: column;
-  margin: 1% 185px;
+  margin: 1%;
   background-color: #00C084;
   border-radius: 20px;
 }
@@ -59,10 +60,17 @@
 * .content .issue_body {
   display: flex;
   flex-direction: column;
+  margin-left: 15%;
+}
+* .content .issue_body_form {
+  margin: 10px;
+  width: 1080px;
+  height: 900px;
 }
 * .content .issue_body_form-name {
   background-color: transparent;
   border-bottom: 1px solid #FFFFFF;
+  margin-bottom: 10px;
 }
 * .content .issue_body_form-description {
   background-color: transparent;
@@ -72,12 +80,9 @@
 }
 * .content .issue_body_form-field {
   background-color: transparent;
+  margin-bottom: 10px;
 }
-* .content .issue_footer {
-  display: flex;
-  justify-content: flex-end;
-}
-* .content .issue_footer-btn {
+* .content .issue_body_form-btn {
   border: 1px solid #FFFFFF;
   margin: 3% 5%;
   border-radius: 15px;

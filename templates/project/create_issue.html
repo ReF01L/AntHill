@@ -55,11 +55,8 @@
             <form class="issue_body_form" method="post">
                 {{ form.as_p }}
                 {% csrf_token %}
-                <input type="submit" value="send">
+                <input class="issue_body_form-btn" type="submit" value="Create issue">
             </form>
-        </div>
-        <div class="issue_footer">
-            <button class="issue_footer-btn">Create Issue</button>
         </div>
     </div>
 {% endblock %}

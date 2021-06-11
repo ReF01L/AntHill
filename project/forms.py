@@ -8,6 +8,8 @@ class ChooseProjectForm(forms.ModelForm):
     PROJECTS = ((x.name, x.name) for x in Project.objects.all())
     EXECUTORS = ((x.executor.user.username, x.executor.user.username) for x in Issue.objects.all())
     TASK_TYPE = (('Epic', 'Epic'), ('notEpic', 'notEpic'))
+    AUTHOR = ((x.verifier.user.username, x.verifier.user.username) for x in Issue.objects.all())
+    # PARENT_ISSUE = ((x.objects.name, x.objects.name) for x in Issue.objects.all())
 
     projects = forms.ChoiceField(label='Project', label_suffix='', widget=forms.Select(
         attrs={
@@ -38,17 +40,22 @@ class ChooseProjectForm(forms.ModelForm):
         attrs={
             'class': 'issue_body_form-field'
         }
-    ))
+    ), choices=(('Sprint1', 'Sprint1'), ('Sprint2', 'Sprint2')))  # todo fix sprint
     story_point_estimate = forms.CharField(widget=forms.TextInput(
         attrs={
             'class': 'issue_body_form-name'
         }
     ))
-    author = forms.CharField(label='Author', label_suffix='', widget=forms.Select(
+    author = forms.ChoiceField(label='Author', label_suffix='', widget=forms.Select(
         attrs={
             'class': 'issue_body_form-field'
         }
-    ))
+    ), choices=AUTHOR)
+    parent_issue = forms.ChoiceField(label='Parent issue', label_suffix='', widget=forms.Select(
+        attrs={
+            'class': 'issue_body_form-field'
+        }
+    ), choices=(('Parent1', 'Parent1'), ('Parent2', 'Parent2')))  # todo fix parent_issue
 
     class Meta:
         model = Issue
