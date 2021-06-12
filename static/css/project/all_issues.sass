@@ -1,0 +1,76 @@
+@import "../colors"
+@import "../fonts"
+
+.issues
+  display: flex
+  width: 1070px
+  min-height: 100vh
+  justify-content: flex-start
+  align-items: flex-start
+  flex-direction: column
+  margin: auto
+  background-color: $gray
+
+  &-title
+    font-size: 36px
+    color: $dark
+    @include medium
+    border-bottom: 1px solid $dark
+    margin-top: 100px
+
+  &_filters
+    display: flex
+    justify-content: flex-end
+    width: 100%
+    margin-bottom: 15px
+
+    & button
+      font-size: 30px
+      @include medium
+      color: $dark
+      background-color: transparent
+      margin-left: 10px
+
+  &_body
+    width: 100%
+
+    & table
+      width: 100%
+      border-collapse: collapse
+
+      & tr
+        margin: 15px auto
+
+        & th
+          width: 270px
+          border-left: 1px solid $dark
+          border-right: 1px solid $dark
+          border-bottom: 1px solid $dark
+          text-align: left
+          padding-left: 10px
+          font-size: 25px
+          @include medium
+          color: $dark
+
+          &:last-child
+            border-right: none
+
+          &:first-child
+            border-left: none
+
+        & td
+          border-left: 1px solid $dark
+          border-right: 1px solid $dark
+          padding-left: 10px
+          font-size: 20px
+          @include medium
+          color: $dark
+          text-align: center
+          padding-top: 15px
+          padding-bottom: 15px
+
+          &:last-child
+            border-right: none
+
+          &:first-child
+            border-left: none

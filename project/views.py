@@ -5,6 +5,8 @@ from django.views.decorators.http import require_GET
 
 from account.models import Profile
 from project import constants
+from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
+from project.models import Project, Issue
 from project.forms import CreateProjectForm, CreateIssueForm, CreateLogForm
 from project.models import Project, Issue, Sprint
 
@@ -113,7 +115,9 @@ def create_issue(request, slug):
 
 
 def issues(request, slug):
-    return HttpResponse('Issues')
+    return render(request, 'project/all_issues.html', {
+        'project': Project.objects.get(slug=slug)
+    })
 
 
 def roadmap(request, slug):
@@ -127,4 +131,18 @@ def log(request, slug):
     return render(request, 'project/log.html', {
         'project': Project.objects.get(slug=slug),
         'form': form,
+    })
+
+def create_issue(request, slug):
+    return HttpResponse('Create Issue')
+
+
+def issue(request, project_slug, issue_slug):
+    return render(request, 'project/issue.html', {
+        'issue': Issue.objects.get(slug=issue_slug),
+        'project': Project.objects.get(slug=project_slug),
+        'hero_form': IssueHeroForm(),
+        'info_form': IssueInfoForm(initial={
+            'project': Project.objects.get(slug=project_slug).name
+        }),
     })

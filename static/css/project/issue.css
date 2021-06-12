@@ -1,0 +1,193 @@
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Light";
+  src: url("../fonts/Raleway-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway SemiBold";
+  src: url("../fonts/Raleway-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+.issue {
+  background-color: #00C084;
+}
+.issue_container {
+  min-height: 100vh;
+  width: 1070px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items: flex-start;
+}
+.issue-title {
+  color: #364364;
+  font-size: 36px;
+  font-family: "Raleway SemiBold", sans-serif;
+  border-bottom: 2px solid #364364;
+}
+.issue-log {
+  align-self: flex-end;
+  border: 1px solid #364364;
+  border-radius: 20px;
+  text-transform: uppercase;
+  width: 180px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #364364;
+  font-family: "Raleway Light", sans-serif;
+  font-size: 20px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #FFFFFF;
+  margin-bottom: 30px;
+}
+.issue-log:hover {
+  background-color: #364364;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.issue_body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.issue_body-hero {
+  background-color: #FFFFFF;
+  border: 1px solid #364364;
+  border-radius: 50px;
+}
+.issue_body-hero_form {
+  background-color: transparent;
+  width: 710px;
+  height: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.issue_body-hero_form p {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 50px;
+}
+.issue_body-hero_form p label {
+  margin-left: 10px;
+  font-size: 20px;
+  font-family: "Raleway Medium", sans-serif;
+  color: #364364;
+}
+.issue_body-hero_form-field {
+  background-color: #F2F4F9;
+  border: 1px solid #364364;
+  width: 550px;
+  height: 100px;
+  border-radius: 15px;
+  padding: 15px;
+  color: #364364;
+  font-size: 16px;
+  font-family: "Raleway Regular", sans-serif;
+}
+.issue_body-hero_form-btn {
+  align-self: flex-end;
+  margin: auto 80px 20px 0;
+  border: 1px solid #364364;
+  background-color: #F2F4F9;
+  border-radius: 10px;
+  width: 260px;
+  height: 60px;
+  color: #364364;
+  font-size: 36px;
+  font-family: "Raleway Regular", sans-serif;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -ms-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s;
+}
+.issue_body-hero_form-btn:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.issue_body-info {
+  background-color: #FFFFFF;
+  border: 1px solid #364364;
+  border-radius: 50px;
+  margin-left: 10px;
+}
+.issue_body-info_form {
+  background-color: transparent;
+  width: 350px;
+  height: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.issue_body-info_form p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+  width: 310px;
+  height: 55px;
+}
+.issue_body-info_form p:first-child {
+  margin-top: 5px;
+}
+.issue_body-info_form p label {
+  margin-left: 10px;
+  font-size: 20px;
+  font-family: "Raleway Medium", sans-serif;
+  color: #364364;
+  text-transform: capitalize;
+  align-self: flex-end;
+  margin-top: 2px;
+}
+.issue_body-info_form-field {
+  background-color: transparent;
+  border-bottom: 1px solid #364364;
+  width: 100%;
+  padding: 15px 15px 0;
+  color: #364364;
+  font-size: 30px;
+  font-family: "Raleway Light", sans-serif;
+}
+
+/*# sourceMappingURL=issue.css.map */
