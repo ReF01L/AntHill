@@ -5,8 +5,8 @@ from django.views.decorators.http import require_GET
 
 from account.models import Profile
 from project import constants
-from project.forms import CreateProjectForm
-from project.models import Project
+from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
+from project.models import Project, Issue
 
 
 @login_required(login_url='/account/login/')
@@ -95,3 +95,14 @@ def log(request, slug):
 
 def create_issue(request, slug):
     return HttpResponse('Create Issue')
+
+
+def issue(request, project_slug, issue_slug):
+    return render(request, 'project/issue.html', {
+        'issue': Issue.objects.get(slug=issue_slug),
+        'project': Project.objects.get(slug=project_slug),
+        'hero_form': IssueHeroForm(),
+        'info_form': IssueInfoForm(initial={
+            'project': Project.objects.get(slug=project_slug).name
+        }),
+    })
