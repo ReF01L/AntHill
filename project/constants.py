@@ -20,3 +20,7 @@ class Priority(models.TextChoices):
     HIGH = 'High', _('High')
     MEDIUM = 'Medium', _('Medium')
     LOW = 'Low', _('Low')
+
+
+class DefaultSprint(models.TextChoices):
+    DEFAULT = 'No Sprint', _('No Sprint')
