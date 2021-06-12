@@ -13,7 +13,9 @@
                 {{ form.as_p }}
                 {% csrf_token %}
                 <div class="log_body_form_btns">
-                    <input class="log_body_form_btns-btn" type="button" onclick="window.location.href='{% url 'project:board' project.slug %}'" value="Cancel">
+                    <button class="log_body_form_btns-btn"
+                            onclick="window.location.href='{% url 'project:board' project.slug %}'">Cancel
+                    </button>
                     <input class="log_body_form_btns-btn" type="submit" value="Log Work">
                 </div>
             </form>

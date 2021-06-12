@@ -25,20 +25,34 @@
         margin-bottom: 50px
 
         & select
-          border: 1px solid $dark
+          border: 2px solid $dark
           border-radius: 15px
           padding: 10px 15px
           width: 500px
+          color: $dark
+          @include regular
+          font-size: 18px
+
+          & option
+            background-color: $dark
+            &:checked
+              background-color: $green
 
         & input
-          border: 1px solid $dark
+          border: 2px solid $dark
           border-radius: 15px
           padding: 10px
+          color: $dark
+          @include regular
+          font-size: 18px
 
         & textarea
-          border: 1px solid $dark
+          border: 2px solid $dark
           border-radius: 15px
           padding: 10px
+          color: $dark
+          @include regular
+          font-size: 18px
 
         & label
           color: $dark
@@ -54,7 +68,7 @@
 
         &-btn
           background-color: $white
-          border: 1px solid $dark
+          border: 2px solid $dark
           border-radius: 15px
           padding: 5px 20px
           color: $dark

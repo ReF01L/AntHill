@@ -1,0 +1,111 @@
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Light";
+  src: url("../fonts/Raleway-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway SemiBold";
+  src: url("../fonts/Raleway-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+.log {
+  width: 1070px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 100vh;
+}
+.log_body {
+  border: 5px solid #00C084;
+  border-radius: 15px;
+  padding: 15px;
+}
+.log_body_form p {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 500px;
+  position: relative;
+  margin-bottom: 50px;
+}
+.log_body_form p select {
+  border: 2px solid #364364;
+  border-radius: 15px;
+  padding: 10px 15px;
+  width: 500px;
+  color: #364364;
+  font-family: "Raleway Regular", sans-serif;
+  font-size: 18px;
+}
+.log_body_form p select option {
+  background-color: #364364;
+}
+.log_body_form p select option:checked {
+  background-color: #00C084;
+}
+.log_body_form p input {
+  border: 2px solid #364364;
+  border-radius: 15px;
+  padding: 10px;
+  color: #364364;
+  font-family: "Raleway Regular", sans-serif;
+  font-size: 18px;
+}
+.log_body_form p textarea {
+  border: 2px solid #364364;
+  border-radius: 15px;
+  padding: 10px;
+  color: #364364;
+  font-family: "Raleway Regular", sans-serif;
+  font-size: 18px;
+}
+.log_body_form p label {
+  color: #364364;
+  font-family: "Raleway Medium", sans-serif;
+  font-size: 30px;
+  position: absolute;
+  bottom: -35px;
+  right: 20px;
+}
+.log_body_form_btns {
+  display: flex;
+  justify-content: space-evenly;
+}
+.log_body_form_btns-btn {
+  background-color: #FFFFFF;
+  border: 2px solid #364364;
+  border-radius: 15px;
+  padding: 5px 20px;
+  color: #364364;
+  font-family: "Raleway Medium", sans-serif;
+  font-size: 30px;
+}
+
+/*# sourceMappingURL=log.css.map */
