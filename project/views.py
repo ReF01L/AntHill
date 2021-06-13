@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -6,6 +7,8 @@ from django.views.decorators.http import require_GET
 
 from account.models import Profile
 from project import constants
+from project.forms import CreateProjectForm, CreateIssueForm
+from project.models import Project, Issue, Sprint
 from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
 from project.models import Project, Issue
 from project.forms import CreateProjectForm, CreateIssueForm, CreateLogForm
@@ -50,7 +53,7 @@ def create_project(request):
             proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
                                           slug=cd['link'].split('/')[-1])
             proj.users.add(user)
-            return redirect('project:board', 'kPaQDGUdPZ')
+            return redirect('project:board', cd['link'].split('/')[-1])
 
     return render(request, 'project/create.html', {'form': form})
 
@@ -75,11 +78,15 @@ def board(request, slug):
         'progress': [x for x in project.issue_set.filter(status=constants.Statuses.PROGRESS)],
         'complete': [x for x in project.issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
+    [setattr(x, 'shortname', x.verifier.user.last_name[0] + x.verifier.user.first_name[0]) for x in (
+            tickets['waiting'] + tickets['progress'] + tickets['complete']
+    )]
     return render(request, 'project/board.html', {
         'waiting': tickets['waiting'],
         'progress': tickets['progress'],
         'complete': tickets['complete'],
-        'project': project
+        'project': project,
+        'sprint': project.sprint or None
     })
 
 
@@ -90,8 +97,6 @@ def create_issue(request, slug):
         form = CreateIssueForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            executor = Profile.objects.get(user=User.objects.get(username=cd.get('executor')))
-            verifier = Profile.objects.get(user=User.objects.get(username=cd.get('verifier')))
             Issue.objects.create(
                 status=cd.get('status'),
                 type=cd.get('type'),
@@ -102,19 +107,14 @@ def create_issue(request, slug):
                 environment=cd.get('environment'),
                 ETA=cd.get('ETA'),
                 project=project,
-                slug=cd.get(slug),
-                sprint=Sprint.objects.get(name=cd.get('sprint')),
-                verifier=verifier,
-                executor=executor,
+                slug=cd.get('slug'),
+                sprint=cd.get('sprint'),
+                verifier=cd.get('verifier'),
+                executor=cd.get('executor'),
             )
+            return redirect('project:board', cd.get('slug'))
     else:
         form = CreateIssueForm()
-        form.fields['verifier'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
-        form.fields['sprint'].choices = constants.DefaultSprint.choices
-        if project.sprint is not None:
-            form.fields['sprint'].choices += [(project.sprint.name, project.sprint.name)]
-        form.fields['executor'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
-
     return render(request, 'project/create_issue.html', {
         'form': form,
         'project': project,

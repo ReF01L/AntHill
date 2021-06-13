@@ -2,11 +2,12 @@ from random import choice
 from string import ascii_letters
 
 from django import forms
+from django.contrib.auth.models import User
 from django.forms import CheckboxSelectMultiple
 
 from account.models import Profile
 from . import constants
-from .models import Project
+from .models import Project, Sprint
 
 from project.models import Project, Issue
 
@@ -50,9 +51,6 @@ class ChooseProjectForm(forms.ModelForm):
     error_css_class = 'error'
     # PROJECTS = ((x.name, x.name) for x in Project.objects.all())
     # EXECUTORS = ((x.executor.user.username, x.executor.user.username) for x in Issue.objects.all())
-    # TASK_TYPE = (('Epic', 'Epic'), ('notEpic', 'notEpic'))
-    # AUTHOR = ((x.verifier.user.username, x.verifier.user.username) for x in Issue.objects.all())
-    # PARENT_ISSUE = ((x.objects.name, x.objects.name) for x in Issue.objects.all())
 
     projects = forms.ChoiceField(label='Project', label_suffix='', widget=forms.Select(
         attrs={
@@ -106,29 +104,29 @@ class ChooseProjectForm(forms.ModelForm):
 
 
 class CreateIssueForm(forms.ModelForm):
-    summary = forms.CharField(label='Name Issue', label_suffix='', max_length=100)
-    type = forms.ChoiceField(label='Type', label_suffix='', widget=forms.Select, choices=constants.Types.choices)
-    description = forms.CharField(label='Description', label_suffix='', max_length=300, widget=forms.Textarea(
-        attrs={
-            'cols': 80,
-        }
-    ))
-    executor = forms.ChoiceField(label='Executor', label_suffix='', widget=forms.Select)
-    sprint = forms.ChoiceField(label='Sprint', label_suffix='', widget=forms.Select)
-    percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput)
-    verifier = forms.ChoiceField(label='Verifiers', label_suffix='', widget=forms.Select)
-    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format=('%d-%m-%Y'),
-                                                                               attrs={'class': 'myDateClass',
-                                                                                      'placeholder': 'Select a date'}))
-    priority = forms.ChoiceField(label='Priority', label_suffix='', widget=forms.Select,
-                                 choices=constants.Priority.choices)
+    sprint = forms.ModelChoiceField(label='Sprint', label_suffix='',
+                                    queryset=Sprint.objects.all().distinct(),
+                                    required=False
+                                    )
+    verifier = forms.ModelChoiceField(label='Verifiers', label_suffix='',
+                                      queryset=Profile.objects.all().distinct()
+                                      )
+    executor = forms.ModelChoiceField(label='Executor', label_suffix='',
+                                      queryset=Profile.objects.all().distinct()
+                                      )
     status = forms.ChoiceField(label='Status', label_suffix='', widget=forms.Select,
                                choices=constants.Statuses.choices, initial=constants.Statuses.WAITING)
-    environment = forms.CharField(label='Environment', label_suffix='', widget=forms.Textarea(
-        attrs={
-            'cols': 80,
-        }
-    ))
+    type = forms.ChoiceField(label='Type', label_suffix='', widget=forms.Select, choices=constants.Types.choices)
+    priority = forms.ChoiceField(label='Priority', label_suffix='', widget=forms.Select,
+                                 choices=constants.Priority.choices)
+    summary = forms.CharField(label='Name Issue', label_suffix='', max_length=100)
+    description = forms.CharField(label='Description', label_suffix='', max_length=300)
+    environment = forms.CharField(label='Environment', label_suffix='')
+    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
+                                                                                                         'placeholder': 'Select a date'
+                                                                                                         }))
+    percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput)
+    original_estimate = forms.CharField(label='Original estimate', label_suffix='')
     slug = forms.SlugField(label='Issue Key', label_suffix='', widget=forms.TextInput(attrs={
         'readonly': True,
         'value': ''.join(choice(ascii_letters) for _ in range(10))
@@ -136,10 +134,12 @@ class CreateIssueForm(forms.ModelForm):
 
     class Meta:
         model = Issue
-        fields = ('sprint', 'verifier',
+        fields = ('sprint', 'verifier', 'original_estimate',
                   'executor', 'status', 'type',
                   'priority', 'summary', 'description',
                   'environment', 'ETA', 'percent', 'slug',)
+
+
 
 
 class CreateLogForm(forms.ModelForm):

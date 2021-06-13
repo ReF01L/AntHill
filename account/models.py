@@ -11,4 +11,4 @@ class Profile(models.Model):
     code = models.CharField(max_length=4, default='0000')
 
     def __str__(self):
-        return f'Profile for user {self.user.username}'
+        return self.user.username
