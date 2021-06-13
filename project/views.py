@@ -5,11 +5,12 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
 from account.models import Profile
-from project import constants
-from project.forms import CreateProjectForm, CreateIssueForm
-from project.models import Project, Issue, Sprint
-from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
-from project.models import Project, Issue
+from . import constants
+from .forms import CreateProjectForm, CreateIssueForm
+from .models import Project, Issue, Sprint
+from .forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
+from .models import Project, Issue
+from .utils import parser_estimate
 
 
 @login_required(login_url='/account/login/')
@@ -129,8 +130,9 @@ def create_issue(request, slug):
                 sprint=cd.get('sprint'),
                 verifier=cd.get('verifier'),
                 executor=cd.get('executor'),
+                original_estimate=parser_estimate(cd.get('original_estimate'))
             )
-            return redirect('project:board', cd.get('slug'))
+            return redirect('project:issue', project_slug=slug, issue_slug=cd.get('slug'))
     else:
         form = CreateIssueForm()
     return render(request, 'project/create_issue.html', {

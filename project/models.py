@@ -37,7 +37,7 @@ class Issue(models.Model):
     percent = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    slug = models.SlugField(max_length=20)
+    slug = models.SlugField(max_length=20, unique=True)
     original_estimate = models.PositiveIntegerField(default=0)
 
     def __str__(self):
