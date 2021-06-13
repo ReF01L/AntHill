@@ -126,7 +126,7 @@ class CreateIssueForm(forms.ModelForm):
                                                                                                          'placeholder': 'Select a date'
                                                                                                          }))
     percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput)
-    original_estimate = forms.CharField(label='Original estimate', label_suffix='')
+    original_estimate = forms.CharField(label='Original estimate', label_suffix='', widget=forms.TextInput)
     slug = forms.SlugField(label='Issue Key', label_suffix='', widget=forms.TextInput(attrs={
         'readonly': True,
         'value': ''.join(choice(ascii_letters) for _ in range(10))
@@ -134,10 +134,27 @@ class CreateIssueForm(forms.ModelForm):
 
     class Meta:
         model = Issue
-        fields = ('sprint', 'verifier', 'original_estimate',
+        fields = ('sprint', 'verifier',
                   'executor', 'status', 'type',
                   'priority', 'summary', 'description',
                   'environment', 'ETA', 'percent', 'slug',)
+
+    def clean_original_estimate(self):
+        cd = self.cleaned_data
+        original_estimate = cd.get('original_estimate')
+        original_estimate = original_estimate.replace(' ', '')
+        allowed_flags = ['w', 'd', 'h', 'm']
+        if original_estimate[-1] not in allowed_flags:
+            raise forms.ValidationError('Incorrect format')
+        for i, letter in enumerate(original_estimate):
+            if letter.isdigit():
+                continue
+            elif letter in allowed_flags:
+                if i != 0 and original_estimate[i - 1].isdigit():
+                    allowed_flags.remove(letter)
+                    continue
+            raise forms.ValidationError('Incorrect format')
+        return cd.get('original_estimate')
 
 
 class CreateLogForm(forms.ModelForm):

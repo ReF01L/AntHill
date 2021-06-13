@@ -13,6 +13,12 @@ from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
 from project.models import Project, Issue
 from project.forms import CreateProjectForm, CreateIssueForm, CreateLogForm
 from project.models import Project, Issue, Sprint
+from . import constants
+from .forms import CreateProjectForm, CreateIssueForm
+from .models import Project, Issue, Sprint
+from .forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
+from .models import Project, Issue
+from .utils import parser_estimate
 
 
 @login_required(login_url='/account/login/')
@@ -111,8 +117,9 @@ def create_issue(request, slug):
                 sprint=cd.get('sprint'),
                 verifier=cd.get('verifier'),
                 executor=cd.get('executor'),
+                original_estimate=parser_estimate(cd.get('original_estimate'))
             )
-            return redirect('project:board', slug)
+            return redirect('project:issue', project_slug=slug, issue_slug=cd.get('slug'))
     else:
         form = CreateIssueForm()
     return render(request, 'project/create_issue.html', {
