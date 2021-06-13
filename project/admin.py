@@ -20,7 +20,8 @@ class IssueAdmin(admin.ModelAdmin):
                     'ETA',
                     'percent',
                     'created',
-                    'updated']
+                    'updated',
+                    'original_estimate']
 
 
 class SprintAdmin(admin.ModelAdmin):

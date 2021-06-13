@@ -10,6 +10,9 @@ class Sprint(models.Model):
     start_date = models.DateField(auto_now_add=True)
     due_date = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 
 class Project(models.Model):
     users = models.ManyToManyField(to=Profile)
@@ -17,12 +20,6 @@ class Project(models.Model):
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(max_length=20)
     sprint = models.OneToOneField(to=Sprint, on_delete=models.SET_NULL, null=True, blank=True)
-
-
-class LoggedTime(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
-    hours_count = models.TimeField()
-    description = models.TextField()
 
 
 class Issue(models.Model):
@@ -41,6 +38,17 @@ class Issue(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=20)
+    original_estimate = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.summary
+
+
+class LoggedTime(models.Model):
+    issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    hours_count = models.PositiveIntegerField()
+    description = models.TextField()
+
+
+

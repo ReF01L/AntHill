@@ -50,7 +50,7 @@ def create_project(request):
             proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
                                           slug=cd['link'].split('/')[-1])
             proj.users.add(user)
-            return redirect('project:board', 'kPaQDGUdPZ')
+            return redirect('project:board', cd['link'].split('/')[-1])
 
     return render(request, 'project/create.html', {'form': form})
 
@@ -115,8 +115,6 @@ def create_issue(request, slug):
         form = CreateIssueForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            executor = Profile.objects.get(user=User.objects.get(username=cd.get('executor')))
-            verifier = Profile.objects.get(user=User.objects.get(username=cd.get('verifier')))
             Issue.objects.create(
                 status=cd.get('status'),
                 type=cd.get('type'),
@@ -127,18 +125,14 @@ def create_issue(request, slug):
                 environment=cd.get('environment'),
                 ETA=cd.get('ETA'),
                 project=project,
-                slug=cd.get(slug),
-                sprint=Sprint.objects.get(name=cd.get('sprint')),
-                verifier=verifier,
-                executor=executor,
+                slug=cd.get('slug'),
+                sprint=cd.get('sprint'),
+                verifier=cd.get('verifier'),
+                executor=cd.get('executor'),
             )
+            return redirect('project:board', cd.get('slug'))
     else:
         form = CreateIssueForm()
-        form.fields['verifier'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
-        form.fields['sprint'].choices = constants.DefaultSprint.choices
-        if project.sprint is not None:
-            form.fields['sprint'].choices += [(project.sprint.name, project.sprint.name)]
-        form.fields['executor'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
     return render(request, 'project/create_issue.html', {
         'form': form
     })
