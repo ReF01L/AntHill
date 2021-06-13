@@ -87,11 +87,16 @@ class ChooseProjectForm(forms.ModelForm):
             'class': 'issue_body_form-name'
         }
     ))
-    author = forms.CharField(label='Author', label_suffix='', widget=forms.Select(
+    author = forms.ChoiceField(label='Author', label_suffix='', widget=forms.Select(
         attrs={
             'class': 'issue_body_form-field'
         }
     ))
+    parent_issue = forms.ChoiceField(label='Parent issue', label_suffix='', widget=forms.Select(
+        attrs={
+            'class': 'issue_body_form-field'
+        }
+    ), choices=(('Parent1', 'Parent1'), ('Parent2', 'Parent2')))  # todo fix parent_issue
 
     class Meta:
         model = Issue
@@ -100,7 +105,8 @@ class ChooseProjectForm(forms.ModelForm):
 
 class CreateIssueForm(forms.ModelForm):
     sprint = forms.ModelChoiceField(label='Sprint', label_suffix='',
-                                    queryset=Sprint.objects.all().distinct()
+                                    queryset=Sprint.objects.all().distinct(),
+                                    required=False
                                     )
     verifier = forms.ModelChoiceField(label='Verifiers', label_suffix='',
                                       queryset=Profile.objects.all().distinct()
@@ -116,9 +122,9 @@ class CreateIssueForm(forms.ModelForm):
     summary = forms.CharField(label='Name Issue', label_suffix='', max_length=100)
     description = forms.CharField(label='Description', label_suffix='', max_length=300)
     environment = forms.CharField(label='Environment', label_suffix='')
-    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format=('%m/%d/%Y'),
-                                                                               attrs={'class': 'myDateClass',
-                                                                                      'placeholder': 'Select a date'}))
+    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
+                                                                                                         'placeholder': 'Select a date'
+                                                                                                         }))
     percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput)
     original_estimate = forms.CharField(label='Original estimate', label_suffix='', widget=forms.TextInput)
     slug = forms.SlugField(label='Issue Key', label_suffix='', widget=forms.TextInput(attrs={
@@ -149,6 +155,25 @@ class CreateIssueForm(forms.ModelForm):
                     continue
             raise forms.ValidationError('Incorrect format')
         return cd.get('original_estimate')
+
+
+class CreateLogForm(forms.ModelForm):
+    issue = forms.ChoiceField(label='Issue', label_suffix='', widget=forms.Select())
+    time_spend = forms.CharField(label='Time Spend', label_suffix='', max_length=100, widget=forms.Textarea(
+        attrs={
+            'cols': 80,
+            'rows': 1,
+        }
+    ))
+    desc = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
+        attrs={
+            'cols': 80,
+        }
+    ))
+
+    class Meta:
+        model = Issue
+        fields = ()
 
 
 class IssueHeroForm(forms.ModelForm):

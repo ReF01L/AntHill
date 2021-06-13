@@ -1,10 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
 from account.models import Profile
+from project import constants
+from project.forms import CreateProjectForm, CreateIssueForm
+from project.models import Project, Issue, Sprint
+from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
+from project.models import Project, Issue
+from project.forms import CreateProjectForm, CreateIssueForm, CreateLogForm
+from project.models import Project, Issue, Sprint
 from . import constants
 from .forms import CreateProjectForm, CreateIssueForm
 from .models import Project, Issue, Sprint
@@ -76,36 +84,15 @@ def board(request, slug):
         'progress': [x for x in project.issue_set.filter(status=constants.Statuses.PROGRESS)],
         'complete': [x for x in project.issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
+    [setattr(x, 'shortname', x.verifier.user.last_name[0] + x.verifier.user.first_name[0]) for x in (
+            tickets['waiting'] + tickets['progress'] + tickets['complete']
+    )]
     return render(request, 'project/board.html', {
         'waiting': tickets['waiting'],
         'progress': tickets['progress'],
         'complete': tickets['complete'],
-        'project': project
-    })
-
-
-def issues(request, slug):
-    return render(request, 'project/all_issues.html', {
-        'project': Project.objects.get(slug=slug)
-    })
-
-
-def roadmap(request, slug):
-    return HttpResponse('RoadMap')
-
-
-def log(request, slug):
-    return HttpResponse('Log')
-
-
-def issue(request, project_slug, issue_slug):
-    return render(request, 'project/issue.html', {
-        'issue': Issue.objects.get(slug=issue_slug),
-        'project': Project.objects.get(slug=project_slug),
-        'hero_form': IssueHeroForm(),
-        'info_form': IssueInfoForm(initial={
-            'project': Project.objects.get(slug=project_slug).name
-        }),
+        'project': project,
+        'sprint': project.sprint or None
     })
 
 
@@ -136,5 +123,44 @@ def create_issue(request, slug):
     else:
         form = CreateIssueForm()
     return render(request, 'project/create_issue.html', {
-        'form': form
+        'form': form,
+        'project': project,
+    })
+
+
+def issues(request, slug):
+    project = Project.objects.get(slug=slug)
+    _issues = project.issue_set.all()
+    status = request.GET.get('status') == 'True'
+    executor = request.GET.get('executor') == 'True'
+    if status:
+        _issues = _issues.filter(status__in=[constants.Statuses.WAITING, constants.Statuses.PROGRESS])
+    if executor:
+        _issues = _issues.filter(executor=Profile.objects.get(user=request.user))
+    return render(request, 'project/all_issues.html', {
+        'project': project,
+        'issues': _issues,
+        'status': status,
+        'executor': executor,
+    })
+
+
+def log(request, slug):
+    form = CreateLogForm()
+    form.fields['issue'].choices = [(x.summary, x.summary) for x in Issue.objects.all()]
+
+    return render(request, 'project/log.html', {
+        'project': Project.objects.get(slug=slug),
+        'form': form,
+    })
+
+
+def issue(request, project_slug, issue_slug):
+    return render(request, 'project/issue.html', {
+        'issue': Issue.objects.get(slug=issue_slug),
+        'project': Project.objects.get(slug=project_slug),
+        'hero_form': IssueHeroForm(),
+        'info_form': IssueInfoForm(initial={
+            'project': Project.objects.get(slug=project_slug).name
+        }),
     })

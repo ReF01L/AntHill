@@ -14,7 +14,6 @@ urlpatterns = [
     path('<str:project_key>/', RedirectView.as_view(url='board'), name='_board'),
     path('<slug:slug>/board/', views.board, name='board'),
     path('<slug:slug>/issues/', views.issues, name='issues'),
-    path('<slug:slug>/roadmap/', views.roadmap, name='roadmap'),
     path('<slug:slug>/log/', views.log, name='log'),
     path('<slug:slug>/create/', views.create_issue, name='create_issue'),
     path('<slug:project_slug>/issue/<slug:issue_slug>/', views.issue, name='issue'),

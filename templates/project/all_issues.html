@@ -1,5 +1,6 @@
 {% extends "project/project_base.html" %}
 {% load static %}
+{% load custom_tag %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/project/all_issues.css' %}">
 {% endblock %}
@@ -10,39 +11,27 @@
     <div class="issues">
         <div class="issues-title">Issues</div>
         <div class="issues_filters">
-            <button>Executor</button>
-            <button>Status</button>
+            <button onclick="window.location.href='{% url 'project:issues' project.slug %}?executor={{ executor|inverse }}&status={{ status }}'">Executor</button>
+            <button onclick="window.location.href='{% url 'project:issues' project.slug %}?executor={{ executor }}&status={{ status|inverse }}'">Status</button>
         </div>
         <div class="issues_body">
             <table>
                 <tr>
                     <th>Issue Name</th>
                     <th>Priority</th>
-                    <th>Leader</th>
+                    <th>Verifier</th>
                     <th>Executor</th>
                     <th>Status</th>
                 </tr>
-                <tr>
-                    <td>Issue 1</td>
-                    <td>Highest</td>
-                    <td>Leader</td>
-                    <td>Executor</td>
-                    <td>Done</td>
-                </tr>
-                <tr>
-                    <td>Issue 1</td>
-                    <td>Highest</td>
-                    <td>Leader</td>
-                    <td>Executor</td>
-                    <td>Done</td>
-                </tr>
-                <tr>
-                    <td>Issue 1</td>
-                    <td>Highest</td>
-                    <td>Leader</td>
-                    <td>Executor</td>
-                    <td>Done</td>
-                </tr>
+                {% for issue in issues %}
+                    <tr>
+                        <td><a href="{% url 'project:issue' project.slug issue.slug %}">{{ issue.summary }}</a></td>
+                        <td>{{ issue.priority }}</td>
+                        <td>{{ issue.verifier.user.username }}</td>
+                        <td>{{ issue.executor.user.username }}</td>
+                        <td>{{ issue.status }}</td>
+                    </tr>
+                {% endfor %}
             </table>
         </div>
     </div>)
