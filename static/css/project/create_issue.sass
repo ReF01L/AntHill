@@ -1,89 +1,99 @@
 @import "../colors"
 @import "../fonts"
 
-.issue
+
+.content
   display: flex
   flex-direction: column
-  margin: 1% 380px
-  background-color: $green
-  border-radius: 20px
-  width: 1070px
-  color: $white
-  font-size: 36px
+  align-items: center
 
-  &_header
-    margin: auto 10%
-    padding-top: 5%
-
-    &-title
-      display: flex
-      @include light
-
-  &_body
+  .issue
     display: flex
     flex-direction: column
-    margin-left: 15%
-    align-items: flex-start
+    margin: 1% 380px
+    background-color: $green
+    border-radius: 20px
+    width: 1070px
+    color: $white
+    font-size: 36px
 
-    &_form
-      margin: 30px
-      width: 80%
+    &_header
+      margin: auto 10%
+      padding-top: 5%
 
-      & p
+      &-title
         display: flex
-        justify-content: flex-start
-        position: relative
-        margin-bottom: 50px
+        @include light
 
-        & select
-          background-color: transparent
-          outline: none
-          border: 2px solid $green
-          border-bottom: 2px solid $white
-          color: $white
-          @include light
-          font-size: 36px
-          width: 100%
+    &_body
+      display: flex
+      flex-direction: column
+      margin-left: 15%
+      align-items: flex-start
 
-          & option
-            color: $dark
+      &_form
+        margin: 30px
+        width: 80%
+
+        & p
+          display: flex
+          justify-content: flex-start
+          position: relative
+          margin-bottom: 50px
+
+          & select
+            background-color: transparent
+            outline: none
+            border: 2px solid $green
+            border-bottom: 2px solid $white
+            color: $white
             @include light
+            font-size: 36px
+            width: 100%
 
-        & input
-          background-color: transparent
-          border-bottom: 2px solid $white
-          padding: 10px
-          color: $white
-          @include regular
-          font-size: 18px
-          width: 100%
+            & option
+              color: $dark
+              @include light
 
-        & textarea
-          background-color: transparent
-          border: 2px solid $white
-          border-radius: 15px
-          padding: 10px
-          color: $white
-          @include regular
-          font-size: 18px
+          & input
+            background-color: transparent
+            border-bottom: 2px solid $white
+            padding: 10px
+            color: $white
+            @include regular
+            font-size: 18px
+            width: 100%
 
-        & label
-          color: $white
-          @include light
-          font-size: 18px
-          position: absolute
-          bottom: -22px
-          right: 0
+            &::placeholder
+              color: $white
+              @include regular
 
-      &_btns
-        display: flex
-        justify-content: space-evenly
+          & textarea
+            background-color: transparent
+            border: 2px solid $white
+            border-radius: 15px
+            padding: 10px
+            color: $white
+            @include regular
+            font-size: 18px
 
-        &-btn
-          background-color: transparent
-          border: 2px solid $white
-          border-radius: 15px
-          padding: 5px 20px
-          color: $white
-          @include light
-          font-size: 30px
+          & label
+            color: $white
+            @include light
+            font-size: 18px
+            position: absolute
+            bottom: -22px
+            right: 0
+
+        &_btns
+          display: flex
+          justify-content: space-evenly
+
+          &-btn
+            background-color: transparent
+            border: 2px solid $white
+            border-radius: 15px
+            padding: 5px 20px
+            color: $white
+            @include light
+            font-size: 30px

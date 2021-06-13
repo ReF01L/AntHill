@@ -112,7 +112,7 @@ def create_issue(request, slug):
                 verifier=cd.get('verifier'),
                 executor=cd.get('executor'),
             )
-            return redirect('project:board', cd.get('slug'))
+            return redirect('project:board', slug)
     else:
         form = CreateIssueForm()
     return render(request, 'project/create_issue.html', {

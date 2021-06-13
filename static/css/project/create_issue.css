@@ -34,7 +34,12 @@
   font-weight: normal;
   font-style: normal;
 }
-.issue {
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content .issue {
   display: flex;
   flex-direction: column;
   margin: 1% 380px;
@@ -44,31 +49,31 @@
   color: #FFFFFF;
   font-size: 36px;
 }
-.issue_header {
+.content .issue_header {
   margin: auto 10%;
   padding-top: 5%;
 }
-.issue_header-title {
+.content .issue_header-title {
   display: flex;
   font-family: "Raleway Light", sans-serif;
 }
-.issue_body {
+.content .issue_body {
   display: flex;
   flex-direction: column;
   margin-left: 15%;
   align-items: flex-start;
 }
-.issue_body_form {
+.content .issue_body_form {
   margin: 30px;
   width: 80%;
 }
-.issue_body_form p {
+.content .issue_body_form p {
   display: flex;
   justify-content: flex-start;
   position: relative;
   margin-bottom: 50px;
 }
-.issue_body_form p select {
+.content .issue_body_form p select {
   background-color: transparent;
   outline: none;
   border: 2px solid #00C084;
@@ -78,11 +83,11 @@
   font-size: 36px;
   width: 100%;
 }
-.issue_body_form p select option {
+.content .issue_body_form p select option {
   color: #364364;
   font-family: "Raleway Light", sans-serif;
 }
-.issue_body_form p input {
+.content .issue_body_form p input {
   background-color: transparent;
   border-bottom: 2px solid #FFFFFF;
   padding: 10px;
@@ -91,7 +96,11 @@
   font-size: 18px;
   width: 100%;
 }
-.issue_body_form p textarea {
+.content .issue_body_form p input::placeholder {
+  color: #FFFFFF;
+  font-family: "Raleway Regular", sans-serif;
+}
+.content .issue_body_form p textarea {
   background-color: transparent;
   border: 2px solid #FFFFFF;
   border-radius: 15px;
@@ -100,7 +109,7 @@
   font-family: "Raleway Regular", sans-serif;
   font-size: 18px;
 }
-.issue_body_form p label {
+.content .issue_body_form p label {
   color: #FFFFFF;
   font-family: "Raleway Light", sans-serif;
   font-size: 18px;
@@ -108,11 +117,11 @@
   bottom: -22px;
   right: 0;
 }
-.issue_body_form_btns {
+.content .issue_body_form_btns {
   display: flex;
   justify-content: space-evenly;
 }
-.issue_body_form_btns-btn {
+.content .issue_body_form_btns-btn {
   background-color: transparent;
   border: 2px solid #FFFFFF;
   border-radius: 15px;

@@ -5,9 +5,38 @@
   display: flex
   flex-direction: column
   justify-content: center
-  align-items: flex-start
+  align-items: center
   width: 1070px
   margin: auto
+
+  &_nosprint
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    flex-direction: column
+    padding: 20px
+    background-color: $green
+    color: $white
+    height: 100vh
+    width: 100vw
+
+    & h2
+      @include regular
+      font-size: 48px
+      margin-bottom: 15px
+
+    & p
+      @include regular
+      font-size: 36px
+
+      & a
+        text-decoration: none
+        color: $white
+        border-bottom: 2px solid $white
+
+        &:hover
+          cursor: pointer
+
   &-title
     margin-top: 45px
     margin-bottom: 15px
@@ -22,42 +51,51 @@
     flex-direction: column
     align-items: flex-start
     margin: auto 90px
+
   &_body
     display: flex
     justify-content: flex-start
+
     &_col
-      width: 170px
+      width: 190px
       margin-right: 10px
       background: $white
       border-radius: 10px
+
       &-title
         @include thin
         font-size: 30px
         color: $dark
         border-bottom: 1px solid $dark
         text-align: center
+
       &_cards
         border-radius: 5px
+
         &_card
           margin: 20px 10px 10px
           border: 1px solid $green
+
           &-name
             margin: 30px auto 5px
             text-align: center
             color: $dark
             margin: 10px
+
           &-date
             color: $dark
-            font-size: 12px
+            font-size: 18px
             @include light
             margin-left: 10px
             margin-top: 5px
+
           &-link
             color: $dark
             font-size: 12px
             @include light
             margin-left: 10px
             margin-top: 5px
+
           &-percents
             color: $dark
             font-size: 12px
@@ -65,34 +103,41 @@
             margin-left: 10px
             margin-top: 5px
             margin-bottom: 70px
+
           &_creator
             margin-bottom: 25px
             margin-right: 5px
             text-align: right
+
             & span
               border: 1px solid $dark
               border-radius: 50%
               padding: 5px
               font-size: 20px
               @include thin
+
     &_filter
       margin-left: 10px
+
       & span
         @include thin
         font-size: 30px
         color: $dark
         border-bottom: 1px solid $dark
         text-align: center
+
     &_info
       display: flex
       flex-direction: column
       align-items: center
       margin-left: 20px
       position: relative
+
       &_users
         display: flex
         justify-content: center
         align-items: center
+
         &-user
           width: 40px
           height: 40px
@@ -105,6 +150,7 @@
           font-size: 20px
           @include light
           margin: auto 2px
+
       &-btn
         border: 1px solid $dark
         color: $dark
@@ -120,6 +166,7 @@
         -ms-transition: 0.2s
         -o-transition: 0.2s
         transition: 0.2s
+
         &:hover
           cursor: pointer
           -webkit-transform: scale(1.1)
@@ -129,6 +176,7 @@
           transform: scale(1.1)
           background-color: $dark
           color: $white
+
       &-date
         color: $dark
         border-radius: 5px
@@ -141,6 +189,7 @@
         justify-content: center
         align-items: center
         margin-top: 10px
+
       &-img
         width: 400px
         opacity: 0.6
