@@ -75,11 +75,15 @@ def board(request, slug):
         'progress': [x for x in project.issue_set.filter(status=constants.Statuses.PROGRESS)],
         'complete': [x for x in project.issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
+    [setattr(x, 'shortname', x.verifier.user.last_name[0] + x.verifier.user.first_name[0]) for x in (
+            tickets['waiting'] + tickets['progress'] + tickets['complete']
+    )]
     return render(request, 'project/board.html', {
         'waiting': tickets['waiting'],
         'progress': tickets['progress'],
         'complete': tickets['complete'],
-        'project': project
+        'project': project,
+        'sprint': project.sprint or None
     })
 
 
@@ -87,10 +91,6 @@ def issues(request, slug):
     return render(request, 'project/all_issues.html', {
         'project': Project.objects.get(slug=slug)
     })
-
-
-def roadmap(request, slug):
-    return HttpResponse('RoadMap')
 
 
 def log(request, slug):

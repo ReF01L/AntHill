@@ -100,7 +100,8 @@ class ChooseProjectForm(forms.ModelForm):
 
 class CreateIssueForm(forms.ModelForm):
     sprint = forms.ModelChoiceField(label='Sprint', label_suffix='',
-                                    queryset=Sprint.objects.all().distinct()
+                                    queryset=Sprint.objects.all().distinct(),
+                                    required=False
                                     )
     verifier = forms.ModelChoiceField(label='Verifiers', label_suffix='',
                                       queryset=Profile.objects.all().distinct()
@@ -116,9 +117,9 @@ class CreateIssueForm(forms.ModelForm):
     summary = forms.CharField(label='Name Issue', label_suffix='', max_length=100)
     description = forms.CharField(label='Description', label_suffix='', max_length=300)
     environment = forms.CharField(label='Environment', label_suffix='')
-    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format=('%m/%d/%Y'),
-                                                                               attrs={'class': 'myDateClass',
-                                                                                      'placeholder': 'Select a date'}))
+    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
+                                                                                                         'placeholder': 'Select a date'
+                                                                                                         }))
     percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput)
     original_estimate = forms.CharField(label='Original estimate', label_suffix='')
     slug = forms.SlugField(label='Issue Key', label_suffix='', widget=forms.TextInput(attrs={

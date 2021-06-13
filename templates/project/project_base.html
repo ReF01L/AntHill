@@ -19,7 +19,6 @@
         <div class="menu-name">{{ user.username }}</div>
         <div class="menu-project">{{ project.name }}</div>
         <div class="menu-item" onclick="window.location.href='{% url 'project:issues' project.slug %}'">All issues</div>
-        <div class="menu-item" onclick="window.location.href='{% url 'project:roadmap' project.slug %}'">Roadmap</div>
         <div class="menu-item" onclick="window.location.href='{% url 'project:log' project.slug %}'">Log work</div>
         <div class="menu-item" onclick="window.location.href='{% url 'project:create' %}'">Create project</div>
         <div class="menu-item" onclick="window.location.href='{% url 'project:create_issue' project.slug %}'">Create issue</div>
