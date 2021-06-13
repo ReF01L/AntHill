@@ -1,0 +1,24 @@
+{% extends "project/project_base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/log.css' %}">
+{% endblock %}
+
+{% block title %} - Log{% endblock %}
+
+{% block project_content %}
+    <div class="log">
+        <div class="log_body">
+            <form class="log_body_form" method="post" action=".">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <div class="log_body_form_btns">
+                    <button class="log_body_form_btns-btn"
+                            onclick="window.location.href='{% url 'project:board' project.slug %}'">Cancel
+                    </button>
+                    <input class="log_body_form_btns-btn" type="submit" value="Log Work">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

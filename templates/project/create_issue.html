@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "project/project_base.html" %}
 {% load static %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/project/create_issue.css' %}">
@@ -20,14 +20,16 @@
             <div class="issue_header-title">Issue Creation</div>
         </div>
         <div class="issue_body">
-            <form class="issue_body_form" method="post">
+            <form class="issue_body_form" method="post" action=".">
                 {{ form.as_p }}
                 {% csrf_token %}
-                <input type="submit" value="send">
+                <div class="issue_body_form_btns">
+                    <button class="issue_body_form_btns-btn"
+                            onclick="window.location.href='{% url 'project:board' project.slug %}'">Cancel
+                    </button>
+                    <input class="issue_body_form_btns-btn" type="submit" value="Create issue">
+                </div>
             </form>
-        </div>
-        <div class="issue_footer">
-            <button class="issue_footer-btn">Create Issue</button>
         </div>
     </div>
 {% endblock %}

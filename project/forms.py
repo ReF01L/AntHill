@@ -87,11 +87,16 @@ class ChooseProjectForm(forms.ModelForm):
             'class': 'issue_body_form-name'
         }
     ))
-    author = forms.CharField(label='Author', label_suffix='', widget=forms.Select(
+    author = forms.ChoiceField(label='Author', label_suffix='', widget=forms.Select(
         attrs={
             'class': 'issue_body_form-field'
         }
     ))
+    parent_issue = forms.ChoiceField(label='Parent issue', label_suffix='', widget=forms.Select(
+        attrs={
+            'class': 'issue_body_form-field'
+        }
+    ), choices=(('Parent1', 'Parent1'), ('Parent2', 'Parent2')))  # todo fix parent_issue
 
     class Meta:
         model = Issue
@@ -133,6 +138,25 @@ class CreateIssueForm(forms.ModelForm):
                   'executor', 'status', 'type',
                   'priority', 'summary', 'description',
                   'environment', 'ETA', 'percent', 'slug',)
+
+
+class CreateLogForm(forms.ModelForm):
+    issue = forms.ChoiceField(label='Issue', label_suffix='', widget=forms.Select())
+    time_spend = forms.CharField(label='Time Spend', label_suffix='', max_length=100, widget=forms.Textarea(
+        attrs={
+            'cols': 80,
+            'rows': 1,
+        }
+    ))
+    desc = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
+        attrs={
+            'cols': 80,
+        }
+    ))
+
+    class Meta:
+        model = Issue
+        fields = ()
 
 
 class IssueHeroForm(forms.ModelForm):

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
@@ -10,6 +11,8 @@ from project.forms import CreateProjectForm, CreateIssueForm
 from project.models import Project, Issue, Sprint
 from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
 from project.models import Project, Issue
+from project.forms import CreateProjectForm, CreateIssueForm, CreateLogForm
+from project.models import Project, Issue, Sprint
 
 
 @login_required(login_url='/account/login/')
@@ -87,27 +90,6 @@ def board(request, slug):
     })
 
 
-def issues(request, slug):
-    return render(request, 'project/all_issues.html', {
-        'project': Project.objects.get(slug=slug)
-    })
-
-
-def log(request, slug):
-    return HttpResponse('Log')
-
-
-def issue(request, project_slug, issue_slug):
-    return render(request, 'project/issue.html', {
-        'issue': Issue.objects.get(slug=issue_slug),
-        'project': Project.objects.get(slug=project_slug),
-        'hero_form': IssueHeroForm(),
-        'info_form': IssueInfoForm(initial={
-            'project': Project.objects.get(slug=project_slug).name
-        }),
-    })
-
-
 @login_required(login_url='/account/login/')
 def create_issue(request, slug):
     project = Project.objects.get(slug=slug)
@@ -134,5 +116,33 @@ def create_issue(request, slug):
     else:
         form = CreateIssueForm()
     return render(request, 'project/create_issue.html', {
-        'form': form
+        'form': form,
+        'project': project,
+    })
+
+
+def issues(request, slug):
+    return render(request, 'project/all_issues.html', {
+        'project': Project.objects.get(slug=slug)
+    })
+
+
+def log(request, slug):
+    form = CreateLogForm()
+    form.fields['issue'].choices = [(x.summary, x.summary) for x in Issue.objects.all()]
+
+    return render(request, 'project/log.html', {
+        'project': Project.objects.get(slug=slug),
+        'form': form,
+    })
+
+
+def issue(request, project_slug, issue_slug):
+    return render(request, 'project/issue.html', {
+        'issue': Issue.objects.get(slug=issue_slug),
+        'project': Project.objects.get(slug=project_slug),
+        'hero_form': IssueHeroForm(),
+        'info_form': IssueInfoForm(initial={
+            'project': Project.objects.get(slug=project_slug).name
+        }),
     })
