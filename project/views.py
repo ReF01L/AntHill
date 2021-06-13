@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
@@ -7,6 +8,8 @@ from account.models import Profile
 from project import constants
 from project.forms import CreateProjectForm, CreateIssueForm
 from project.models import Project, Issue, Sprint
+from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
+from project.models import Project, Issue
 
 
 @login_required(login_url='/account/login/')
@@ -66,18 +69,42 @@ def join_project(request):
 
 @login_required(login_url='/account/login/')
 def board(request, slug):
+    project = Project.objects.get(slug=slug)
     tickets = {
-        'waiting': [x for x in
-                    Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.WAITING)],
-        'progress': [x for x in
-                     Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.PROGRESS)],
-        'complete': [x for x in
-                     Project.objects.filter(slug=slug)[0].issue_set.filter(status=constants.Statuses.COMPLETE)]
+        'waiting': [x for x in project.issue_set.filter(status=constants.Statuses.WAITING)],
+        'progress': [x for x in project.issue_set.filter(status=constants.Statuses.PROGRESS)],
+        'complete': [x for x in project.issue_set.filter(status=constants.Statuses.COMPLETE)]
     }
     return render(request, 'project/board.html', {
         'waiting': tickets['waiting'],
         'progress': tickets['progress'],
-        'complete': tickets['complete']
+        'complete': tickets['complete'],
+        'project': project
+    })
+
+
+def issues(request, slug):
+    return render(request, 'project/all_issues.html', {
+        'project': Project.objects.get(slug=slug)
+    })
+
+
+def roadmap(request, slug):
+    return HttpResponse('RoadMap')
+
+
+def log(request, slug):
+    return HttpResponse('Log')
+
+
+def issue(request, project_slug, issue_slug):
+    return render(request, 'project/issue.html', {
+        'issue': Issue.objects.get(slug=issue_slug),
+        'project': Project.objects.get(slug=project_slug),
+        'hero_form': IssueHeroForm(),
+        'info_form': IssueInfoForm(initial={
+            'project': Project.objects.get(slug=project_slug).name
+        }),
     })
 
 

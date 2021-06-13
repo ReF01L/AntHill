@@ -1,0 +1,49 @@
+{% extends "project/project_base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/all_issues.css' %}">
+{% endblock %}
+
+{% block title %} - Issues{% endblock %}
+
+{% block project_content %}
+    <div class="issues">
+        <div class="issues-title">Issues</div>
+        <div class="issues_filters">
+            <button>Executor</button>
+            <button>Status</button>
+        </div>
+        <div class="issues_body">
+            <table>
+                <tr>
+                    <th>Issue Name</th>
+                    <th>Priority</th>
+                    <th>Leader</th>
+                    <th>Executor</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>Issue 1</td>
+                    <td>Highest</td>
+                    <td>Leader</td>
+                    <td>Executor</td>
+                    <td>Done</td>
+                </tr>
+                <tr>
+                    <td>Issue 1</td>
+                    <td>Highest</td>
+                    <td>Leader</td>
+                    <td>Executor</td>
+                    <td>Done</td>
+                </tr>
+                <tr>
+                    <td>Issue 1</td>
+                    <td>Highest</td>
+                    <td>Leader</td>
+                    <td>Executor</td>
+                    <td>Done</td>
+                </tr>
+            </table>
+        </div>
+    </div>)
+{% endblock %}

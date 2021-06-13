@@ -1,0 +1,157 @@
+@import "../colors"
+@import "../fonts"
+
+.issue
+  background-color: $green
+
+  &_container
+    min-height: 100vh
+    width: 1070px
+    display: flex
+    flex-direction: column
+    margin: auto
+    justify-content: center
+    align-items: flex-start
+
+  &-title
+    color: $dark
+    font-size: 36px
+    @include semi_bold
+    border-bottom: 2px solid $dark
+
+  &-log
+    align-self: flex-end
+    border: 1px solid $dark
+    border-radius: 20px
+    text-transform: uppercase
+    width: 180px
+    height: 40px
+    display: flex
+    justify-content: center
+    align-items: center
+    color: $dark
+    @include light
+    font-size: 20px
+    -webkit-transition: 0.2s
+    -moz-transition: 0.2s
+    -ms-transition: 0.2s
+    -o-transition: 0.2s
+    transition: 0.2s
+    background-color: $white
+    margin-bottom: 30px
+
+    &:hover
+      background-color: $dark
+      color: $white
+      cursor: pointer
+
+  &_body
+    display: flex
+    justify-content: center
+    align-items: flex-start
+
+    &-hero
+      background-color: $white
+      border: 1px solid $dark
+      border-radius: 50px
+
+      &_form
+        background-color: transparent
+        width: 710px
+        height: 680px
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+        align-items: center
+
+        & p
+          display: flex
+          flex-direction: column
+          align-items: flex-start
+          margin-top: 50px
+
+          & label
+            margin-left: 10px
+            font-size: 20px
+            @include medium
+            color: $dark
+
+        &-field
+          background-color: $gray
+          border: 1px solid $dark
+          width: 550px
+          height: 100px
+          border-radius: 15px
+          padding: 15px
+          color: $dark
+          font-size: 16px
+          @include regular
+
+        &-btn
+          align-self: flex-end
+          margin: auto 80px 20px 0
+          border: 1px solid $dark
+          background-color: $gray
+          border-radius: 10px
+          width: 260px
+          height: 60px
+          color: $dark
+          font-size: 36px
+          @include regular
+          -webkit-transition: 0.4s
+          -moz-transition: 0.4s
+          -ms-transition: 0.4s
+          -o-transition: 0.4s
+          transition: 0.4s
+
+          &:hover
+            cursor: pointer
+            -webkit-transform: scale(1.2)
+            -moz-transform: scale(1.2)
+            -ms-transform: scale(1.2)
+            -o-transform: scale(1.2)
+            transform: scale(1.2)
+
+    &-info
+      background-color: $white
+      border: 1px solid $dark
+      border-radius: 50px
+      margin-left: 10px
+
+      &_form
+        background-color: transparent
+        width: 350px
+        height: 680px
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+        align-items: center
+
+        & p
+          display: flex
+          flex-direction: column
+          align-items: center
+          margin-top: 25px
+          width: 310px
+          height: 55px
+
+          &:first-child
+            margin-top: 5px
+
+          & label
+            margin-left: 10px
+            font-size: 20px
+            @include medium
+            color: $dark
+            text-transform: capitalize
+            align-self: flex-end
+            margin-top: 2px
+
+        &-field
+          background-color: transparent
+          border-bottom: 1px solid $dark
+          width: 100%
+          padding: 15px 15px 0
+          color: $dark
+          font-size: 30px
+          @include light

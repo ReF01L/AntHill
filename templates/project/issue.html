@@ -1,0 +1,38 @@
+{% extends "project/project_base.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/issue.css' %}">
+{% endblock %}
+
+{% block title %} - {{ issue.summary }}{% endblock %}
+
+{% block project_content %}
+    <div class="issue">
+        <div class="issue_container">
+            <div class="issue-title">{{ issue.summary }}</div>
+            <div class="issue-log">log work</div>
+            <div class="issue_body">
+                <div class="issue_body-hero">
+                    <form action="." method="post" class="issue_body-hero_form">
+                        {{ hero_form.as_p }}
+                        <input type="hidden" name="hero" value="True">
+                        {% csrf_token %}
+                        <input type="submit" value="Save" class="issue_body-hero_form-btn">
+                    </form>
+                </div>
+                <div class="issue_body-info">
+                    <form action="." method="post" class="issue_body-info_form">
+                        {% for field in info_form %}
+                            <p>
+                                {{ field }}
+                                {{ field.label_tag }}
+                            </p>
+                        {% endfor %}
+                        <input type="hidden" name="info" value="True">
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

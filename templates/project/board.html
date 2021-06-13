@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "project/project_base.html" %}
 {% load static %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/project/board.css' %}">
@@ -6,7 +6,7 @@
 
 {% block title %} - Board{% endblock %}
 
-{% block content %}
+{% block project_content %}
     <div class="board">
         <div class="board_content">
             <div class="board-title">Name of project</div>

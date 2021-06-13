@@ -1,0 +1,39 @@
+@import "../colors"
+@import "../fonts"
+
+.menu
+  position: fixed
+  background-color: $blue
+  height: 100vh
+  width: 380px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: flex-start
+  opacity: 0
+  z-index: -1
+  -webkit-transition: 1.2s
+  -moz-transition: 1.2s
+  -ms-transition: 1.2s
+  -o-transition: 1.2s
+  transition: 1.2s
+  &-name
+    color: $white
+    @include medium
+    font-size: 64px
+    margin: 120px auto 10px
+    text-transform: uppercase
+  &-project
+    color: $white
+    @include regular
+    font-size: 36px
+    margin: 0 auto 50px auto
+  &-item
+    font-size: 48px
+    @include light
+    color: $white
+    margin-bottom: 10px
+    text-transform: capitalize
+    &:hover
+      cursor: pointer
+      text-decoration: underline

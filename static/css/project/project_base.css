@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Light";
+  src: url("../fonts/Raleway-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway SemiBold";
+  src: url("../fonts/Raleway-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+.menu {
+  position: fixed;
+  background-color: #066BC6;
+  height: 100vh;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 0;
+  z-index: -1;
+  -webkit-transition: 1.2s;
+  -moz-transition: 1.2s;
+  -ms-transition: 1.2s;
+  -o-transition: 1.2s;
+  transition: 1.2s;
+}
+.menu-name {
+  color: #FFFFFF;
+  font-family: "Raleway Medium", sans-serif;
+  font-size: 64px;
+  margin: 120px auto 10px;
+  text-transform: uppercase;
+}
+.menu-project {
+  color: #FFFFFF;
+  font-family: "Raleway Regular", sans-serif;
+  font-size: 36px;
+  margin: 0 auto 50px auto;
+}
+.menu-item {
+  font-size: 48px;
+  font-family: "Raleway Light", sans-serif;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+.menu-item:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=project_base.css.map */
