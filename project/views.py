@@ -114,8 +114,10 @@ def create_issue(request, slug):
         if project.sprint is not None:
             form.fields['sprint'].choices += [(project.sprint.name, project.sprint.name)]
         form.fields['executor'].choices = [(x.user.username, x.user.username) for x in project.users.all()]
+
     return render(request, 'project/create_issue.html', {
-        'form': form
+        'form': form,
+        'project': project,
     })
 
 
@@ -137,9 +139,6 @@ def log(request, slug):
         'project': Project.objects.get(slug=slug),
         'form': form,
     })
-
-def create_issue(request, slug):
-    return HttpResponse('Create Issue')
 
 
 def issue(request, project_slug, issue_slug):
