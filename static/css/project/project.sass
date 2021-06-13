@@ -8,6 +8,36 @@
   justify-content: center
   align-items: center
   height: 100vh
+  &_btns
+    display: flex
+    &-btn
+      background-color: $gray
+      color: $dark
+      @include regular
+      font-size: 36px
+      border-radius: 20px
+      border: none
+      outline: none
+      margin: 20px
+      width: 250px
+      height: 70px
+      -webkit-transition: 0.2s
+      -moz-transition: 0.2s
+      -ms-transition: 0.2s
+      -o-transition: 0.2s
+      transition: 0.2s
+      &:hover
+        cursor: pointer
+        -webkit-transform: scale(1.1)
+        -moz-transform: scale(1.1)
+        -ms-transform: scale(1.1)
+        -o-transform: scale(1.1)
+        transform: scale(1.1)
+      &:last-child
+        background-color: transparent
+        border: 1px solid $white
+        color: $white
+
   &-btn
     background-color: $gray
     color: $dark
@@ -32,6 +62,29 @@
       -ms-transform: scale(1.1)
       -o-transform: scale(1.1)
       transform: scale(1.1)
+  &-input
+    background-color: transparent
+    color: $white
+    @include regular
+    font-size: 48px
+    border: none
+    border-bottom: 2px solid $white
+    outline: none
+    height: 100px
+    width: 550px
+    text-transform: uppercase
+    margin: 20px
+    padding: 20px
+    -webkit-transition: 0.2s
+    -moz-transition: 0.2s
+    -ms-transition: 0.2s
+    -o-transition: 0.2s
+    transition: 0.2s
+    &::placeholder
+      opacity: 0.6
+      color: $white
+      @include regular
+
 .projects
   width: 1070px
   margin: auto

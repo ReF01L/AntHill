@@ -6,9 +6,9 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script>
-    $(document).ready(function() {
-        $('.datepicker').datepicker();
-    });
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+        });
     </script>
 {% endblock %}
 
@@ -16,20 +16,22 @@
 
 {% block content %}
     <div class="issue">
-        <div class="issue_header">
-            <div class="issue_header-title">Issue Creation</div>
-        </div>
-        <div class="issue_body">
-            <form class="issue_body_form" method="post" action=".">
-                {{ form.as_p }}
-                {% csrf_token %}
-                <div class="issue_body_form_btns">
-                    <button class="issue_body_form_btns-btn"
-                            onclick="window.location.href='{% url 'project:board' project.slug %}'">Cancel
-                    </button>
-                    <input class="issue_body_form_btns-btn" type="submit" value="Create issue">
-                </div>
-            </form>
+        <div class="issue_content">
+            <div class="issue_header">
+                <div class="issue_header-title">Issue Creation</div>
+            </div>
+            <div class="issue_body">
+                <form class="issue_body_form" method="post" action=".">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <div class="issue_body_form_btns">
+                        <button class="issue_body_form_btns-btn"
+                                onclick="window.location.href='{% url 'project:board' project.slug %}'">Cancel
+                        </button>
+                        <input class="issue_body_form_btns-btn" type="submit" value="Create issue">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}
