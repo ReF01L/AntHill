@@ -112,7 +112,7 @@ def create_issue(request, slug):
                 verifier=cd.get('verifier'),
                 executor=cd.get('executor'),
             )
-            return redirect('project:board', cd.get('slug'))
+            return redirect('project:board', slug)
     else:
         form = CreateIssueForm()
     return render(request, 'project/create_issue.html', {
@@ -122,8 +122,19 @@ def create_issue(request, slug):
 
 
 def issues(request, slug):
+    project = Project.objects.get(slug=slug)
+    _issues = project.issue_set.all()
+    status = request.GET.get('status') == 'True'
+    executor = request.GET.get('executor') == 'True'
+    if status:
+        _issues = _issues.filter(status__in=[constants.Statuses.WAITING, constants.Statuses.PROGRESS])
+    if executor:
+        _issues = _issues.filter(executor=Profile.objects.get(user=request.user))
     return render(request, 'project/all_issues.html', {
-        'project': Project.objects.get(slug=slug)
+        'project': project,
+        'issues': _issues,
+        'status': status,
+        'executor': executor,
     })
 
 
