@@ -41,7 +41,7 @@ class Issue(models.Model):
     original_estimate = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.summary
+        return self.slug + ' | ' + self.summary
 
 
 class LoggedTime(models.Model):

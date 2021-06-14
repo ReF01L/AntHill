@@ -7,7 +7,7 @@ from django.forms import CheckboxSelectMultiple
 
 from account.models import Profile
 from . import constants
-from .models import Project, Sprint
+from .models import LoggedTime, Project, Sprint
 
 from project.models import Project, Issue
 
@@ -158,31 +158,26 @@ class CreateIssueForm(forms.ModelForm):
 
 
 class CreateLogForm(forms.ModelForm):
-    issue = forms.ChoiceField(label='Issue', label_suffix='', widget=forms.Select())
-    time_spend = forms.CharField(label='Time Spend', label_suffix='', max_length=100, widget=forms.Textarea(
-        attrs={
-            'cols': 80,
-            'rows': 1,
-        }
-    ))
-    desc = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
+    issue = forms.ModelChoiceField(label='Issue', label_suffix='', queryset=Issue.objects.all().distinct(), required=True)
+    hours_count = forms.CharField(label='Time Spend', label_suffix='', max_length=100, widget=forms.TextInput)
+    description = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
         attrs={
             'cols': 80,
         }
     ))
 
     class Meta:
-        model = Issue
-        fields = ()
+        model = LoggedTime
+        fields = ('issue', 'description')
 
 
 class IssueHeroForm(forms.ModelForm):
-    description = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
+    description = forms.CharField(label='Description', label_suffix='', required=False, widget=forms.Textarea(
         attrs={
             'class': 'issue_body-hero_form-field'
         }
     ))
-    environment = forms.CharField(label='Environment', label_suffix='', widget=forms.Textarea(
+    environment = forms.CharField(label='Environment', label_suffix='', required=False, widget=forms.Textarea(
         attrs={
             'class': 'issue_body-hero_form-field'
         }

@@ -2,108 +2,122 @@
 @import "../fonts"
 
 
-.content
-  display: flex
-  flex-direction: column
-  align-items: center
+.issue
+  min-height: 100vh
+  max-width: 100vw
+  margin: auto
+  background-color: $green
 
-  .issue
+  &_content
+    width: 1070px
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    margin: auto
+    border-radius: 20px
+
+  &_header
+    width: 80%
+    margin: 35px auto
+
+    &-title
+      display: flex
+      @include semi_bold
+      font-size: 36px
+      color: $white
+      justify-content: center
+      border-bottom: 3px solid $white
+      padding-bottom: 5px
+      width: 100%
+
+  &_body
     display: flex
     flex-direction: column
-    margin: 1% 380px
-    background-color: $green
-    border-radius: 20px
-    width: 1070px
-    color: $white
-    font-size: 36px
-    &_content
-      display: flex
-      justify-content: center
-      align-items: center
-      flex-direction: column
-      margin: 0 auto
-      width: 100%
+    align-items: center
+    justify-content: flex-start
+    width: 100%
 
+    &_form
+      margin: 30px
+      width: 80%
 
-    &_header
-      margin: auto 10%
-      padding-top: 5%
-
-      &-title
+      & p
         display: flex
-        @include light
+        justify-content: flex-start
+        position: relative
+        margin-bottom: 50px
+        width: 100%
 
-    &_body
-      display: flex
-      flex-direction: column
-      align-items: center
-      justify-content: flex-start
-      width: 100%
-
-      &_form
-        margin: 30px
-        width: 80%
-
-        & p
-          display: flex
-          justify-content: flex-start
-          position: relative
-          margin-bottom: 50px
+        & select
+          background-color: transparent
+          outline: none
+          border: 2px solid $green
+          border-bottom: 2px solid $white
+          color: $white
+          @include light
+          font-size: 36px
           width: 100%
 
-          & select
-            background-color: transparent
-            outline: none
-            border: 2px solid $green
-            border-bottom: 2px solid $white
-            color: $white
+          & option
+            color: $dark
             @include light
-            font-size: 36px
-            width: 100%
 
-            & option
-              color: $dark
-              @include light
+        & input
+          background-color: transparent
+          border-bottom: 2px solid $white
+          padding: 10px
+          color: $white
+          @include regular
+          font-size: 18px
+          width: 100%
 
-          & input
-            background-color: transparent
-            border-bottom: 2px solid $white
-            padding: 10px
+          &::placeholder
             color: $white
             @include regular
-            font-size: 18px
-            width: 100%
 
-            &::placeholder
-              color: $white
-              @include regular
+        & textarea
+          background-color: transparent
+          border: 2px solid $white
+          border-radius: 15px
+          padding: 10px
+          color: $white
+          @include regular
+          font-size: 18px
 
-          & textarea
-            background-color: transparent
-            border: 2px solid $white
-            border-radius: 15px
-            padding: 10px
-            color: $white
+        & label
+          color: $white
+          @include light
+          font-size: 18px
+          position: absolute
+          bottom: -22px
+          right: 0
+
+      &_btns
+        display: flex
+        justify-content: space-evenly
+
+        &-btn
+          background-color: transparent
+          border: 2px solid $white
+          border-radius: 15px
+          padding: 5px 20px
+          color: $white
+          @include light
+          font-size: 30px
+          -webkit-transition: 1s ease-in-out
+          -moz-transition: 1s ease-in-out
+          -ms-transition: 1s ease-in-out
+          -o-transition: 1s ease-in-out
+          transition: 1s ease-in-out
+          &:hover
+            cursor: pointer
+            background-color: $white
+            color: $green
+            border-radius: 1px solid $green
             @include regular
-            font-size: 18px
-
-          & label
-            color: $white
-            @include light
-            font-size: 18px
-            position: absolute
-            bottom: -22px
-            right: 0
-
-        &_btns
-          display: flex
-          justify-content: space-evenly
-
-          &-btn
-            background-color: transparent
-            border: 2px solid $white
-            border-radius: 15px
-            padding: 5px 20px
-            color: $white
-            @include light
-            font-size: 30px
+            -webkit-transform: rotateY(360deg) scale(1.05)
+            -moz-transform: rotateY(360deg) scale(1.05)
+            -ms-transform: rotateY(360deg) scale(1.05)
+            -o-transform: rotateY(360deg) scale(1.05)
+            transform: rotateY(360deg) scale(1.05)
