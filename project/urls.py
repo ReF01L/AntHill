@@ -16,5 +16,9 @@ urlpatterns = [
     path('<slug:slug>/issues/', views.issues, name='issues'),
     path('<slug:slug>/log/', views.log, name='log'),
     path('<slug:slug>/create/', views.create_issue, name='create_issue'),
+    path('<slug:slug>/create_sprint/', views.create_sprint, name='create_sprint'),
+    path('<slug:slug>/edit_sprint/', views.edit_sprint, name='edit_sprint'),
+    path('<slug:slug>/delete_sprint/', views.delete_sprint, name='delete_sprint'),
     path('<slug:project_slug>/issue/<slug:issue_slug>/', views.issue, name='issue'),
+    path('<slug:project_slug>/delete_issue/<slug:issue_slug>/', views.delete_issue, name='delete_issue'),
 ]

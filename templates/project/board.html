@@ -79,6 +79,7 @@
         {% else %}
             <h2>No sprints created</h2>
             <p>To create click <a href="#">here</a></p>
+            <div onclick="window.location.href='{% url 'project:create_sprint' project.slug %}'"> create</div>
         {% endif %}
 
     </div>

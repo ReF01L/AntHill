@@ -122,9 +122,10 @@ class CreateIssueForm(forms.ModelForm):
     summary = forms.CharField(label='Name Issue', label_suffix='', max_length=100)
     description = forms.CharField(label='Description', label_suffix='', max_length=300)
     environment = forms.CharField(label='Environment', label_suffix='')
-    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
-                                                                                                         'placeholder': 'Select a date'
-                                                                                                         }))
+    ETA = forms.DateField(label='ETA', label_suffix='',
+                          widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
+                                                                           'placeholder': 'Select a date'
+                                                                           }))
     percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput)
     original_estimate = forms.CharField(label='Original estimate', label_suffix='', widget=forms.TextInput)
     slug = forms.SlugField(label='Issue Key', label_suffix='', widget=forms.TextInput(attrs={
@@ -253,3 +254,15 @@ class IssueInfoForm(forms.ModelForm):
             'priority',
             'percent',
         )
+
+
+class CreateSprintForm(forms.ModelForm):
+    name = forms.CharField(label='Name Sprint', label_suffix='', widget=forms.TextInput)
+    due_date = forms.DateField(label='ETA', label_suffix='',
+                               widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
+                                                                                'placeholder': 'Select a date'
+                                                                                }))
+
+    class Meta:
+        model = Sprint
+        fields = ('name', 'due_date')
