@@ -64,12 +64,6 @@
   font-family: "Raleway Regular", sans-serif;
   font-size: 18px;
 }
-.log_body_form p select option {
-  background-color: #364364;
-}
-.log_body_form p select option:checked {
-  background-color: #00C084;
-}
 .log_body_form p input {
   border: 2px solid #364364;
   border-radius: 15px;

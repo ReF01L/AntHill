@@ -4,13 +4,13 @@
     <link rel="stylesheet" href="{% static 'css/project/issue.css' %}">
 {% endblock %}
 
-{% block title %} - {{ issue.summary }}{% endblock %}
+{% block title %} - {{ summary }}{% endblock %}
 
 {% block project_content %}
     <div class="issue">
         <div class="issue_container">
-            <div class="issue-title">{{ issue.summary }}</div>
-            <div class="issue-log">log work</div>
+            <div class="issue-title">{{ summary }}</div>
+            <div class="issue-log" onclick="window.location.href='{% url 'project:log' project.slug %}'">log work</div>
             <div class="issue_body">
                 <div class="issue_body-hero">
                     <form action="." method="post" class="issue_body-hero_form">

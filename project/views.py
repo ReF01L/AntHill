@@ -7,6 +7,8 @@ from django.views.decorators.http import require_GET
 
 from account.models import Profile
 from project import constants
+from project.forms import CreateProjectForm, CreateIssueForm
+from project.models import Project, Issue, Sprint, LoggedTime
 from project.forms import CreateProjectForm, CreateIssueForm, CreateSprintForm
 from project.models import Project, Issue, Sprint
 from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
@@ -18,7 +20,7 @@ from .forms import CreateProjectForm, CreateIssueForm
 from .models import Project, Issue, Sprint
 from .forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
 from .models import Project, Issue
-from .utils import parser_estimate
+from .utils import parser_estimate, parser_to_str
 
 
 @login_required(login_url='/account/login/')
@@ -122,12 +124,14 @@ def create_issue(request, slug):
             return redirect('project:issue', project_slug=slug, issue_slug=cd.get('slug'))
     else:
         form = CreateIssueForm()
+        form.fields['sprint'].choices = ((project.sprint, project.sprint),)
     return render(request, 'project/create_issue.html', {
         'form': form,
         'project': project,
     })
 
 
+@login_required(login_url='/account/login/')
 def issues(request, slug):
     project = Project.objects.get(slug=slug)
     _issues = project.issue_set.all()
@@ -145,9 +149,20 @@ def issues(request, slug):
     })
 
 
+@login_required(login_url='/account/login/')
 def log(request, slug):
-    form = CreateLogForm()
-    form.fields['issue'].choices = [(x.summary, x.summary) for x in Issue.objects.all()]
+    form = CreateLogForm(request.POST or None)
+    project = Project.objects.get(slug=slug)
+    form.fields['issue'].queryset = Issue.objects.filter(project=project)
+    if request.method == 'POST':
+        if form.is_valid():
+            cd = form.cleaned_data
+            LoggedTime.objects.create(
+                issue=cd['issue'],
+                hours_count=parser_estimate(cd.get('hours_count')),
+                description=cd['description']
+            )
+            return redirect('project:issue', project_slug=project.slug, issue_slug=cd['issue'].slug)
 
     return render(request, 'project/log.html', {
         'project': Project.objects.get(slug=slug),
@@ -155,13 +170,37 @@ def log(request, slug):
     })
 
 
+@login_required(login_url='/account/login/')
 def issue(request, project_slug, issue_slug):
+    _issue = Issue.objects.get(slug=issue_slug)
+    project = Project.objects.get(slug=project_slug)
+    logged_time = sum((x.hours_count for x in LoggedTime.objects.filter(issue=_issue)))
+    original_estimate = parser_to_str(_issue.original_estimate)
+    remaining_estimate = parser_to_str(_issue.original_estimate - logged_time)
+    if request.method == 'POST':
+        form = IssueHeroForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            _issue.description = cd['description']
+            _issue.environment = cd['environment']
+            _issue.save()
+
     return render(request, 'project/issue.html', {
-        'issue': Issue.objects.get(slug=issue_slug),
-        'project': Project.objects.get(slug=project_slug),
-        'hero_form': IssueHeroForm(),
+        'summary': _issue.summary,
+        'project': project,
+        'hero_form': IssueHeroForm(initial={
+            'description': _issue.description,
+            'environment': _issue.environment,
+        }),
         'info_form': IssueInfoForm(initial={
-            'project': Project.objects.get(slug=project_slug).name
+            'project': project.name,
+            'verifier': _issue.verifier.user.username,
+            'executor': _issue.executor.user.username,
+            'status': _issue.status,
+            'priority': _issue.priority,
+            'percent': _issue.percent,
+            'original_estimate': original_estimate,
+            'remaining_estimate': remaining_estimate,
         }),
     })
 
