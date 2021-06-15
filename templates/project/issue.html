@@ -4,12 +4,12 @@
     <link rel="stylesheet" href="{% static 'css/project/issue.css' %}">
 {% endblock %}
 
-{% block title %} - {{ summary }}{% endblock %}
+{% block title %} - {{ issue.summary }}{% endblock %}
 
 {% block project_content %}
     <div class="issue">
         <div class="issue_container">
-            <div class="issue-title">{{ summary }}</div>
+            <div class="issue-title">{{ issue.summary }}</div>
             <div class="issue-log" onclick="window.location.href='{% url 'project:log' project.slug %}'">log work</div>
             <div class="issue_body">
                 <div class="issue_body-hero">
@@ -32,6 +32,7 @@
                         {% csrf_token %}
                     </form>
                 </div>
+            <div onclick="window.location.href='{% url 'project:delete_issue' project.slug issue.slug %}'">Delete</div>
             </div>
         </div>
     </div>

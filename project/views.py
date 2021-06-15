@@ -1,3 +1,6 @@
+from random import choice
+from string import ascii_letters
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -9,6 +12,8 @@ from account.models import Profile
 from project import constants
 from project.forms import CreateProjectForm, CreateIssueForm
 from project.models import Project, Issue, Sprint, LoggedTime
+from project.forms import CreateProjectForm, CreateIssueForm, CreateSprintForm
+from project.models import Project, Issue, Sprint
 from project.forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
 from project.models import Project, Issue
 from project.forms import CreateProjectForm, CreateIssueForm, CreateLogForm
@@ -51,8 +56,8 @@ def recent_project(request):
 
 @login_required(login_url='/account/login/')
 def create_project(request):
-    form = CreateProjectForm(request.POST or None)
     if request.method == 'POST':
+        form = CreateProjectForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             user = Profile.objects.get(user=request.user)
@@ -60,7 +65,9 @@ def create_project(request):
                                           slug=cd['link'].split('/')[-1])
             proj.users.add(user)
             return redirect('project:board', cd['link'].split('/')[-1])
-
+    else:
+        form = CreateProjectForm(
+            initial={'link': 'http://localhost:8000/project/' + ''.join(choice(ascii_letters) for _ in range(10))})
     return render(request, 'project/create.html', {'form': form})
 
 
@@ -79,21 +86,27 @@ def join_project(request):
 @login_required(login_url='/account/login/')
 def board(request, slug):
     project = Project.objects.get(slug=slug)
-    tickets = {
-        'waiting': [x for x in project.issue_set.filter(status=constants.Statuses.WAITING)],
-        'progress': [x for x in project.issue_set.filter(status=constants.Statuses.PROGRESS)],
-        'complete': [x for x in project.issue_set.filter(status=constants.Statuses.COMPLETE)]
-    }
-    [setattr(x, 'shortname', x.verifier.user.last_name[0] + x.verifier.user.first_name[0]) for x in (
-            tickets['waiting'] + tickets['progress'] + tickets['complete']
-    )]
-    return render(request, 'project/board.html', {
-        'waiting': tickets['waiting'],
-        'progress': tickets['progress'],
-        'complete': tickets['complete'],
-        'project': project,
-        'sprint': project.sprint or None
-    })
+    if project.sprint:
+        tickets = {
+            'waiting': [x for x in project.sprint.issue_set.filter(status=constants.Statuses.WAITING)],
+            'progress': [x for x in project.sprint.issue_set.filter(status=constants.Statuses.PROGRESS)],
+            'complete': [x for x in project.sprint.issue_set.filter(status=constants.Statuses.COMPLETE)]
+        }
+        [setattr(x, 'shortname', x.verifier.user.last_name[0] + x.verifier.user.first_name[0]) for x in (
+                tickets['waiting'] + tickets['progress'] + tickets['complete']
+        )]
+        return render(request, 'project/board.html', {
+            'waiting': tickets['waiting'],
+            'progress': tickets['progress'],
+            'complete': tickets['complete'],
+            'project': project,
+            'sprint': project.sprint
+        })
+    else:
+        return render(request, 'project/board.html', {
+            'project': project,
+            'sprint': None
+        })
 
 
 @login_required(login_url='/account/login/')
@@ -121,8 +134,8 @@ def create_issue(request, slug):
             )
             return redirect('project:issue', project_slug=slug, issue_slug=cd.get('slug'))
     else:
-        form = CreateIssueForm()
-        form.fields['sprint'].choices = ((project.sprint, project.sprint),)
+        form = CreateIssueForm(initial={'slug': ''.join(choice(ascii_letters) for _ in range(10))})
+    form.fields['sprint'].queryset = Sprint.objects.filter(name=project.sprint.name)
     return render(request, 'project/create_issue.html', {
         'form': form,
         'project': project,
@@ -175,29 +188,84 @@ def issue(request, project_slug, issue_slug):
     logged_time = sum((x.hours_count for x in LoggedTime.objects.filter(issue=_issue)))
     original_estimate = parser_to_str(_issue.original_estimate)
     remaining_estimate = parser_to_str(_issue.original_estimate - logged_time)
+    if remaining_estimate[0] == '-':
+        remaining_estimate = 0
     if request.method == 'POST':
         form = IssueHeroForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
             _issue.description = cd['description']
             _issue.environment = cd['environment']
+            _issue.status = cd['status']
+            _issue.percent = cd['percent']
             _issue.save()
 
     return render(request, 'project/issue.html', {
-        'summary': _issue.summary,
+        'issue': _issue,
         'project': project,
         'hero_form': IssueHeroForm(initial={
             'description': _issue.description,
             'environment': _issue.environment,
+            'status': _issue.status,
+            'percent': _issue.percent,
         }),
         'info_form': IssueInfoForm(initial={
             'project': project.name,
             'verifier': _issue.verifier.user.username,
             'executor': _issue.executor.user.username,
-            'status': _issue.status,
             'priority': _issue.priority,
-            'percent': _issue.percent,
             'original_estimate': original_estimate,
             'remaining_estimate': remaining_estimate,
         }),
     })
+
+
+@login_required(login_url='/account/login/')
+def create_sprint(request, slug):
+    form = CreateSprintForm(request.POST or None)
+    project = Project.objects.get(slug=slug)
+    if request.method == 'POST':
+        if form.is_valid():
+            cd = form.cleaned_data
+            sprint = Sprint.objects.create(
+                name=cd.get('name'),
+                due_date=cd.get('due_date'),
+            )
+            project.sprint = sprint
+            project.save()
+            return redirect('project:board', slug)
+    return render(request, 'project/create_sprint.html', {
+        'form': form,
+        'project': project,
+    })
+
+
+@login_required(login_url='/account/login/')
+def edit_sprint(request, slug):
+    project = Project.objects.get(slug=slug)
+    sprint = project.sprint
+    if request.method == "POST":
+        form = CreateSprintForm(data=request.POST, instance=sprint)
+        if form.is_valid():
+            form.save()
+            return redirect('project:board', slug=slug)
+    else:
+        form = CreateSprintForm(instance=sprint)
+    return render(request, "project/edit_sprint.html", {'form': form, 'project': project})
+
+
+@login_required(login_url='/account/login/')
+def delete_sprint(request, slug):
+    project = Project.objects.get(slug=slug)
+    sprint = project.sprint
+    project.sprint = None
+    project.save()
+    sprint.delete()
+    return redirect('project:issues', slug=slug)
+
+
+@login_required(login_url='/account/login/')
+def delete_issue(request, project_slug, issue_slug):
+    _issue = Issue.objects.get(slug=issue_slug)
+    _issue.delete()
+    return redirect('project:issues', slug=project_slug)

@@ -37,8 +37,7 @@ class CreateProjectForm(forms.ModelForm):
     link = forms.CharField(label='Link for the join to this project', label_suffix='', widget=forms.TextInput(
         attrs={
             'class': 'create_project_form-field',
-            'readonly': True,
-            'value': 'http://localhost:8000/project/' + ''.join(choice(ascii_letters) for _ in range(10))
+            'readonly': True
         }
     ))
 
@@ -120,16 +119,16 @@ class CreateIssueForm(forms.ModelForm):
     priority = forms.ChoiceField(label='Priority', label_suffix='', widget=forms.Select,
                                  choices=constants.Priority.choices)
     summary = forms.CharField(label='Name Issue', label_suffix='', max_length=100)
-    description = forms.CharField(label='Description', label_suffix='', max_length=300)
-    environment = forms.CharField(label='Environment', label_suffix='')
-    ETA = forms.DateField(label='ETA', label_suffix='', widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
-                                                                                                         'placeholder': 'Select a date'
-                                                                                                         }))
-    percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput)
+    description = forms.CharField(label='Description', label_suffix='', max_length=300, required=False)
+    environment = forms.CharField(label='Environment', label_suffix='', required=False)
+    ETA = forms.DateField(label='ETA', label_suffix='',
+                          widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
+                                                                           'placeholder': 'Select a date'
+                                                                           }))
+    percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput, initial=0)
     original_estimate = forms.CharField(label='Original estimate', label_suffix='', widget=forms.TextInput)
     slug = forms.SlugField(label='Issue Key', label_suffix='', widget=forms.TextInput(attrs={
         'readonly': True,
-        'value': ''.join(choice(ascii_letters) for _ in range(10))
     }))
 
     class Meta:
@@ -158,7 +157,8 @@ class CreateIssueForm(forms.ModelForm):
 
 
 class CreateLogForm(forms.ModelForm):
-    issue = forms.ModelChoiceField(label='Issue', label_suffix='', queryset=Issue.objects.all().distinct(), required=True)
+    issue = forms.ModelChoiceField(label='Issue', label_suffix='', queryset=Issue.objects.all().distinct(),
+                                   required=True)
     hours_count = forms.CharField(label='Time Spend', label_suffix='', max_length=100, widget=forms.TextInput)
     description = forms.CharField(label='Description', label_suffix='', widget=forms.Textarea(
         attrs={
@@ -182,10 +182,20 @@ class IssueHeroForm(forms.ModelForm):
             'class': 'issue_body-hero_form-field'
         }
     ))
+    status = forms.ChoiceField(label='Status', label_suffix='', required=False, widget=forms.Select(
+        attrs={
+            'class': 'issue_body-hero_form-field'
+        }
+    ), choices=constants.Statuses.choices)
+    percent = forms.CharField(label='Percent', label_suffix='', required=False, widget=forms.Textarea(
+        attrs={
+            'class': 'issue_body-hero_form-field'
+        }
+    ))
 
     class Meta:
         model = Issue
-        fields = ('description', 'environment')
+        fields = ('description', 'environment', 'status', 'percent')
 
 
 class IssueInfoForm(forms.ModelForm):
@@ -207,19 +217,7 @@ class IssueInfoForm(forms.ModelForm):
             'readonly': True
         }
     ))
-    status = forms.CharField(label='status', label_suffix='', widget=forms.TextInput(
-        attrs={
-            'class': 'issue_body-info_form-field',
-            'readonly': True
-        }
-    ))
     priority = forms.CharField(label='priority', label_suffix='', widget=forms.TextInput(
-        attrs={
-            'class': 'issue_body-info_form-field',
-            'readonly': True
-        }
-    ))
-    percent = forms.CharField(label='percent', label_suffix='', widget=forms.TextInput(
         attrs={
             'class': 'issue_body-info_form-field',
             'readonly': True
@@ -244,7 +242,17 @@ class IssueInfoForm(forms.ModelForm):
             'project',
             'verifier',
             'executor',
-            'status',
             'priority',
-            'percent',
         )
+
+
+class CreateSprintForm(forms.ModelForm):
+    name = forms.CharField(label='Name Sprint', label_suffix='', widget=forms.TextInput)
+    due_date = forms.DateField(label='ETA', label_suffix='',
+                               widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
+                                                                                'placeholder': 'Select a date'
+                                                                                }))
+
+    class Meta:
+        model = Sprint
+        fields = ('name', 'due_date')
