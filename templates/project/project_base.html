@@ -23,6 +23,7 @@
         <div class="menu-item" onclick="window.location.href='{% url 'project:log' project.slug %}'">Log work</div>
         <div class="menu-item" onclick="window.location.href='{% url 'project:create' %}'">Create project</div>
         <div class="menu-item" onclick="window.location.href='{% url 'project:create_issue' project.slug %}'">Create issue</div>
+        <div class="menu-item" onclick="window.location.href='{% url 'account:logout' %}'">Log out</div>
     </nav>
     {% block project_content %}{% endblock %}
 {% endblock %}

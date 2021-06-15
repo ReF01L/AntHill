@@ -7,12 +7,15 @@
 {% block title %} - Projects{% endblock %}
 {% block content %}
     <div class="no_projects">
-        <input class="no_projects-input" placeholder="Enter project link"/>
-        <div class="no_projects_btns">
-            <button class="no_projects_btns-btn" onclick="window.location.href='{% url 'project:projects' %}'">Cancel
-            </button>
-            <button class="no_projects_btns-btn" onclick="window.location.href='{% url 'project:projects' %}'">Add project
-            </button>
-        </div>
+        <form action="." method="post">
+            <input class="no_projects-input" placeholder="Enter project link" name="slug"/>
+            <div class="no_projects_btns">
+                <button class="no_projects_btns-btn" onclick="window.location.href='{% url 'project:projects' %}'">
+                    Cancel
+                </button>
+                <input type="submit" class="no_projects_btns-btn" value="Add project"/>
+            </div>
+            {% csrf_token %}
+        </form>
     </div>
 {% endblock %}

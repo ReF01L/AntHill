@@ -73,12 +73,19 @@ def create_project(request):
 
 @login_required(login_url='/account/login/')
 def join_project(request):
-    key = request.POST.get('key') or request.GET.get('key') or 0
-    if key != 0:
-        user = Profile.objects.get(user=request.user)
-        proj = Project.objects.filter(slug=key)
-        proj.users.add(user)
-        return render(request, 'project/join_success.html')
+    slug = request.POST.get('slug')
+    if slug:
+        slug = slug.split('/')[-1]
+        try:
+            project = Project.objects.get(slug=slug)
+            user = Profile.objects.get(user=request.user)
+            if user in project.users.all():
+                return redirect('project:board', slug=slug)
+            project.users.add(user)
+            project.save()
+        except Project.DoesNotExist:
+            return render(request, 'project/join_fail.html')
+        return redirect('project:board', slug=slug)
 
     return render(request, 'project/join_fail.html')
 
@@ -97,17 +104,19 @@ def board(request, slug):
         [setattr(x, 'shortname', x.verifier.user.last_name[0] + x.verifier.user.first_name[0]) for x in (
                 tickets['waiting'] + tickets['progress'] + tickets['complete']
         )]
+        users = [x.user.last_name[0] + x.user.first_name[0] for x in Project.objects.get(slug=slug).users.all()]
         return render(request, 'project/board.html', {
             'waiting': tickets['waiting'],
             'progress': tickets['progress'],
             'complete': tickets['complete'],
             'project': project,
-            'sprint': project.sprint
+            'sprint': project.sprint,
+            'shortname': users
         })
     else:
         return render(request, 'project/board.html', {
             'project': project,
-            'sprint': None
+            'sprint': None,
         })
 
 

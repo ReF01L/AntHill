@@ -66,10 +66,9 @@
                     </div>
                     <div class="board_body_info">
                         <div class="board_body_info_users">
-                            <div class="board_body_info_users-user">DS</div>
-                            <div class="board_body_info_users-user">DS</div>
-                            <div class="board_body_info_users-user">DS</div>
-                            <div class="board_body_info_users-user">DS</div>
+                            {% for sn in shortname %}
+                                <div class="board_body_info_users-user">{{ sn }}</div>
+                            {% endfor %}
                         </div>
                         <button class="board_body_info-btn" onclick="window.location.href='{% url 'project:delete_sprint' project.slug %}'">Complete Sprint</button>
                         <div class="board_body_info-edit" onclick="window.location.href='{% url 'project:edit_sprint' project.slug %}'">EDIT SPRINT</div>
