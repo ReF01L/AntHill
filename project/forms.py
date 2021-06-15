@@ -186,7 +186,7 @@ class CreateLogForm(forms.ModelForm):
                     allowed_flags.remove(letter)
                     continue
             raise forms.ValidationError('Incorrect format')
-        return cd.get('original_estimate')
+        return cd.get('hours_count')
 
 
 class IssueHeroForm(forms.ModelForm):
