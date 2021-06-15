@@ -70,8 +70,9 @@
                             <div class="board_body_info_users-user">DS</div>
                             <div class="board_body_info_users-user">DS</div>
                         </div>
-                        <button class="board_body_info-btn">Complete Sprint</button>
-                        <div class="board_body_info-date">1 MAY 2021</div>
+                        <button class="board_body_info-btn" onclick="window.location.href='{% url 'project:delete_sprint' project.slug %}'">Complete Sprint</button>
+                        <div class="board_body_info-date">{{ sprint.due_date }}</div>
+                        <div onclick="window.location.href='{% url 'project:edit_sprint' project.slug %}'">EDIT SPRINT</div>
                         <img src="{% static 'img/ant.png' %}" alt="" class="board_body_info-img">
                     </div>
                 </div>
@@ -79,7 +80,7 @@
         {% else %}
             <div class="board_nosprint">
                 <h2>No sprints created</h2>
-                <p>To create click <a href="#">here</a></p>
+                <p>To create click <a href="{% url 'project:create_sprint' project.slug %}">here</a></p>
             </div>
         {% endif %}
 

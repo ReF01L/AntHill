@@ -26,6 +26,9 @@
                     <div class="field-key">username</div>
                     <div class="field-value">{{ user.user.username }}</div>
                 </div>
+                <form action="{% url "account:logout" %}">
+                    <button type="submit" class="button-link">Выйти</button>
+                </form>
                 <div class="field">
                     <div class="field-key">Last Name</div>
                     <div class="field-value">{{ user.user.last_name }}</div>

@@ -1,0 +1,29 @@
+{% extends "project/project_base.html" %}
+{% load static %}
+{% block extrahead %}
+{#    <link rel="stylesheet" href="{% static 'css/project/board.css' %}">#}
+{% endblock %}
+
+{% block title %} - Edit Sprint{% endblock %}
+
+{% block project_content %}
+   <div class="sprint">
+        <div class="sprint_content">
+            <div class="sprint_header">
+                <div class="sprint_header-title">Sprint Edit</div>
+            </div>
+            <div class="sprint_body">
+                <form class="sprint_body_form" method="post" action=".">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <div class="sprint_body_form_btns">
+                        <button class="sprint_body_form_btns-btn"
+                                onclick="window.location.href='{% url 'project:edit_sprint' project.slug %}'">Cancel
+                        </button>
+                        <input class="sprint_body_form_btns-btn" type="submit" value="Edit sprint">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

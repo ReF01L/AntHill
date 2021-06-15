@@ -19,7 +19,7 @@ class Project(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(max_length=20)
-    sprint = models.OneToOneField(to=Sprint, on_delete=models.SET_NULL, null=True, blank=True)
+    sprint = models.OneToOneField(to=Sprint, on_delete=models.DO_NOTHING, null=True, blank=True, default=None)
 
 
 class Issue(models.Model):
