@@ -16,7 +16,8 @@
                         <div class="board_body_col-title">To be done</div>
                         <div class="board_body_col_cards">
                             {% for ticket in waiting %}
-                                <div class="board_body_col_cards_card" onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
+                                <div class="board_body_col_cards_card"
+                                     onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
                                     <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
                                     <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
                                     <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
@@ -32,7 +33,8 @@
                         <div class="board_body_col-title">In Progress</div>
                         <div class="board_body_col_cards">
                             {% for ticket in progress %}
-                                <div class="board_body_col_cards_card" onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
+                                <div class="board_body_col_cards_card"
+                                     onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
                                     <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
                                     <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
                                     <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
@@ -48,7 +50,8 @@
                         <div class="board_body_col-title">Finished</div>
                         <div class="board_body_col_cards">
                             {% for ticket in complete %}
-                                <div class="board_body_col_cards_card" onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
+                                <div class="board_body_col_cards_card"
+                                     onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
                                     <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
                                     <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
                                     <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
@@ -65,14 +68,17 @@
                     </div>
                     <div class="board_body_info">
                         <div class="board_body_info_users">
-                            <div class="board_body_info_users-user">DS</div>
-                            <div class="board_body_info_users-user">DS</div>
-                            <div class="board_body_info_users-user">DS</div>
-                            <div class="board_body_info_users-user">DS</div>
+                            {% for sn in shortname %}
+                                <div class="board_body_info_users-user">{{ sn }}</div>
+                            {% endfor %}
                         </div>
-                        <button class="board_body_info-btn" onclick="window.location.href='{% url 'project:delete_sprint' project.slug %}'">Complete Sprint</button>
+                        <button class="board_body_info-btn"
+                                onclick="window.location.href='{% url 'project:delete_sprint' project.slug %}'">Complete
+                            Sprint
+                        </button>
                         <div class="board_body_info-date">{{ sprint.due_date }}</div>
-                        <div onclick="window.location.href='{% url 'project:edit_sprint' project.slug %}'">EDIT SPRINT</div>
+                        <div onclick="window.location.href='{% url 'project:edit_sprint' project.slug %}'">EDIT SPRINT
+                        </div>
                         <img src="{% static 'img/ant.png' %}" alt="" class="board_body_info-img">
                     </div>
                 </div>
