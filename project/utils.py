@@ -11,6 +11,7 @@ def parser_estimate(time: str) -> int:
 
 def parser_to_str(time: int) -> str:
     helper = {'w': 0, 'd': 0, 'h': 0, 'm': 0}
+
     helper['w'] = time // (5 * 8 * 60)
     time -= int(helper['w']) * 5 * 8 * 60
     helper['d'] = time // (8 * 60)
