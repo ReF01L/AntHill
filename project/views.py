@@ -23,7 +23,7 @@ from .forms import CreateProjectForm, CreateIssueForm
 from .models import Project, Issue, Sprint
 from .forms import CreateProjectForm, IssueHeroForm, IssueInfoForm
 from .models import Project, Issue
-from .utils import parser_estimate, parser_to_str
+from .utils import parser_estimate, parser_to_str, user_in_project
 
 
 @login_required(login_url='/account/login/')
@@ -86,6 +86,8 @@ def join_project(request):
 @login_required(login_url='/account/login/')
 def board(request, slug):
     project = Project.objects.get(slug=slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
     if project.sprint:
         tickets = {
             'waiting': [x for x in project.sprint.issue_set.filter(status=constants.Statuses.WAITING)],
@@ -112,6 +114,8 @@ def board(request, slug):
 @login_required(login_url='/account/login/')
 def create_issue(request, slug):
     project = Project.objects.get(slug=slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
     if request.method == 'POST':
         form = CreateIssueForm(request.POST)
         if form.is_valid():
@@ -145,6 +149,8 @@ def create_issue(request, slug):
 @login_required(login_url='/account/login/')
 def issues(request, slug):
     project = Project.objects.get(slug=slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
     _issues = project.issue_set.all()
     status = request.GET.get('status') == 'True'
     executor = request.GET.get('executor') == 'True'
@@ -162,8 +168,10 @@ def issues(request, slug):
 
 @login_required(login_url='/account/login/')
 def log(request, slug):
-    form = CreateLogForm(request.POST or None)
     project = Project.objects.get(slug=slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
+    form = CreateLogForm(request.POST or None)
     form.fields['issue'].queryset = Issue.objects.filter(project=project)
     if request.method == 'POST':
         if form.is_valid():
@@ -183,8 +191,10 @@ def log(request, slug):
 
 @login_required(login_url='/account/login/')
 def issue(request, project_slug, issue_slug):
-    _issue = Issue.objects.get(slug=issue_slug)
     project = Project.objects.get(slug=project_slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
+    _issue = Issue.objects.get(slug=issue_slug)
     logged_time = sum((x.hours_count for x in LoggedTime.objects.filter(issue=_issue)))
     original_estimate = parser_to_str(_issue.original_estimate)
     remaining_estimate = parser_to_str(_issue.original_estimate - logged_time)
@@ -222,8 +232,10 @@ def issue(request, project_slug, issue_slug):
 
 @login_required(login_url='/account/login/')
 def create_sprint(request, slug):
-    form = CreateSprintForm(request.POST or None)
     project = Project.objects.get(slug=slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
+    form = CreateSprintForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data
@@ -243,6 +255,8 @@ def create_sprint(request, slug):
 @login_required(login_url='/account/login/')
 def edit_sprint(request, slug):
     project = Project.objects.get(slug=slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
     sprint = project.sprint
     if request.method == "POST":
         form = CreateSprintForm(data=request.POST, instance=sprint)
@@ -257,6 +271,8 @@ def edit_sprint(request, slug):
 @login_required(login_url='/account/login/')
 def delete_sprint(request, slug):
     project = Project.objects.get(slug=slug)
+    if user_in_project(request, project):
+        return redirect('project:join')
     sprint = project.sprint
     project.sprint = None
     project.save()
@@ -266,6 +282,8 @@ def delete_sprint(request, slug):
 
 @login_required(login_url='/account/login/')
 def delete_issue(request, project_slug, issue_slug):
+    if user_in_project(request, Project.objects.get(slug=project_slug)):
+        return redirect('project:join')
     _issue = Issue.objects.get(slug=issue_slug)
     _issue.delete()
     return redirect('project:issues', slug=project_slug)

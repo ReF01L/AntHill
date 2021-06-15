@@ -1,3 +1,8 @@
+from django.shortcuts import redirect
+
+from account.models import Profile
+
+
 def parser_estimate(time: str) -> int:
     helper = {'m': 0, 'h': 0, 'd': 0, 'w': 0, }
     step = 0
@@ -24,3 +29,7 @@ def parser_to_str(time: int) -> str:
     for k, v in dir.items():
         res_str += str(dir[k]) + k + ' '
     return res_str
+
+
+def user_in_project(request, project):
+    return Profile.objects.get(user=request.user) not in project.users.all()
