@@ -1,5 +1,6 @@
 {% extends "project/project_base.html" %}
 {% load static %}
+{% load custom_tag %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/project/board.css' %}">
 {% endblock %}
@@ -17,10 +18,10 @@
                         <div class="board_body_col_cards">
                             {% for ticket in waiting %}
                                 <div class="board_body_col_cards_card" onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
-                                    <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
+                                    <div class="board_body_col_cards_card-name">{{ ticket.summary|cut_title }}</div>
                                     <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
                                     <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
-                                    <div class="board_body_col_cards_card-percents">{{ ticket.percent }}</div>
+                                    <div class="board_body_col_cards_card-percents">Percents: {{ ticket.percent }}</div>
                                     <div class="board_body_col_cards_card_creator">
                                         <span>{{ ticket.shortname }}</span>
                                     </div>
@@ -33,10 +34,10 @@
                         <div class="board_body_col_cards">
                             {% for ticket in progress %}
                                 <div class="board_body_col_cards_card" onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
-                                    <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
+                                    <div class="board_body_col_cards_card-name">{{ ticket.summary|cut_title }}</div>
                                     <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
                                     <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
-                                    <div class="board_body_col_cards_card-percents">{{ ticket.percent }}</div>
+                                    <div class="board_body_col_cards_card-percents">Percents: {{ ticket.percent }}</div>
                                     <div class="board_body_col_cards_card_creator">
                                         <span>{{ ticket.shortname }}</span>
                                     </div>
@@ -49,10 +50,10 @@
                         <div class="board_body_col_cards">
                             {% for ticket in complete %}
                                 <div class="board_body_col_cards_card" onclick="window.location.href='{% url 'project:issue' project.slug ticket.slug %}'">
-                                    <div class="board_body_col_cards_card-name">{{ ticket.summary }}</div>
+                                    <div class="board_body_col_cards_card-name">{{ ticket.summary|cut_title }}</div>
                                     <div class="board_body_col_cards_card-date">{{ ticket.ETA }}</div>
                                     <div class="board_body_col_cards_card-link">{{ ticket.slug }}</div>
-                                    <div class="board_body_col_cards_card-percents">{{ ticket.percent }}</div>
+                                    <div class="board_body_col_cards_card-percents">Percents: {{ ticket.percent }}</div>
                                     <div class="board_body_col_cards_card_creator">
                                         <span>{{ ticket.shortname }}</span>
                                     </div>
@@ -71,8 +72,8 @@
                             <div class="board_body_info_users-user">DS</div>
                         </div>
                         <button class="board_body_info-btn" onclick="window.location.href='{% url 'project:delete_sprint' project.slug %}'">Complete Sprint</button>
+                        <div class="board_body_info-edit" onclick="window.location.href='{% url 'project:edit_sprint' project.slug %}'">EDIT SPRINT</div>
                         <div class="board_body_info-date">{{ sprint.due_date }}</div>
-                        <div onclick="window.location.href='{% url 'project:edit_sprint' project.slug %}'">EDIT SPRINT</div>
                         <img src="{% static 'img/ant.png' %}" alt="" class="board_body_info-img">
                     </div>
                 </div>

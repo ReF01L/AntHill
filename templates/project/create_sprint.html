@@ -1,14 +1,20 @@
 {% extends "project/project_base.html" %}
 {% load static %}
 {% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/project/create_sprint.css' %}">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
 {% endblock %}
 
 {% block title %} - Creat Sprint{% endblock %}
 
-{% block content %}
+{% block project_content %}
     <div class="sprint">
         <div class="sprint_content">
             <div class="sprint_header">
