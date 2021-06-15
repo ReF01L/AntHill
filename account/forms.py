@@ -16,6 +16,18 @@ class ProfileEditForm(forms.ModelForm):
 
 
 class UserRegistrationForm(forms.ModelForm):
+    first_name = forms.CharField(label='Name', label_suffix='', widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Name',
+            'class': 'frame_3_form-field',
+        }
+    ))
+    last_name = forms.CharField(label='Surname', label_suffix='', widget=forms.TextInput(
+        attrs={
+            'placeholder': 'Surname',
+            'class': 'frame_3_form-field',
+        }
+    ))
     username = forms.CharField(label='Login', label_suffix='', widget=forms.TextInput(
         attrs={
             'placeholder': 'Username',
@@ -43,7 +55,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ('first_name', 'last_name', 'username', 'email', 'password')
 
     def clean_password2(self):
         cd = self.cleaned_data

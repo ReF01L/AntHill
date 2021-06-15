@@ -25,9 +25,7 @@
                     {{ form.as_p }}
                     {% csrf_token %}
                     <div class="issue_body_form_btns">
-                        <button class="issue_body_form_btns-btn"
-                                onclick="window.location.href='{% url 'project:board' project.slug %}'">Cancel
-                        </button>
+                        <button class="issue_body_form_btns-btn" onclick="window.location.href='{% url 'project:board' project.slug %}'">Cancel</button>
                         <input class="issue_body_form_btns-btn" type="submit" value="Create issue">
                     </div>
                 </form>

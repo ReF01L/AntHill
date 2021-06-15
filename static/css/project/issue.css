@@ -87,11 +87,11 @@
   background-color: #FFFFFF;
   border: 1px solid #364364;
   border-radius: 50px;
+  height: 680px;
 }
 .issue_body-hero_form {
   background-color: transparent;
   width: 710px;
-  height: 680px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -101,7 +101,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .issue_body-hero_form p label {
   margin-left: 10px;
@@ -120,24 +120,34 @@
   font-size: 16px;
   font-family: "Raleway Regular", sans-serif;
 }
-.issue_body-hero_form-btn {
-  align-self: flex-end;
-  margin: auto 80px 20px 0;
+.issue_body-hero_form-field.short {
+  height: 60px;
+}
+.issue_body-hero_form_btns {
+  width: 710px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.issue_body-hero_form_btns-btn {
+  align-self: flex-start;
   border: 1px solid #364364;
   background-color: #F2F4F9;
   border-radius: 10px;
-  width: 260px;
-  height: 60px;
+  width: 150px;
+  height: 40px;
   color: #364364;
-  font-size: 36px;
+  font-size: 24px;
   font-family: "Raleway Regular", sans-serif;
   -webkit-transition: 0.4s;
   -moz-transition: 0.4s;
   -ms-transition: 0.4s;
   -o-transition: 0.4s;
   transition: 0.4s;
+  margin-left: 80px;
+  margin-top: 15px;
 }
-.issue_body-hero_form-btn:hover {
+.issue_body-hero_form_btns-btn:hover {
   cursor: pointer;
   -webkit-transform: scale(1.2);
   -moz-transform: scale(1.2);
@@ -157,7 +167,7 @@
   height: 680px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 .issue_body-info_form p {

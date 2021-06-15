@@ -123,7 +123,8 @@ class CreateIssueForm(forms.ModelForm):
     environment = forms.CharField(label='Environment', label_suffix='', required=False)
     ETA = forms.DateField(label='ETA', label_suffix='',
                           widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
-                                                                           'placeholder': 'Select a date'
+                                                                           'placeholder': 'Select a date',
+                                                                           'autocomplete': 'off'
                                                                            }))
     percent = forms.IntegerField(label='Story point estimate', label_suffix='', widget=forms.NumberInput, initial=0)
     original_estimate = forms.CharField(label='Original estimate', label_suffix='', widget=forms.TextInput)
@@ -170,6 +171,23 @@ class CreateLogForm(forms.ModelForm):
         model = LoggedTime
         fields = ('issue', 'description')
 
+    def clean_hours_count(self):
+        cd = self.cleaned_data
+        hours_count = cd.get('hours_count')
+        hours_count = hours_count.replace(' ', '')
+        allowed_flags = ['w', 'd', 'h', 'm']
+        if hours_count[-1] not in allowed_flags:
+            raise forms.ValidationError('Incorrect format')
+        for i, letter in enumerate(hours_count):
+            if letter.isdigit():
+                continue
+            elif letter in allowed_flags:
+                if i != 0 and hours_count[i - 1].isdigit():
+                    allowed_flags.remove(letter)
+                    continue
+            raise forms.ValidationError('Incorrect format')
+        return cd.get('original_estimate')
+
 
 class IssueHeroForm(forms.ModelForm):
     description = forms.CharField(label='Description', label_suffix='', required=False, widget=forms.Textarea(
@@ -184,12 +202,12 @@ class IssueHeroForm(forms.ModelForm):
     ))
     status = forms.ChoiceField(label='Status', label_suffix='', required=False, widget=forms.Select(
         attrs={
-            'class': 'issue_body-hero_form-field'
+            'class': 'issue_body-hero_form-field short'
         }
     ), choices=constants.Statuses.choices)
-    percent = forms.CharField(label='Percent', label_suffix='', required=False, widget=forms.Textarea(
+    percent = forms.CharField(label='Percent', label_suffix='', required=False, widget=forms.TextInput(
         attrs={
-            'class': 'issue_body-hero_form-field'
+            'class': 'issue_body-hero_form-field short'
         }
     ))
 
@@ -250,7 +268,8 @@ class CreateSprintForm(forms.ModelForm):
     name = forms.CharField(label='Name Sprint', label_suffix='', widget=forms.TextInput)
     due_date = forms.DateField(label='ETA', label_suffix='',
                                widget=forms.DateInput(format='%m/%d/%Y', attrs={'class': 'datepicker',
-                                                                                'placeholder': 'Select a date'
+                                                                                'placeholder': 'Select a date',
+                                                                                'autocomplete': 'off'
                                                                                 }))
 
     class Meta:

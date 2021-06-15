@@ -59,10 +59,24 @@
 }
 .issues_filters button {
   font-size: 30px;
-  font-family: "Raleway Medium", sans-serif;
+  font-family: "Raleway Bold", sans-serif;
   color: #364364;
   background-color: transparent;
   margin-left: 10px;
+  border: 1px solid #066BC6;
+  border-radius: 15px;
+  width: 150px;
+  height: 40px;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.issues_filters button:hover {
+  cursor: pointer;
+  background: #066BC6;
+  color: #FFFFFF;
 }
 .issues_body {
   width: 100%;

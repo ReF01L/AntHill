@@ -26,10 +26,23 @@
 
     & button
       font-size: 30px
-      @include medium
+      @include bold
       color: $dark
       background-color: transparent
       margin-left: 10px
+      border: 1px solid $blue
+      border-radius: 15px
+      width: 150px
+      height: 40px
+      -webkit-transition: 0.2s
+      -moz-transition: 0.2s
+      -ms-transition: 0.2s
+      -o-transition: 0.2s
+      transition: 0.2s
+      &:hover
+        cursor: pointer
+        background: $blue
+        color: $white
 
   &_body
     width: 100%

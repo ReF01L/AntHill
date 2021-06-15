@@ -60,14 +60,17 @@ def create_project(request):
         form = CreateProjectForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            slug = cd['link'].split('/')[-1]
+            if Project.objects.filter(slug=slug).exists():
+                return redirect('project:projects')
             user = Profile.objects.get(user=request.user)
             proj = Project.objects.create(name=cd.get('name'), description=cd.get('description'),
-                                          slug=cd['link'].split('/')[-1])
+                                          slug=slug)
             proj.users.add(user)
             return redirect('project:board', cd['link'].split('/')[-1])
     else:
         form = CreateProjectForm(
-            initial={'link': 'http://localhost:8000/project/' + ''.join(choice(ascii_letters) for _ in range(10))})
+            initial={'link': 'http://80.78.244.149:8000/project/' + ''.join(choice(ascii_letters) for _ in range(10))})
     return render(request, 'project/create.html', {'form': form})
 
 
@@ -148,7 +151,9 @@ def create_issue(request, slug):
             return redirect('project:issue', project_slug=slug, issue_slug=cd.get('slug'))
     else:
         form = CreateIssueForm(initial={'slug': ''.join(choice(ascii_letters) for _ in range(10))})
-    form.fields['sprint'].queryset = Sprint.objects.filter(name=project.sprint.name)
+    form.fields['sprint'].queryset = Sprint.objects.filter(id=project.sprint.id)
+    form.fields['verifier'].queryset = Project.objects.get(slug=slug).users
+    form.fields['executor'].queryset = Project.objects.get(slug=slug).users
     return render(request, 'project/create_issue.html', {
         'form': form,
         'project': project,
@@ -282,10 +287,8 @@ def delete_sprint(request, slug):
     project = Project.objects.get(slug=slug)
     if user_in_project(request, project):
         return redirect('project:join')
-    sprint = project.sprint
     project.sprint = None
     project.save()
-    sprint.delete()
     return redirect('project:issues', slug=slug)
 
 
@@ -293,6 +296,5 @@ def delete_sprint(request, slug):
 def delete_issue(request, project_slug, issue_slug):
     if user_in_project(request, Project.objects.get(slug=project_slug)):
         return redirect('project:join')
-    _issue = Issue.objects.get(slug=issue_slug)
-    _issue.delete()
-    return redirect('project:issues', slug=project_slug)
+    Issue.objects.get(slug=issue_slug).delete()
+    return redirect('project:board', slug=project_slug)

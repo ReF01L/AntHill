@@ -1,5 +1,6 @@
 {% extends "project/project_base.html" %}
 {% load static %}
+{% load custom_tag %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/project/issue.css' %}">
 {% endblock %}
@@ -7,6 +8,7 @@
 {% block title %} - {{ issue.summary }}{% endblock %}
 
 {% block project_content %}
+    <input type="hidden" name="_status" value="{{ status }}">
     <div class="issue">
         <div class="issue_container">
             <div class="issue-title">{{ issue.summary }}</div>
@@ -17,8 +19,13 @@
                         {{ hero_form.as_p }}
                         <input type="hidden" name="hero" value="True">
                         {% csrf_token %}
-                        <input type="submit" value="Save" class="issue_body-hero_form-btn">
+                        <input type="submit" value="Save" class="issue_body-hero_form_btns-btn">
                     </form>
+                    <div class="issue_body-hero_form_btns">
+                        <button class="issue_body-hero_form_btns-btn delete"
+                                onclick="window.location.href='{% url 'project:delete_issue' project.slug issue.slug %}'">Delete
+                        </button>
+                    </div>
                 </div>
                 <div class="issue_body-info">
                     <form action="." method="post" class="issue_body-info_form">
@@ -32,7 +39,6 @@
                         {% csrf_token %}
                     </form>
                 </div>
-            <div onclick="window.location.href='{% url 'project:delete_issue' project.slug issue.slug %}'">Delete</div>
             </div>
         </div>
     </div>
